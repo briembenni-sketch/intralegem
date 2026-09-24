@@ -6,3 +6,10 @@ Vefsíða Intra Legem slf. — sýniseintak.
 - `assets/` — myndir.
 
 Opnaðu `index.html` í vafra til að skoða.
+
+## Merki og veggmynd
+
+- `assets/brand/` — merkið (SVG): `logo-stacked.svg`, `logo-horizontal.svg`, `mark.svg`.
+- `assets/intra-legem-wall-*.{webp,jpg}` — merkið á múrvegg (efst á síðunni).
+- `tools/brand/` — skriftur sem búa til merkið og veggmyndina
+  (`logo.py` → SVG, `rastermask.js` → maski, `render.py` → mynd).
