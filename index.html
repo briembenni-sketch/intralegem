@@ -212,81 +212,84 @@
   .logo { height: 30px; width: auto; display: block; color: var(--ink); }
   .logo-foot { height: 26px; }
 
-  /* ---------- Wall ---------- */
+  /* ---------- Hero / wall ---------- */
   .wall {
+    --wall-h: max(100vh, 780px);
     position: relative;
-    height: 100vh; height: 100svh;
-    min-height: 560px; max-height: 1200px;
+    min-height: var(--wall-h);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 120px 0 clamp(40px, 5vw, 64px);
+    background: var(--paper);
     overflow: hidden;
-    background: #CFC3AE;
   }
-  .wall picture, .wall img { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .wall img {
-    object-fit: cover; object-position: 50% 50%;
-    transform: scale(1.06);
+  @supports (height: 100svh) { .wall { --wall-h: max(100svh, 780px); } }
+  .wall-img, .wall-veil { position: absolute; left: 0; right: 0; top: 0; height: var(--wall-h); }
+  .wall-img { background: #D8CCB6; }
+  .wall-img img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 24%;
+    transform: scale(1.05);
     transition: transform 3.2s cubic-bezier(0.16, 0.8, 0.2, 1), opacity 1.4s ease;
     opacity: 0;
-    will-change: transform;
   }
-  .loaded .wall img, .wall img.ready { opacity: 1; transform: scale(1); }
-  .wall-foot {
-    position: absolute; left: 0; right: 0; bottom: 28px;
-    display: flex; justify-content: space-between; align-items: center;
+  .wall-img img.ready { opacity: 1; transform: scale(1); }
+  .wall-veil {
+    background: linear-gradient(to bottom,
+      rgba(245, 244, 240, 0) 42%,
+      rgba(245, 244, 240, 0.42) 66%,
+      rgba(245, 244, 240, 0.86) 88%,
+      var(--paper) 100%);
   }
-  .wall-foot .label { color: rgba(15, 18, 21, 0.62); }
-  .wall-cue { display: inline-flex; align-items: center; gap: 10px; transition: color .3s; }
-  .wall-cue svg { width: 10px; height: 18px; animation: cue 2.4s var(--ease) infinite; }
-  .wall-cue:hover { color: var(--ink); }
-  @keyframes cue { 0%, 100% { transform: translateY(-2px); opacity: .5; } 50% { transform: translateY(3px); opacity: 1; } }
-
-  /* ---------- Hero ---------- */
-  .hero { padding: clamp(96px, 11vw, 150px) 0 0; }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    column-gap: 24px;
+  .wall-content {
+    position: relative; width: 100%;
+    display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px;
     align-items: end;
   }
-  .hero-copy { grid-column: 1 / span 7; padding-bottom: 8px; }
-  .hero-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 36px; }
+  .wall-copy { grid-column: 1 / span 7; }
+  .hero-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; color: var(--ink-2); }
   .hero-kicker::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
-  .hero h1 {
-    font-size: clamp(46px, 7.4vw, 112px);
+  .wall h1 {
+    font-size: clamp(40px, 4.7vw, 72px);
     font-weight: 300;
-    letter-spacing: -0.03em;
-    line-height: 0.98;
+    letter-spacing: -0.028em;
+    line-height: 1.0;
+    max-width: 13em;
   }
-  .hero h1 em { font-style: italic; font-weight: 300; }
-  .hero-lede {
-    margin-top: 36px;
-    max-width: 34em;
-    font-size: clamp(17px, 1.35vw, 19px);
-    line-height: 1.6;
-    color: var(--ink-2);
-  }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+  .wall h1 em { font-style: italic; }
+  .hero-lede { margin-top: 22px; max-width: 34em; font-size: clamp(16px, 1.25vw, 18.5px); line-height: 1.6; color: var(--ink-2); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .btn .ic-phone { width: 15px; height: 15px; }
+  .btn:hover .ic-phone { transform: none; }
+  .wall .btn.ghost { background: rgba(245, 244, 240, 0.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 
-  .hero-figure { grid-column: 9 / span 4; position: relative; }
-  .portrait {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-    background: var(--paper-3);
+  .quick { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; margin-top: 34px; font-size: 14px; }
+  .quick .label { margin-right: 4px; }
+  .quick a { color: var(--ink); border-bottom: 1px solid var(--rule-strong); padding-bottom: 2px; transition: border-color .25s, color .25s; }
+  .quick a:hover { border-color: var(--accent); color: var(--accent); }
+
+  .card {
+    grid-column: 9 / span 4;
+    background: rgba(250, 249, 246, 0.74);
+    -webkit-backdrop-filter: saturate(1.2) blur(14px); backdrop-filter: saturate(1.2) blur(14px);
+    border: 1px solid rgba(15, 18, 21, 0.1);
+    padding: 22px 22px 18px;
+    box-shadow: 0 30px 60px -30px rgba(40, 30, 15, 0.35);
   }
-  .portrait img {
-    width: 100%; height: 100%; object-fit: cover; object-position: 54% 30%;
-    transform: scale(1.04);
-    transition: transform 1.8s var(--ease);
-  }
-  .loaded .portrait img { transform: scale(1); }
-  .hero-figure figcaption {
-    display: flex; justify-content: space-between; gap: 16px;
-    padding-top: 14px; font-size: 13px; color: var(--muted);
-  }
-  .hero-figure figcaption b { color: var(--ink); font-weight: 500; }
+  .card-head { display: flex; gap: 14px; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--rule); }
+  .card-head img { width: 56px; height: 56px; object-fit: cover; object-position: 54% 18%; flex-shrink: 0; }
+  .card-head b { display: block; font-family: var(--serif); font-weight: 400; font-size: 21px; line-height: 1.15; }
+  .card-head span { font-size: 13px; color: var(--muted); }
+  .card-list { list-style: none; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .card-list li { display: flex; gap: 10px; align-items: baseline; font-size: 14px; line-height: 1.45; color: var(--ink-2); padding: 4px 0; }
+  .card-list .dot { width: 5px; height: 5px; background: var(--accent); flex-shrink: 0; transform: translateY(-2px); }
+  .card-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; padding-top: 14px; font-size: 13.5px; }
+  .card-foot a { transition: color .25s; }
+  .card-foot a:hover { color: var(--accent); }
+  .card-more { color: var(--muted); }
+
+  .facts-band { padding-top: clamp(24px, 3vw, 40px); }
 
   .facts {
-    margin-top: clamp(64px, 9vw, 120px);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     border-top: 1px solid var(--rule-strong);
@@ -518,8 +521,8 @@
   /* ---------- Responsive ---------- */
   @media (max-width: 1080px) {
     .nav-links { gap: 24px; }
-    .hero-copy { grid-column: 1 / span 7; }
-    .hero-figure { grid-column: 8 / span 5; }
+    .wall-copy { grid-column: 1 / span 7; }
+    .card { grid-column: 8 / span 5; }
     .two-col .c1 { grid-column: 1 / span 6; }
     .two-col .c2 { grid-column: 7 / span 6; }
     .area .n { grid-column: 1 / span 1; }
@@ -547,11 +550,13 @@
     .nav-links .btn { margin-top: 20px; justify-content: center; width: 100%; }
     .nav-links .lang-li { padding-top: 20px; }
     .menu-btn { display: block; }
+    .wall { --wall-h: 100vh; padding-top: 0; min-height: 0; display: block; }
+    @supports (height: 100svh) { .wall { --wall-h: 100svh; } }
+    .wall-img img { object-position: 50% 20%; }
+    .wall-content { display: block; padding-top: calc(var(--wall-h) * 0.40); }
+    .card { margin-top: 44px; max-width: 480px; }
     .brand-sub { display: none; }
 
-    .hero { padding-top: 88px; }
-    .hero-copy, .hero-figure { grid-column: 1 / -1; }
-    .hero-figure { margin-top: 56px; max-width: 460px; }
     .facts { grid-template-columns: 1fr 1fr; }
     .fact:nth-child(2) { border-right: 0; }
     .fact:nth-child(3) { padding-left: 0; }
@@ -583,7 +588,6 @@
     .facts { grid-template-columns: 1fr; }
     .fact, .fact + .fact { padding: 20px 0; border-right: 0; }
     .fact + .fact { border-top: 1px solid var(--rule); }
-    .hero-figure figcaption { flex-direction: column; gap: 2px; }
   }
 </style>
 </head>
@@ -618,48 +622,64 @@
 
 <main id="main">
 
-<!-- ========== WALL ========== -->
-<section class="wall" aria-label="Intra Legem">
-  <picture>
+<!-- ========== HERO / WALL ========== -->
+<section class="wall" id="top" aria-labelledby="heroTitle">
+  <picture class="wall-img">
     <source media="(max-width: 760px)" srcset="assets/intra-legem-wall-tall.webp" type="image/webp">
     <source media="(max-width: 760px)" srcset="assets/intra-legem-wall-tall.jpg">
     <source srcset="assets/intra-legem-wall-wide.webp" type="image/webp">
     <img src="assets/intra-legem-wall-wide.jpg" alt="Merki Intra Legem á múrvegg í síðdegissól" width="2800" height="1600" fetchpriority="high" decoding="async">
   </picture>
-  <div class="wall-foot wrap">
-    <span class="label" data-i18n="wallLoc">Gróska · Reykjavík</span>
-    <a href="#top" class="wall-cue label"><span data-i18n="wallCue">Skruna</span><svg viewBox="0 0 12 20" aria-hidden="true"><path d="M6 1v17M1 13l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
+  <div class="wall-veil" aria-hidden="true"></div>
+
+  <div class="wall-content wrap">
+    <div class="wall-copy">
+      <p class="label hero-kicker rv" data-i18n="heroKicker">Lögmannsstofa · Gróska, Reykjavík</p>
+      <h1 id="heroTitle" class="rv d1" data-i18n-html="heroTitle">Innan vébanda laganna — <em>með skýra stefnu.</em></h1>
+      <p class="hero-lede rv d2" data-i18n="heroLede">Sérsniðin lögmannsþjónusta fyrir fyrirtæki, fjárfesta og frumkvöðla, með áherslu á samkeppnisrétt, samningagerð og málflutning.</p>
+      <div class="hero-actions rv d3">
+        <a href="#samband" class="btn">
+          <span data-i18n="ctaPrimary">Bóka samtal</span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.4"/></svg>
+        </a>
+        <a href="tel:+3548926064" class="btn ghost">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="ic-phone"><path d="M5.2 1.8 3.4 2.3c-.9.3-1.5 1.2-1.3 2.2.9 4.6 4.5 8.2 9.1 9.1 1 .2 1.9-.4 2.2-1.3l.5-1.8-3-1.6-1.3 1.4C8 9.6 6.4 8 5.7 6.4l1.4-1.3-1.9-3.3Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          <span>+354 892 6064</span>
+        </a>
+      </div>
+      <nav class="quick rv d3" aria-label="Helstu svið">
+        <span class="label" data-i18n="quickLabel">Helstu svið</span>
+        <a href="#svid-1" data-i18n="q1">Samkeppnisréttur</a>
+        <a href="#svid-3" data-i18n="q2">Samningar og félög</a>
+        <a href="#svid-4" data-i18n="q3">Kaup og sala fyrirtækja</a>
+        <a href="#svid-5" data-i18n="q4">Málflutningur</a>
+      </nav>
+    </div>
+
+    <aside class="card rv d2" aria-label="Hallmundur Albertsson">
+      <div class="card-head">
+        <img src="assets/hallmundur-albertsson.jpg" alt="" width="713" height="475">
+        <div>
+          <b>Hallmundur Albertsson</b>
+          <span data-i18n="cardRole">Lögmaður og eigandi</span>
+        </div>
+      </div>
+      <ul class="card-list">
+        <li><span class="dot" aria-hidden="true"></span><span data-i18n="card1">Viðurkenndur af Legal 500 í samkeppnisrétti</span></li>
+        <li><span class="dot" aria-hidden="true"></span><span data-i18n="card2">Málflutningsréttindi fyrir Landsrétti</span></li>
+        <li><span class="dot" aria-hidden="true"></span><span data-i18n="card3">MA í samkeppnisrétti, King’s College London</span></li>
+      </ul>
+      <div class="card-foot">
+        <a href="mailto:hallmundur@intralegem.is">hallmundur@intralegem.is</a>
+        <a href="#logmadur" class="card-more" data-i18n="cardMore">Nánar um Hallmund →</a>
+      </div>
+    </aside>
   </div>
 </section>
 
-<!-- ========== HERO ========== -->
-<section class="hero" id="top">
+<!-- ========== FACTS ========== -->
+<section class="facts-band">
   <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <p class="label hero-kicker rv" data-i18n="heroKicker">Lögmannsstofa · Reykjavík</p>
-        <h1 class="rv d1" data-i18n-html="heroTitle">Innan vébanda laganna — <em>með skýra stefnu.</em></h1>
-        <p class="hero-lede rv d2" data-i18n="heroLede">Sérsniðin lögmannsþjónusta fyrir fyrirtæki, fjárfesta og frumkvöðla, með áherslu á samkeppnisrétt, samningagerð og málflutning.</p>
-        <div class="hero-actions rv d3">
-          <a href="#samband" class="btn">
-            <span data-i18n="ctaPrimary">Bóka samtal</span>
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.4"/></svg>
-          </a>
-          <a href="#starfssvid" class="btn ghost" data-i18n="ctaSecondary">Starfssvið</a>
-        </div>
-      </div>
-
-      <figure class="hero-figure rv d2">
-        <div class="portrait">
-          <img src="assets/hallmundur-albertsson.jpg" alt="Hallmundur Albertsson lögmaður" width="713" height="475" fetchpriority="high">
-        </div>
-        <figcaption>
-          <b>Hallmundur Albertsson</b>
-          <span data-i18n="heroCaption">Lögmaður og eigandi</span>
-        </figcaption>
-      </figure>
-    </div>
-
     <div class="facts rv">
       <div class="fact">
         <span class="k">Legal 500</span>
@@ -709,31 +729,31 @@
     </div>
 
     <ul class="areas">
-      <li class="rv"><details class="area">
+      <li class="rv" id="svid-1"><details class="area">
         <summary><span class="n">01</span><span class="t" data-i18n="a1t">Samkeppnisréttur, ríkisaðstoð og EES-réttur</span><span class="ic" aria-hidden="true"></span></summary>
         <div class="body"><p data-i18n="a1d">Samrunamál og tilkynningar til Samkeppniseftirlitsins, rannsóknir og húsleitir, gerð samkeppnisréttaráætlana og ráðgjöf um ríkisaðstoð og reglur EES-réttar.</p></div>
       </details></li>
-      <li class="rv"><details class="area">
+      <li class="rv" id="svid-2"><details class="area">
         <summary><span class="n">02</span><span class="t" data-i18n="a2t">Fjarskipti, fjölmiðlar, upplýsingatækni og nýsköpun</span><span class="ic" aria-hidden="true"></span></summary>
         <div class="body"><p data-i18n="a2d">Regluverk fjarskipta- og fjölmiðlamarkaða, samskipti við eftirlitsstofnanir, samningar tæknifyrirtækja og ráðgjöf til nýsköpunar- og sprotafyrirtækja á öllum stigum.</p></div>
       </details></li>
-      <li class="rv"><details class="area">
+      <li class="rv" id="svid-3"><details class="area">
         <summary><span class="n">03</span><span class="t" data-i18n="a3t">Samninga- og félagaréttur og stjórnarhættir</span><span class="ic" aria-hidden="true"></span></summary>
         <div class="body"><p data-i18n="a3d">Gerð og yfirferð viðskiptasamninga, hluthafasamkomulög, stofnun og skipulag félaga og ráðgjöf til stjórna um góða stjórnarhætti.</p></div>
       </details></li>
-      <li class="rv"><details class="area">
+      <li class="rv" id="svid-4"><details class="area">
         <summary><span class="n">04</span><span class="t" data-i18n="a4t">Kaup og sala fyrirtækja</span><span class="ic" aria-hidden="true"></span></summary>
         <div class="body"><p data-i18n="a4d">Áreiðanleikakannanir, kaupsamningar, fjármögnun og samrunaeftirlit — frá fyrstu viljayfirlýsingu til afhendingar.</p></div>
       </details></li>
-      <li class="rv"><details class="area">
+      <li class="rv" id="svid-5"><details class="area">
         <summary><span class="n">05</span><span class="t" data-i18n="a5t">Málflutningur og úrlausn ágreinings</span><span class="ic" aria-hidden="true"></span></summary>
         <div class="body"><p data-i18n="a5d">Málflutningur fyrir héraðsdómstólum og Landsrétti, rekstur mála fyrir stjórnvöldum og úrskurðarnefndum, og sáttamiðlun þar sem hún á við.</p></div>
       </details></li>
-      <li class="rv"><details class="area">
+      <li class="rv" id="svid-6"><details class="area">
         <summary><span class="n">06</span><span class="t" data-i18n="a6t">Opinber innkaup, útboð og verksamningar</span><span class="ic" aria-hidden="true"></span></summary>
         <div class="body"><p data-i18n="a6d">Ráðgjöf til kaupenda og bjóðenda, kærumál vegna útboða og gerð verksamninga, meðal annars á grundvelli FIDIC-staðla.</p></div>
       </details></li>
-      <li class="rv"><details class="area">
+      <li class="rv" id="svid-7"><details class="area">
         <summary><span class="n">07</span><span class="t" data-i18n="a7t">Orkuréttur</span><span class="ic" aria-hidden="true"></span></summary>
         <div class="body"><p data-i18n="a7d">Regluverk orkumarkaðar, samningar um kaup og sölu orku og ráðgjöf vegna leyfismála.</p></div>
       </details></li>
@@ -912,8 +932,7 @@
 
   // Nav state
   var nav = document.getElementById('nav');
-  var wall = document.querySelector('.wall');
-  var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > wall.offsetHeight - 90); };
+  var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 40); };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -941,7 +960,7 @@
   } else {
     els.forEach(function (el) { el.classList.add('in'); });
   }
-  var wallImg = document.querySelector('.wall img');
+  var wallImg = document.querySelector('.wall-img img');
   var ready = function () { wallImg.classList.add('ready'); };
   if (wallImg.complete && wallImg.naturalWidth) ready(); else wallImg.addEventListener('load', ready);
   window.addEventListener('load', function () { doc.classList.add('loaded'); });
@@ -966,12 +985,12 @@
     skip: 'Skip to content',
     brandSub: 'Law firm',
     navAreas: 'Practice areas', navLawyer: 'Lawyer', navCareer: 'Career', navContact: 'Contact',
-    heroKicker: 'Law firm · Reykjavík',
-    wallLoc: 'Gróska · Reykjavík', wallCue: 'Scroll',
+    heroKicker: 'Law firm · Gróska, Reykjavík',
+    quickLabel: 'Key areas', q1: 'Competition law', q2: 'Contracts and companies', q3: 'Mergers and acquisitions', q4: 'Litigation',
+    cardRole: 'Attorney and founder', card1: 'Recognised by The Legal 500 for competition law', card2: 'Rights of audience before the Court of Appeal', card3: 'MA in EU Competition Law, King’s College London', cardMore: 'More about Hallmundur →',
     heroTitle: 'Within the bounds of the law — <em>with a clear strategy.</em>',
     heroLede: 'Tailored legal services for companies, investors and entrepreneurs, with a focus on competition law, commercial contracts and litigation.',
-    ctaPrimary: 'Book a consultation', ctaSecondary: 'Practice areas',
-    heroCaption: 'Attorney and founder',
+    ctaPrimary: 'Book a consultation', 
     fact1: 'Recognised among Iceland’s leading competition lawyers',
     fact2k: 'Court of Appeal', fact2: 'Rights of audience before Landsréttur',
     fact3: 'MA in EU Competition Law, London',
