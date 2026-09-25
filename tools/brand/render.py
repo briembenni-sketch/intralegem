@@ -70,7 +70,7 @@ Hv = (Ldir + V); Hv /= np.linalg.norm(Hv)
 # window light: lit region below a diagonal edge, with a mullion; soft penumbra + slight edge wobble
 yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
 wob = nd.gaussian_filter(fbm(H, W, 2.8, 33), 3) * 6
-edge = (yy - (0.02*H + 0.075*W + (W - xx)*0.34)) + wob            # diagonal: dark top-left wedge
+edge = (yy - ((LOGO_Y - 0.48)*H + 0.02*H + 0.075*W + (W - xx)*0.34)) + wob            # diagonal: dark top-left wedge
 sun = 1/(1+np.exp(-edge/26))
 edge2 = ((xx*0.9 + yy*0.55) - 0.82*W) + wob              # second soft falloff far right-bottom -> window frame
 sun *= 1 - 0.9/(1+np.exp(-(edge2 - 520)/60))
