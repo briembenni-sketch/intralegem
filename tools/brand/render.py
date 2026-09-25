@@ -2,7 +2,7 @@ import numpy as np, sys
 from scipy import ndimage as nd
 from PIL import Image
 rng = np.random.default_rng(7)
-OUT = sys.argv[1]; W, H = int(sys.argv[2]), int(sys.argv[3]); MASK = sys.argv[4]; LOGO_Y = float(sys.argv[5])
+OUT = sys.argv[1]; W, H = int(sys.argv[2]), int(sys.argv[3]); MASK = sys.argv[4]; LOGO_Y = float(sys.argv[5]); BRASS = sys.argv[6] if len(sys.argv) > 6 else None
 
 def fbm(h, w, beta, seed):
     r = np.random.default_rng(seed)
@@ -48,6 +48,10 @@ lh, lw = logo.shape
 M = np.zeros((H, W), np.float32)
 ox, oy = (W - lw)//2, int(H*LOGO_Y - lh/2)
 M[oy:oy+lh, ox:ox+lw] = logo
+B = np.zeros((H, W), np.float32)
+if BRASS:
+    bl = np.asarray(Image.open(BRASS).convert('L'), dtype=np.float32) / 255
+    B[oy:oy+lh, ox:ox+lw] = bl
 inside = M > 0.5
 edt = nd.distance_transform_edt(inside)
 BEV = 2.4
@@ -92,6 +96,7 @@ alb_wall = lin([222, 210, 190])
 mott = norm01(nd.gaussian_filter(mid, 6))[..., None]
 alb = alb_wall * (0.9 + 0.16*mott) * (1 - 0.1*norm01(pits)[..., None])
 alb_let = lin([28, 27, 26]) * (1 + 0.25*letter_grain[..., None])
+alb_let = alb_let*(1 - B[..., None]) + lin([182, 142, 72]) * (1 + 0.12*letter_grain[..., None]) * B[..., None]
 
 SUN = np.array([1.00, 0.88, 0.72]) * 2.75
 SKY = np.array([0.74, 0.66, 0.58]) * 0.36
@@ -100,7 +105,7 @@ ndl_w = np.clip((Nw*Ldir).sum(2), 0, 1)
 wall = alb * (SKY*(1 - ao[..., None]) * (0.75 + 0.25*Nw[..., 2:3]) +
               SUN * (ndl_w * sun * (1 - cast))[..., None])
 ndl_l = np.clip((Nl*Ldir).sum(2), 0, 1)
-spec = np.clip((Nl*Hv).sum(2), 0, 1)**40 * 0.35
+spec = np.clip((Nl*Hv).sum(2), 0, 1)**40 * (0.35 + 1.6*B)
 letter = alb_let * (SKY*1.1 + SUN*(ndl_l*sun)[..., None]) + (spec*sun)[..., None]*SUN*0.12
 img = wall*(1 - M[..., None]) + letter*M[..., None]
 
