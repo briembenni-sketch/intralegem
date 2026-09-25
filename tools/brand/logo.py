@@ -1,62 +1,66 @@
+"""Intra Legem crest logo (from the firm's existing site) -> outlined SVG lockups."""
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 from fontTools.pens.boundsPen import BoundsPen
+import re, sys
+OUT = sys.argv[1] if len(sys.argv) > 1 else '.'
+F_R, F_I, F_IL = 'fr-r-s30.ttf', 'fr-i-w0.ttf', 'gelasio-i.ttf'
+_fonts = {}
+def font(f):
+    if f not in _fonts: _fonts[f] = TTFont(f)
+    return _fonts[f]
 
-def text_path(fontfile, text, size, x, y, tracking=0):
-    """Return (svg path d, advance width) for text with baseline at y."""
-    f = TTFont(fontfile); gs = f.getGlyphSet(); cmap = f.getBestCmap()
-    upm = f['head'].unitsPerEm; sc = size/upm
+def text_path(f, text, size, x, y, tracking=0):
+    ft = font(f); gs = ft.getGlyphSet(); cmap = ft.getBestCmap(); sc = size/ft['head'].unitsPerEm
     pen = SVGPathPen(gs); cx = x
     for ch in text:
-        g = cmap[ord(ch)]
-        tp = TransformPen(pen, (sc,0,0,-sc,cx,y))
-        gs[g].draw(tp)
-        cx += gs[g].width*sc + tracking
+        g = cmap[ord(ch)]; gs[g].draw(TransformPen(pen, (sc, 0, 0, -sc, cx, y))); cx += gs[g].width*sc + tracking
     return pen.getCommands(), cx - x - tracking
 
-def glyph_bounds(fontfile, ch, size):
-    f = TTFont(fontfile); gs = f.getGlyphSet(); g = f.getBestCmap()[ord(ch)]
-    bp = BoundsPen(gs); gs[g].draw(bp); sc=size/f['head'].unitsPerEm
-    return [v*sc for v in bp.bounds]
+def ink_bounds(f, text, size):
+    ft = font(f); gs = ft.getGlyphSet(); cmap = ft.getBestCmap(); sc = size/ft['head'].unitsPerEm
+    bp = BoundsPen(gs); cx = 0
+    for ch in text:
+        g = cmap[ord(ch)]; gs[g].draw(TransformPen(bp, (1, 0, 0, 1, cx, 0))); cx += gs[g].width
+    x0, y0, x1, y1 = bp.bounds
+    return x0*sc, y0*sc, x1*sc, y1*sc
 
-SER='news-72-400r.ttf'; SANS='geist-500.ttf'
+def frame(o, i):  # square ring as even-odd path
+    return f'M{o[0]} {o[0]}H{o[1]}V{o[1]}H{o[0]}Z M{i[0]} {i[0]}V{i[1]}H{i[1]}V{i[0]}Z'
 
-# ---- Mark: 100 x 120 box. Hairline corner brackets (L bottom-left, inverted L top-right) framing a Roman I.
-T=3.4; ARM=36; ISZ=132
-def mark(ox=0, oy=0, s=1.0, color='currentColor'):
-    b = glyph_bounds(SER,'I',ISZ)   # xmin,ymin,xmax,ymax in font units scaled (y up)
-    gw = b[2]-b[0]; gh = b[3]-b[1]
-    gx = ox + (50 - gw/2 - b[0])*s; base = oy + (60 + gh/2)*s
-    dI,_ = text_path(SER,'I',ISZ*s,gx,base)
-    r = lambda x0,y0,x1,y1: f'M{ox+x0*s:.2f} {oy+y0*s:.2f}H{ox+x1*s:.2f}V{oy+y1*s:.2f}H{ox+x0*s:.2f}Z'
-    d = dI + r(0,120-ARM*1.3,T,120) + r(0,120-T,ARM,120) + r(100-T,0,100,ARM*1.3) + r(100-ARM,0,100,T)
-    return f'<path fill="{color}" d="{d}"/>'
+def crest(ox=0, oy=0, s=1.0):
+    """Crest in a 200x200 box (matches the original SVG): double frame, brass corner triangles, italic IL."""
+    x0, _, x1, _ = ink_bounds(F_IL, 'IL', 100)
+    dIL, _ = text_path(F_IL, 'IL', 100, 100 - (x0 + x1)/2, 132)
+    body = frame((17, 183), (23, 177)) + frame((30.5, 169.5), (33.5, 166.5)) + dIL
+    tris = 'M38 38H52L45 52Z M162 38H148L155 52Z M38 162H52L45 148Z M162 162H148L155 148Z'
+    t = f'translate({ox} {oy}) scale({s})'
+    return (f'<path fill-rule="evenodd" fill="currentColor" transform="{t}" d="{body}"/>'
+            f'<path class="brass" fill="#9A7C39" transform="{t}" d="{tris}"/>')
 
-def lockup_stacked():
-    # mark centred above wordmark, like signage
-    word_size=64; tr=15
-    dW, wW = text_path(SER,'INTRA LEGEM',word_size,0,0,tr)
-    W = wW; MS=1.25; mh=120*MS
-    mx = (W-100*MS)/2
-    out = mark(mx,0,MS)
-    dW, _ = text_path(SER,'INTRA LEGEM',word_size,0,mh+56+word_size*0.68,tr)
-    sub=17; dS, wS = text_path(SANS,'LÖGMANNSSTOFA',sub,0,0,sub*0.42)
-    dS, _ = text_path(SANS,'LÖGMANNSSTOFA',sub,(W-wS)/2,mh+56+word_size*0.68+46,sub*0.42)
-    H = mh+56+word_size*0.68+46+4
-    return W, H, out + f'<path fill="currentColor" d="{dW}"/><path fill="currentColor" d="{dS}"/>'
+def wordmark(x, y, size):
+    d1, w1 = text_path(F_R, 'Intra ', size, x, y)
+    d2, w2 = text_path(F_I, 'Legem', size, x + w1, y)
+    return d1 + d2, w1 + w2
 
-def lockup_horizontal():
-    size=30; tr=6
-    m = mark(0,0,0.36)
-    dW, wW = text_path(SER,'INTRA LEGEM',size,36+18,21.6+size*0.34,tr)
-    return 36+18+wW, 43.2, m + f'<path fill="currentColor" d="{dW}"/>'
+def svg(W, H, body, pad=0):
+    s = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-pad} {-pad} {W+2*pad:.1f} {H+2*pad:.1f}" '
+         f'fill="currentColor">{body}</svg>')
+    return re.sub(r'-?\d+\.\d{3,}', lambda m: ('%.2f' % float(m.group())).rstrip('0').rstrip('.'), s)
 
-def svg(W,H,body,pad=0):
-    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-pad} {-pad} {W+2*pad:.1f} {H+2*pad:.1f}" fill="currentColor">{body}</svg>'
+# stacked: crest above wordmark (signage)
+WS = 80
+_, ww = wordmark(0, 0, WS)
+cs = 1.15; ch = 200*cs
+W = max(ww, ch); gap = 30
+dW, _ = wordmark((W-ww)/2, ch + gap + WS*0.72, WS)
+H = ch + gap + WS*0.72 + WS*0.08
+open(f'{OUT}/logo-stacked.svg', 'w').write(svg(W, H, crest((W-ch)/2, 0, cs) + f'<path d="{dW}"/>', 2))
 
-import json
-W,H,b = lockup_stacked(); open('logo-stacked.svg','w').write(svg(W,H,b,2))
-W2,H2,b2 = lockup_horizontal(); open('logo-horizontal.svg','w').write(svg(W2,H2,b2,1))
-open('mark.svg','w').write(svg(100,120,mark(),2))
-print(W,H,W2,H2)
+# horizontal: crest left, wordmark right (nav/footer), matches the original site header
+S = 22; cs2 = 0.2
+dH, wh = wordmark(40 + 12, 20 + S*0.36, S)
+open(f'{OUT}/logo-horizontal.svg', 'w').write(svg(52 + wh, 40, crest(0, 0, cs2) + f'<path d="{dH}"/>', 1))
+open(f'{OUT}/mark.svg', 'w').write(svg(200, 200, crest(), 0))
+print('ok', W, H)

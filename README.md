@@ -9,7 +9,8 @@ Opnaðu `index.html` í vafra til að skoða.
 
 ## Merki og veggmynd
 
-- `assets/brand/` — merkið (SVG): `logo-stacked.svg`, `logo-horizontal.svg`, `mark.svg`.
+- `assets/brand/` — merki Intra Legem (IL-skjöldur + orðmerki) í SVG: `logo-stacked.svg`, `logo-horizontal.svg`, `mark.svg`.
 - `assets/intra-legem-wall-*.{webp,jpg}` — merkið á múrvegg (efst á síðunni).
 - `tools/brand/` — skriftur sem búa til merkið og veggmyndina
-  (`logo.py` → SVG, `rastermask.js` → maski, `render.py` → mynd).
+  (`logo.py` → SVG, `rastermask.js` → maski, `render.py` → mynd; 6. viðfang = messingmaski).
+  Letur: Fraunces (SOFT) og Gelasio Italic frá Google Fonts.
