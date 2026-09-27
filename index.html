@@ -318,6 +318,7 @@
   .lawyer { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: start; }
   .portrait { grid-column: 1 / span 5; position: sticky; top: calc(var(--head) + 32px); }
   .portrait .ph { border-radius: var(--radius); overflow: hidden; }
+  .portrait .ph picture { display: block; }
   .portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 54% 22%; filter: saturate(0.9) contrast(1.02); }
   .portrait figcaption { display: flex; justify-content: space-between; margin-top: 16px; font-size: 14px; color: var(--on-dark-2); }
   .lawyer-body { grid-column: 7 / span 6; }
@@ -659,7 +660,7 @@
   <div class="wrap">
     <div class="lawyer">
       <figure class="portrait wipe">
-        <div class="ph"><img src="assets/hallmundur-albertsson.jpg" alt="Hallmundur Albertsson" width="713" height="475" loading="lazy"></div>
+        <div class="ph"><picture><source srcset="assets/hallmundur-albertsson.webp" type="image/webp"><img src="assets/hallmundur-albertsson.jpg" alt="Hallmundur Albertsson" width="2000" height="1332" loading="lazy"></picture></div>
         <figcaption><span>Hallmundur Albertsson</span><span data-i18n="capRole">Lögmaður</span></figcaption>
       </figure>
       <div class="lawyer-body">
