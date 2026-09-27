@@ -136,7 +136,7 @@
   /* ---------- Hero (full-screen photo) ---------- */
   .hero { position: relative; min-height: max(100vh, 560px); display: flex; align-items: flex-end; overflow: hidden; background: #2A231C; color: var(--on-dark); isolation: isolate; }
   @supports (height: 100svh) { .hero { min-height: max(100svh, 560px); } }
-  .hero-bg { position: absolute; inset: 0; z-index: -2; }
+  .hero-bg { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
   .hero-bg img { position: absolute; inset: -3% 0 0; width: 100%; height: 106%; object-fit: cover; object-position: 50% 30%; transform: scale(1.04); opacity: 0; transition: opacity 1.2s ease, transform 2s var(--ease); }
   .hero-bg img.ready { opacity: 1; transform: scale(1) translateY(var(--py, 0px)); }
   .hero-shade { position: absolute; inset: 0; z-index: -1; pointer-events: none;
@@ -148,9 +148,6 @@
   .hero-aside { grid-column: 8 / span 5; padding-bottom: 6px; }
   .hero-aside .lede { margin-top: 0; font-size: clamp(17px, 1.4vw, 21px); line-height: 1.5; color: rgba(246, 241, 232, 0.94); }
   .hero-aside .lede b { font-weight: 500; color: #fff; }
-  .hero-areas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-  .hero-areas a { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(246, 241, 232, 0.32); font-size: 14.5px; font-weight: 500; color: #F6F1E8; background: rgba(246, 241, 232, 0.08); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background-color .25s, color .25s, border-color .25s; }
-  .hero-areas a:hover { background: #F6F1E8; color: var(--ink); border-color: #F6F1E8; }
   .hero .eyebrow { color: rgba(239, 232, 220, 0.78); }
   .hero .eyebrow::before { background: var(--brass-lt); }
   .hero h1 { margin-top: 0; font-size: clamp(42px, min(5.6vw, 10.5vh), 100px); line-height: 0.95; font-weight: 340; letter-spacing: -0.038em; font-weight: 320; color: #F6F1E8; text-wrap: balance; }
@@ -185,6 +182,7 @@
   .head:not(.solid) .tools .btn { background: rgba(246, 241, 232, 0.14); border-color: rgba(246, 241, 232, 0.35); color: #F6F1E8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
   .head:not(.solid) .tools .btn:hover { background: #F6F1E8; color: var(--ink); }
   .head .brand .brass { fill: var(--brass-lt); }
+  .head:not(.solid) .brand { opacity: 0; transform: translateY(-6px); pointer-events: none; }
 
   .stats-sec { padding: clamp(56px, 7vw, 96px) 0 0; }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 24px; }
@@ -396,14 +394,18 @@
     .menu .m-extra { display: flex; border: 0; padding-top: 24px; justify-content: space-between; align-items: center; }
     .menu .m-extra a { font-family: var(--sans); font-size: 16px; padding: 0; }
 
-    .hero { background: #1C1814; min-height: 0; display: block; }
-    .hero-bg, .hero-shade { bottom: auto; height: 66vh; }
+    .hero { background: #1C1814; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; }
+    .hero-bg, .hero-shade { bottom: auto; height: 64vh; height: 64svh; }
     .hero-bg img { object-position: 50% 20%; }
     .hero-shade { background: linear-gradient(to top, #1C1814 0%, rgba(28, 24, 20, 0.7) 22%, rgba(28, 24, 20, 0) 50%), linear-gradient(to bottom, rgba(17, 13, 9, 0.5) 0%, rgba(17, 13, 9, 0) 16%); }
-    .hero-in { display: block; padding-top: 56vh; padding-bottom: 72px; }
+    .hero-in { display: block; padding-top: 38vh; padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+    .hero-aside { margin-top: 18px; }
+    .hero-aside .lede { font-size: 16.5px; line-height: 1.5; }
+    .hero-actions { margin-top: 22px; flex-wrap: nowrap; justify-content: space-between; }
+    .hero .btn { padding: 15px 22px; }
     .scroll-cue { display: none; }
     .cta-card { display: none; }
-    .hero h1 { font-size: clamp(40px, 11vw, 60px); }
+    .hero h1 { font-size: clamp(34px, min(10.5vw, 6.2vh), 52px); line-height: 1; }
     .menu-open .head { color: var(--ink); }
     .menu-open .head .brand, .menu-open .head .menu-btn { color: var(--ink); }
     .intro > div, .intro figure { grid-column: 1 / -1; }
@@ -479,12 +481,6 @@
   <div class="hero-in wrap">
     <div class="hero-copy">
       <h1 id="h1" data-i18n-html="heroTitle">Lögmannsstofa fyrir <em>atvinnulífið.</em></h1>
-      <nav class="hero-areas" aria-label="Helstu svið">
-        <a href="#svid" data-area="0" data-i18n="s0t">Samkeppnisréttur</a>
-        <a href="#svid" data-area="1" data-i18n="s1t">Fjarskipti og fjölmiðlar</a>
-        <a href="#svid" data-area="2" data-i18n="s2t">Samningar og félög</a>
-        <a href="#svid" data-area="4" data-i18n="s4t">Málflutningur</a>
-      </nav>
     </div>
     <div class="hero-aside">
       <p class="lede" data-i18n-html="heroLede"><b>Intra Legem</b> er lögmannsstofa Hallmundar Albertssonar, fyrrverandi yfirlögfræðings Símans. Hann ráðleggur fyrirtækjum og rekur mál þeirra fyrir samkeppnisyfirvöldum, eftirlitsstofnunum og dómstólum.</p>
