@@ -3,18 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Intra Legem — Lögmannsstofa Hallmundar Albertssonar</title>
+<title>Intra Legem — Lögmannsstofa</title>
 <meta name="description" content="Intra Legem er lögmannsstofa Hallmundar Albertssonar lögmanns í Grósku, Reykjavík. Samkeppnisréttur, fjarskipti og fjölmiðlar, samninga- og félagaréttur og málflutningur.">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#FBF8F3">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Intra Legem — Lögmannsstofa">
-<meta property="og:description" content="Samkeppnisréttur, fjarskipti og fjölmiðlar, samninga- og félagaréttur og málflutningur.">
+<meta property="og:description" content="Skýr ráðgjöf í flóknu regluverki. Samkeppnisréttur, fjarskipti og viðskiptasamningar.">
 <meta property="og:image" content="https://intralegem.vercel.app/assets/og-image.jpg">
 <meta property="og:locale" content="is_IS">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
-<link rel="preload" as="image" href="assets/intra-legem-wall-panel.webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/schibsted-grotesk-latin.woff2" crossorigin>
+<link rel="preload" as="image" href="assets/wall-wide-shade.webp" media="(min-width: 761px)">
+<link rel="preload" as="image" href="assets/wall-wide-sun.webp" media="(min-width: 761px)">
+<link rel="preload" as="image" href="assets/wall-tall-shade.webp" media="(max-width: 760px)">
+<link rel="preload" as="image" href="assets/wall-tall-sun.webp" media="(max-width: 760px)">
 
 <script type="application/ld+json">
 {
@@ -27,256 +31,386 @@
   "image": "https://intralegem.vercel.app/assets/og-image.jpg",
   "email": "hallmundur@intralegem.is",
   "telephone": "+354 892 6064",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Kristínargata 1 (Gróska)",
-    "postalCode": "102",
-    "addressLocality": "Reykjavík",
-    "addressCountry": "IS"
-  },
-  "employee": {
-    "@type": "Person",
-    "name": "Hallmundur Albertsson",
-    "jobTitle": "Lögmaður",
-    "alumniOf": ["King's College London", "University of Cambridge", "Háskóli Íslands"]
-  }
+  "address": { "@type": "PostalAddress", "streetAddress": "Kristínargata 1 (Gróska)", "postalCode": "102", "addressLocality": "Reykjavík", "addressCountry": "IS" },
+  "employee": { "@type": "Person", "name": "Hallmundur Albertsson", "jobTitle": "Lögmaður", "alumniOf": ["King's College London", "University of Cambridge", "Háskóli Íslands"] }
 }
 </script>
 
 <style>
-  @font-face {
-    font-family: 'Schibsted Grotesk';
-    src: url('assets/fonts/schibsted-grotesk-latin.woff2') format('woff2');
-    font-weight: 400 600; font-style: normal; font-display: swap;
-  }
+  @font-face { font-family: 'Fraunces'; src: url('assets/fonts/fraunces-latin.woff2') format('woff2'); font-weight: 300 500; font-display: swap; }
+  @font-face { font-family: 'Schibsted Grotesk'; src: url('assets/fonts/schibsted-grotesk-latin.woff2') format('woff2'); font-weight: 400 600; font-display: swap; }
+
   :root {
-    --bg: #FFFFFF;
-    --bg-2: #F5F4F1;
-    --ink: #111315;
-    --ink-2: #3D4145;
-    --muted: #6D7176;
-    --rule: #E4E2DD;
-    --rule-2: #CFCCC5;
-    --green: #243B30;
-    --green-ink: #1A2B23;
+    /* Palette sampled from the plaster wall + the crest */
+    --stone-0: #FBF8F3;
+    --stone-1: #F3EDE3;
+    --stone-2: #E6DDCD;
+    --stone-3: #D3C6B0;
+    --ink: #17140F;
+    --ink-2: #4A433B;
+    --muted: #7B7268;
+    --rule: rgba(23, 20, 15, 0.13);
+    --rule-2: rgba(23, 20, 15, 0.26);
+    --umber: #1C1814;
+    --umber-2: #26211B;
+    --on-dark: #EFE8DC;
+    --on-dark-2: rgba(239, 232, 220, 0.66);
+    --rule-dark: rgba(239, 232, 220, 0.14);
+    --brass: #9A7C39;
+    --brass-lt: #C6A462;
+
+    --serif: 'Fraunces', 'Iowan Old Style', Georgia, serif;
     --sans: 'Schibsted Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
-    --gutter: clamp(20px, 3.6vw, 48px);
-    --max: 1280px;
-    --head: 72px;
+    --gutter: clamp(20px, 4vw, 56px);
+    --max: 1320px;
+    --head: 76px;
+    --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--head) + 16px); -webkit-text-size-adjust: 100%; }
+  html { scroll-behavior: smooth; scroll-padding-top: var(--head); -webkit-text-size-adjust: 100%; }
   body {
-    background: var(--bg); color: var(--ink);
+    background: var(--stone-0); color: var(--ink);
     font-family: var(--sans); font-size: 17px; line-height: 1.6;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: 'ss01' 0;
   }
   img { display: block; max-width: 100%; }
-  a { color: inherit; }
-  ::selection { background: var(--green); color: #fff; }
-  :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+  a { color: inherit; text-decoration: none; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  ::selection { background: var(--ink); color: var(--stone-0); }
+  :focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
-  .skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--ink); color: #fff; padding: 10px 14px; font-size: 14px; }
+  .skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--ink); color: var(--stone-0); padding: 10px 14px; font-size: 14px; }
   .skip:focus { top: 12px; }
-  h1, h2, h3 { font-weight: 500; letter-spacing: -0.02em; }
   .tnum { font-variant-numeric: tabular-nums; }
 
-  /* ---------- Header ---------- */
-  .head {
-    position: sticky; top: 0; z-index: 40;
-    background: rgba(255, 255, 255, 0.94);
-    -webkit-backdrop-filter: saturate(1.3) blur(10px); backdrop-filter: saturate(1.3) blur(10px);
-    border-bottom: 1px solid var(--rule);
+  /* ---------- Type system ---------- */
+  .serif, h1, h2 {
+    font-family: var(--serif);
+    font-weight: 350;
+    font-variation-settings: 'SOFT' 50, 'WONK' 0;
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
   }
-  .head .wrap { height: var(--head); display: flex; align-items: center; gap: 40px; }
-  .brand { display: block; color: var(--ink); flex-shrink: 0; }
-  .brand svg { height: 36px; width: auto; display: block; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--muted); }
+  .eyebrow::before { content: ''; width: 7px; height: 7px; background: var(--brass); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+  .h2 { font-size: clamp(36px, 4.2vw, 60px); line-height: 1.04; letter-spacing: -0.028em; }
+  .lede { font-size: clamp(17px, 1.35vw, 20px); line-height: 1.6; color: var(--ink-2); }
+
+  /* ---------- Buttons & links ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 24px; font-size: 15.5px; font-weight: 500; cursor: pointer;
+    background: var(--ink); color: var(--stone-0); border: 1px solid var(--ink);
+    transition: background-color .25s, color .25s, border-color .25s;
+  }
+  .btn svg { width: 14px; height: 14px; transition: transform .35s var(--ease); }
+  .btn:hover { background: var(--brass); border-color: var(--brass); color: #fff; }
+  .btn:hover svg { transform: translateX(3px); }
+  .btn.line { background: transparent; color: var(--ink); border-color: var(--rule-2); }
+  .btn.line:hover { border-color: var(--ink); background: var(--ink); color: var(--stone-0); }
+  .ulink { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size .35s var(--ease), color .2s; }
+  .ulink:hover { background-size: 0 1px; background-position: 100% 100%; }
+
+  /* ---------- Header ---------- */
+  .head { position: fixed; inset: 0 0 auto; z-index: 50; transition: background-color .35s, border-color .35s; border-bottom: 1px solid transparent; }
+  .head .wrap { height: var(--head); display: flex; align-items: center; gap: 36px; }
+  .brand { color: var(--ink); flex-shrink: 0; transition: opacity .4s var(--ease), transform .4s var(--ease); }
+  .brand svg { height: 40px; width: auto; display: block; }
+  .head:not(.solid) .brand { opacity: 0; transform: translateY(-6px); pointer-events: none; }
+  .head.solid { background: rgba(251, 248, 243, 0.9); -webkit-backdrop-filter: saturate(1.3) blur(14px); backdrop-filter: saturate(1.3) blur(14px); border-bottom-color: var(--rule); }
   .menu { display: flex; gap: 30px; list-style: none; margin-left: auto; }
-  .menu a { text-decoration: none; font-size: 15px; color: var(--ink-2); padding: 6px 0; border-bottom: 1px solid transparent; transition: color .2s, border-color .2s; }
-  .menu a:hover, .menu a.active { color: var(--ink); border-bottom-color: var(--ink); }
-  .head-tools { display: flex; align-items: center; gap: 18px; }
-  .head-phone { text-decoration: none; font-size: 15px; font-weight: 500; white-space: nowrap; }
-  .head-phone:hover { color: var(--green); }
+  .menu a { font-size: 15px; color: var(--ink); position: relative; padding: 6px 0; }
+  .menu a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease); }
+  .menu a:hover::after, .menu a.active::after { transform: scaleX(1); transform-origin: left; }
+  .menu .m-extra { display: none; }
+  .tools { display: flex; align-items: center; gap: 20px; }
   .lang { display: flex; font-size: 13px; font-weight: 500; }
-  .lang button { font: inherit; background: none; border: 0; cursor: pointer; color: var(--muted); padding: 4px 5px; }
-  .lang button[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
-  .menu-btn { display: none; margin-left: auto; background: none; border: 0; font: inherit; font-size: 15px; font-weight: 500; cursor: pointer; padding: 10px 0; color: var(--ink); }
+  .lang button { background: none; border: 0; cursor: pointer; color: var(--muted); padding: 4px 5px; }
+  .lang button[aria-pressed="true"] { color: var(--ink); }
+  .head .btn { padding: 11px 18px; font-size: 14px; }
+  .menu-btn { display: none; margin-left: auto; background: none; border: 0; cursor: pointer; font-size: 15px; font-weight: 500; padding: 10px 0; gap: 10px; align-items: center; }
+  .menu-btn i { display: block; width: 18px; height: 8px; position: relative; }
+  .menu-btn i::before, .menu-btn i::after { content: ''; position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor; transition: transform .3s var(--ease); }
+  .menu-btn i::before { top: 0; } .menu-btn i::after { bottom: 0; }
+  .menu-open .menu-btn i::before { transform: translateY(3.25px) rotate(45deg); }
+  .menu-open .menu-btn i::after { transform: translateY(-3.25px) rotate(-45deg); }
 
   /* ---------- Hero ---------- */
-  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - var(--head)); max-height: 980px; border-bottom: 1px solid var(--rule); }
-  @supports (height: 100svh) { .hero { min-height: calc(100svh - var(--head)); } }
-  .hero-text {
-    display: flex; flex-direction: column; justify-content: space-between;
-    padding: clamp(40px, 6vw, 88px) clamp(28px, 4.5vw, 72px) clamp(28px, 3vw, 40px) max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+  .hero { position: relative; min-height: max(100vh, 760px); display: flex; align-items: flex-end; overflow: hidden; background: #8E8272; }
+  @supports (height: 100svh) { .hero { min-height: max(100svh, 760px); } }
+  .hero-layer, .hero-layer picture, .hero-layer img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-layer img { object-fit: cover; object-position: 50% 28%; }
+  .hero-sun {
+    --p: 42; --q: 64;
+    -webkit-mask-image:
+      linear-gradient(161deg, transparent calc(var(--p) * 1% - 3%), #000 calc(var(--p) * 1% + 3%)),
+      linear-gradient(62deg, #000 calc(var(--q) * 1% - 1.6%), transparent calc(var(--q) * 1% - 0.6%), transparent calc(var(--q) * 1% + 0.6%), #000 calc(var(--q) * 1% + 1.6%));
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(161deg, transparent calc(var(--p) * 1% - 3%), #000 calc(var(--p) * 1% + 3%)),
+      linear-gradient(62deg, #000 calc(var(--q) * 1% - 1.6%), transparent calc(var(--q) * 1% - 0.6%), transparent calc(var(--q) * 1% + 0.6%), #000 calc(var(--q) * 1% + 1.6%));
+    mask-composite: intersect;
   }
-  .hero-meta { font-size: 15px; color: var(--muted); }
-  .hero h1 { font-size: clamp(32px, 3.3vw, 50px); line-height: 1.07; letter-spacing: -0.028em; margin-top: 28px; max-width: 16em; }
-  .hero-lede { margin-top: 24px; font-size: clamp(17px, 1.3vw, 19px); color: var(--ink-2); max-width: 30em; }
-  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 36px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
-    background: var(--green); color: #fff; font-weight: 500; font-size: 16px;
-    padding: 15px 22px; border-radius: 2px; transition: background-color .2s;
-  }
-  .btn:hover { background: var(--green-ink); }
-  .btn svg { width: 14px; height: 14px; }
-  .link { font-weight: 500; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: var(--rule-2); transition: text-decoration-color .2s, color .2s; }
-  .link:hover { color: var(--green); text-decoration-color: var(--green); }
-  .hero-contact {
-    display: flex; flex-wrap: wrap; gap: 14px 36px;
-    margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--rule);
-    font-size: 15px;
-  }
-  .hero-contact dt { color: var(--muted); font-size: 13px; }
-  .hero-contact dd { white-space: nowrap; }
-  .hero-contact dd a { text-decoration: none; }
-  .hero-contact dd a:hover { color: var(--green); }
-  .hero-img { position: relative; background: #D6CAB4; overflow: hidden; }
-  .hero-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; opacity: 0; transition: opacity 1.2s ease; }
-  .hero-img img.ready { opacity: 1; }
+  .hero-veil { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(251, 248, 243, 0) 46%, rgba(251, 248, 243, 0.6) 70%, rgba(251, 248, 243, 0.95) 90%, var(--stone-0) 100%); }
+  .hero-in { position: relative; width: 100%; padding-top: 140px; padding-bottom: clamp(36px, 5vw, 64px); display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: end; }
+  .hero-copy { grid-column: 1 / span 7; }
+  .hero .eyebrow { color: var(--ink); }
+  .head:not(.solid) .lang button { color: var(--ink-2); }
+  .head:not(.solid) .lang button[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+  .hero h1 { margin-top: 22px; font-size: clamp(46px, 5.6vw, 88px); line-height: 0.98; letter-spacing: -0.035em; font-weight: 320; }
+  .hero .lede { margin-top: 24px; max-width: 31em; }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; margin-top: 34px; }
+  .hero-phone { font-size: 16px; font-weight: 500; display: inline-flex; gap: 10px; align-items: center; }
+  .hero-phone svg { width: 16px; height: 16px; }
+  .hero-areas { grid-column: 9 / span 4; border-top: 1px solid var(--ink); }
+  .hero-areas .t { display: block; padding: 14px 0 8px; font-size: 13px; color: var(--muted); }
+  .hero-areas a { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0; border-top: 1px solid var(--rule); font-size: 16px; transition: padding .35s var(--ease), color .2s; }
+  .hero-areas a span:last-child { color: var(--muted); transition: transform .35s var(--ease), color .2s; }
+  .hero-areas a:hover { padding-left: 8px; }
+  .hero-areas a:hover span:last-child { transform: translateX(3px); color: var(--brass); }
 
   /* ---------- Sections ---------- */
-  .sec { padding: clamp(72px, 9vw, 128px) 0; border-bottom: 1px solid var(--rule); }
-  .sec.alt { background: var(--bg-2); }
-  .sec-head { display: grid; grid-template-columns: 4fr 8fr; gap: 24px 48px; margin-bottom: clamp(40px, 5vw, 64px); align-items: baseline; }
-  .sec-head h2 { font-size: clamp(30px, 3vw, 42px); line-height: 1.1; }
-  .sec-head p { font-size: 19px; color: var(--ink-2); max-width: 36em; }
+  .sec { padding: clamp(88px, 11vw, 160px) 0; position: relative; }
+  .sec.s1 { background: var(--stone-1); }
+  .sec.dark { background: var(--umber); color: var(--on-dark); }
+  .sec.dark .eyebrow { color: var(--on-dark-2); }
+  .sec.dark .eyebrow::before { background: var(--brass-lt); }
+  .sec.dark .lede { color: var(--on-dark-2); }
+  .sec-head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: end; margin-bottom: clamp(48px, 6vw, 80px); }
+  .sec-head > div { grid-column: 1 / span 6; }
+  .sec-head .h2 { margin-top: 18px; }
+  .sec-head > p { grid-column: 8 / span 5; }
 
-  /* Services */
-  .services { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); }
-  .svc { padding: 28px 40px 32px 0; border-bottom: 1px solid var(--rule); }
-  .svc:nth-child(even) { padding: 28px 0 32px 40px; border-left: 1px solid var(--rule); }
-  .svc h3 { font-size: 21px; line-height: 1.3; letter-spacing: -0.01em; }
-  .svc p { margin-top: 10px; color: var(--ink-2); font-size: 16px; max-width: 34em; }
-  .svc.cta { display: flex; flex-direction: column; justify-content: center; }
-  .svc.cta p { margin-top: 0; color: var(--ink); font-size: 17px; }
-  .svc.cta a { margin-top: 10px; display: inline-block; }
+  /* Intro */
+  .intro-statement { font-size: clamp(28px, 3.1vw, 46px); line-height: 1.2; letter-spacing: -0.022em; max-width: 24em; margin-top: 22px; }
+  .intro-statement b { font-weight: 350; color: var(--brass); }
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 24px; margin-top: clamp(56px, 7vw, 96px); }
+  .principle { border-top: 1px solid var(--ink); padding-top: 22px; padding-right: 32px; }
+  .principle .n { font-size: 13px; color: var(--brass); font-weight: 500; }
+  .principle h3 { margin-top: 36px; font-size: 26px; line-height: 1.15; }
+  .principle p { margin-top: 12px; font-size: 16px; color: var(--ink-2); }
 
-  /* Lawyer */
-  .lawyer { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
-  .lawyer-photo { position: sticky; top: calc(var(--head) + 24px); }
-  .lawyer-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 54% 20%; background: var(--bg-2); }
-  .lawyer-photo figcaption { margin-top: 12px; font-size: 14px; color: var(--muted); }
-  .lawyer h2 { font-size: clamp(34px, 3.6vw, 52px); line-height: 1.05; }
-  .lawyer .role { margin-top: 10px; font-size: 18px; color: var(--ink-2); }
-  .bio { margin-top: 32px; max-width: 38em; }
-  .bio p { color: var(--ink-2); }
+  /* Services — two-pane */
+  .svc-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: start; }
+  .svc-list { grid-column: 1 / span 6; list-style: none; border-top: 1px solid var(--ink); }
+  .svc-item { border-bottom: 1px solid var(--rule-2); }
+  .svc-btn {
+    width: 100%; display: grid; grid-template-columns: 52px 1fr 24px; align-items: baseline; gap: 12px;
+    padding: 22px 0; background: none; border: 0; cursor: pointer; text-align: left;
+    transition: padding .4s var(--ease);
+  }
+  .svc-btn .n { font-size: 13px; font-weight: 500; color: var(--muted); transition: color .2s; }
+  .svc-btn .t { font-family: var(--serif); font-variation-settings: 'SOFT' 50, 'WONK' 0; font-weight: 350; font-size: clamp(22px, 2vw, 29px); line-height: 1.18; letter-spacing: -0.015em; color: var(--ink-2); transition: color .2s; }
+  .svc-btn .a { justify-self: end; color: var(--muted); transition: transform .35s var(--ease), color .2s; }
+  .svc-btn:hover .t, .svc-btn[aria-selected="true"] .t { color: var(--ink); }
+  .svc-btn[aria-selected="true"] .n { color: var(--brass); }
+  .svc-btn[aria-selected="true"] .a { color: var(--brass); transform: translateX(4px); }
+  .svc-btn:hover { padding-left: 6px; }
+  .svc-detail { display: none; }
+  .svc-panel { grid-column: 8 / span 5; position: sticky; top: calc(var(--head) + 32px); }
+  .frame { position: relative; background: var(--stone-0); border: 1px solid var(--ink); padding: 8px; }
+  .frame-in { position: relative; border: 1px solid var(--rule-2); padding: clamp(28px, 3vw, 44px); }
+  .frame::before, .frame::after, .frame-in::before, .frame-in::after { content: ''; position: absolute; width: 9px; height: 9px; background: var(--brass); z-index: 2; }
+  .frame::before { top: 16px; left: 16px; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+  .frame::after { top: 16px; right: 16px; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+  .frame-in::before { bottom: 8px; left: 8px; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+  .frame-in::after { bottom: 8px; right: 8px; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+  .panel-body { transition: opacity .25s ease, transform .3s var(--ease); }
+  .panel-body.swap { opacity: 0; transform: translateY(6px); }
+  .panel-body .n { font-size: 13px; color: var(--brass); font-weight: 500; }
+  .panel-body h3 { margin-top: 18px; font-size: clamp(28px, 2.4vw, 36px); line-height: 1.1; letter-spacing: -0.022em; }
+  .panel-body > p { margin-top: 16px; color: var(--ink-2); font-size: 16.5px; }
+  .panel-body h4 { margin-top: 28px; font-size: 13px; font-weight: 500; color: var(--muted); }
+  .panel-body ul { list-style: none; margin-top: 8px; }
+  .panel-body li { position: relative; padding: 10px 0 10px 22px; border-top: 1px solid var(--rule); font-size: 15.5px; }
+  .panel-body li::before { content: ''; position: absolute; left: 0; top: 21px; width: 10px; height: 1px; background: var(--brass); }
+  .panel-body .btn { margin-top: 28px; }
+
+  /* Lawyer (dark) */
+  .lawyer { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: start; }
+  .portrait { grid-column: 1 / span 5; position: sticky; top: calc(var(--head) + 32px); }
+  .portrait .frame { background: var(--umber-2); border-color: var(--brass-lt); }
+  .portrait .frame-in { padding: 0; border-color: var(--rule-dark); overflow: hidden; }
+  .portrait .frame::before, .portrait .frame::after, .portrait .frame-in::before, .portrait .frame-in::after { background: var(--brass-lt); }
+  .portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 54% 22%; filter: saturate(0.9) contrast(1.02); }
+  .portrait figcaption { display: flex; justify-content: space-between; margin-top: 16px; font-size: 14px; color: var(--on-dark-2); }
+  .lawyer-body { grid-column: 7 / span 6; }
+  .lawyer-body .h2 { margin-top: 18px; font-size: clamp(44px, 5vw, 76px); line-height: 0.98; }
+  .lawyer-body .role { margin-top: 14px; font-size: 18px; color: var(--on-dark-2); }
+  .bio { margin-top: 40px; }
+  .bio p { color: var(--on-dark-2); }
   .bio p + p { margin-top: 1em; }
-  .bio p:first-child { font-size: 20px; line-height: 1.5; color: var(--ink); }
-  .facts { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; border-top: 1px solid var(--ink); }
-  .facts div { padding: 16px 0; border-bottom: 1px solid var(--rule); }
-  .facts dt { font-size: 13px; color: var(--muted); }
-  .facts dd { margin-top: 2px; font-size: 16px; }
-  .facts dd a { text-decoration: none; }
-  .facts dd a:hover { color: var(--green); }
-  .cv { margin-top: 56px; }
-  .cv h3 { font-size: 20px; margin-bottom: 12px; }
-  .cv + .cv { margin-top: 44px; }
-  .cv table { width: 100%; border-collapse: collapse; font-size: 16px; }
-  .cv th, .cv td { text-align: left; font-weight: 400; padding: 12px 16px 12px 0; border-top: 1px solid var(--rule); vertical-align: baseline; }
-  .cv tr:last-child td, .cv tr:last-child th { border-bottom: 1px solid var(--rule); }
-  .cv th { width: 128px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .cv td.r { color: var(--muted); text-align: right; padding-right: 0; }
-  .cv-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 44px; }
-  .cv-cols .cv { margin-top: 0; }
-  .cv-cols th { width: 64px; }
+  .bio p:first-child { font-family: var(--serif); font-variation-settings: 'SOFT' 50, 'WONK' 0; font-weight: 330; font-size: clamp(22px, 1.9vw, 27px); line-height: 1.4; color: var(--on-dark); letter-spacing: -0.012em; }
+  .creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule-dark); }
+  .creds h4 { font-size: 13px; font-weight: 500; color: var(--brass-lt); }
+  .creds ul { list-style: none; margin-top: 10px; }
+  .creds li { font-size: 15px; line-height: 1.45; padding: 6px 0; color: var(--on-dark); }
+  .creds li small { display: block; color: var(--on-dark-2); font-size: 13.5px; }
+  .direct { display: flex; flex-wrap: wrap; gap: 12px 32px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--rule-dark); }
+  .direct a { font-size: 16px; }
+  .direct a:hover { color: var(--brass-lt); }
+
+  /* Career timeline */
+  .tl { border-top: 1px solid var(--ink); }
+  .tl-axis, .tl-row { display: grid; grid-template-columns: minmax(200px, 3fr) 9fr; column-gap: 24px; }
+  .tl-axis { padding: 12px 0; border-bottom: 1px solid var(--rule-2); font-size: 13px; color: var(--muted); }
+  .tl-axis .ticks { position: relative; height: 18px; }
+  .tl-axis .ticks span { position: absolute; transform: translateX(-50%); }
+  .tl-axis .ticks span:first-child { transform: none; }
+  .tl-row { padding: 14px 0; border-bottom: 1px solid var(--rule); align-items: center; }
+  .tl-row .who b { display: block; font-family: var(--serif); font-variation-settings: 'SOFT' 50, 'WONK' 0; font-weight: 400; font-size: 19px; line-height: 1.25; }
+  .tl-row .who span { font-size: 14px; color: var(--muted); }
+  .track { position: relative; height: 34px; background-image: linear-gradient(90deg, var(--rule) 1px, transparent 1px); background-size: calc(100% / 26 * 5) 100%; }
+  .bar {
+    position: absolute; top: 6px; bottom: 6px; left: var(--s); width: var(--w); min-width: 6px;
+    background: var(--stone-3); display: flex; align-items: center; padding: 0 10px;
+    font-size: 12.5px; font-weight: 500; color: transparent; white-space: nowrap; overflow: hidden;
+    transform-origin: left; transform: scaleX(0); transition: transform 1.1s var(--ease);
+  }
+  .tl.in .bar { transform: scaleX(1); }
+  .tl-row:nth-child(3) .bar { transition-delay: .06s; } .tl-row:nth-child(4) .bar { transition-delay: .12s; }
+  .tl-row:nth-child(5) .bar { transition-delay: .18s; } .tl-row:nth-child(6) .bar { transition-delay: .24s; }
+  .tl-row:nth-child(7) .bar { transition-delay: .30s; } .tl-row:nth-child(8) .bar { transition-delay: .36s; }
+  .tl-row:nth-child(9) .bar { transition-delay: .42s; }
+  .bar.now { background: linear-gradient(90deg, var(--brass), var(--brass-lt)); color: #fff; }
+  .bar.long { background: var(--ink); color: var(--stone-0); }
+  .bar.now { color: transparent; }
+  .tl-note { margin-top: 20px; font-size: 14px; color: var(--muted); }
 
   /* Writing */
-  .posts { list-style: none; border-top: 1px solid var(--ink); }
+  .posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; list-style: none; }
   .post a {
-    display: grid; grid-template-columns: 180px 1fr auto; gap: 8px 40px; align-items: baseline;
-    padding: 26px 0; border-bottom: 1px solid var(--rule); text-decoration: none;
+    display: flex; flex-direction: column; height: 100%; min-height: 340px;
+    padding: 28px 28px 26px; background: var(--stone-0); border: 1px solid var(--rule);
+    transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .3s;
   }
-  .post .when { font-size: 14px; color: var(--muted); }
-  .post h3 { font-size: 22px; line-height: 1.3; letter-spacing: -0.012em; transition: color .2s; }
-  .post p { grid-column: 2; margin-top: 4px; color: var(--ink-2); font-size: 16px; max-width: 42em; }
-  .post .go { grid-column: 3; grid-row: 1; font-size: 14px; color: var(--muted); white-space: nowrap; }
-  .post a:hover h3 { color: var(--green); }
-  .post a:hover .go { color: var(--green); }
+  .post a:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -28px rgba(40, 30, 15, 0.35); border-color: var(--rule-2); }
+  .post .meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  .post .meta b { font-weight: 500; color: var(--ink); }
+  .post h3 { margin-top: 40px; font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; }
+  .post p { margin-top: 14px; font-size: 15.5px; color: var(--ink-2); }
+  .post .go { margin-top: auto; padding-top: 28px; font-size: 14px; font-weight: 500; display: inline-flex; gap: 8px; }
+  .post .go span { transition: transform .35s var(--ease), color .2s; }
+  .post a:hover .go span:last-child { transform: translate(2px, -2px); color: var(--brass); }
 
-  /* Firm */
-  .firm { display: grid; grid-template-columns: 4fr 8fr; gap: 24px 48px; }
-  .firm-body .lead { font-size: clamp(22px, 2vw, 28px); line-height: 1.35; letter-spacing: -0.015em; max-width: 26em; }
-  .firm-body > p:not(.lead) { margin-top: 20px; color: var(--ink-2); max-width: 38em; }
-  .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 56px; }
-  .ways h3 { font-size: 18px; padding-top: 16px; border-top: 1px solid var(--ink); }
-  .ways p { margin-top: 10px; font-size: 16px; color: var(--ink-2); }
-
-  /* Contact */
-  .contact h2 { font-size: clamp(34px, 4vw, 60px); line-height: 1.05; letter-spacing: -0.03em; max-width: 14em; }
-  .contact .sub { margin-top: 18px; font-size: 19px; color: var(--ink-2); max-width: 34em; }
-  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 56px; border-top: 1px solid var(--ink); padding-top: 24px; }
-  .contact-grid dt { font-size: 14px; color: var(--muted); }
-  .contact-grid dd { margin-top: 6px; font-size: clamp(20px, 1.8vw, 26px); line-height: 1.3; letter-spacing: -0.01em; }
-  .contact-grid dd a { text-decoration: none; }
-  .contact-grid dd a:hover { color: var(--green); }
-  .contact-grid .small { margin-top: 10px; font-size: 15px; letter-spacing: 0; }
+  /* Contact (dark) */
+  .contact-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: start; }
+  .contact-left { grid-column: 1 / span 5; }
+  .contact-left .h2 { margin-top: 18px; font-size: clamp(48px, 6vw, 96px); line-height: 0.96; }
+  .contact-left .lede { margin-top: 24px; max-width: 26em; }
+  .lines { margin-top: 48px; border-top: 1px solid var(--rule-dark); }
+  .lines div { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule-dark); align-items: baseline; }
+  .lines dt { font-size: 13px; color: var(--on-dark-2); }
+  .lines dd { font-size: 18px; }
+  .lines a:hover { color: var(--brass-lt); }
+  .lines small { display: block; margin-top: 4px; font-size: 14px; }
+  .form-wrap { grid-column: 7 / span 6; }
+  .form-wrap .frame { background: var(--stone-0); color: var(--ink); border-color: var(--brass-lt); }
+  form h3 { font-size: 30px; letter-spacing: -0.02em; line-height: 1.1; }
+  form > p { margin-top: 8px; font-size: 15px; color: var(--ink-2); }
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-top: 28px; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+  .field input, .field select, .field textarea {
+    width: 100%; border: 0; border-bottom: 1px solid var(--rule-2); background: transparent;
+    padding: 10px 0; font-size: 16px; border-radius: 0; transition: border-color .2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .field select { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%237B7268' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right 2px center; padding-right: 22px; cursor: pointer; }
+  .field textarea { resize: vertical; min-height: 100px; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: var(--ink); }
+  .field .err { font-size: 12.5px; color: #9B2C2C; min-height: 0; }
+  .form-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-top: 28px; }
+  .form-foot small { font-size: 13px; color: var(--muted); max-width: 22em; }
 
   /* Footer */
-  footer { background: var(--ink); color: #D9D7D2; padding: 56px 0 40px; font-size: 14px; }
-  footer .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; padding-bottom: 32px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
-  footer .brand { color: #F3F1EC; }
-  footer .brand svg { height: 40px; }
+  footer { background: var(--umber); color: var(--on-dark-2); border-top: 1px solid var(--rule-dark); padding: 64px 0 36px; font-size: 14px; }
+  .foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px; padding-bottom: 36px; border-bottom: 1px solid var(--rule-dark); }
+  .foot-logo { color: var(--on-dark); }
+  .foot-logo svg { height: 104px; width: auto; display: block; }
   footer nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 28px; }
-  footer a { text-decoration: none; }
-  footer a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
-  footer .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 32px; padding-top: 24px; color: #9C9A95; }
+  footer nav a { color: var(--on-dark); }
+  footer nav a:hover { color: var(--brass-lt); }
+  .foot-legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 22px; font-size: 13px; }
+
+  /* Reveal */
+  .js .rv { opacity: 0; transform: translateY(14px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  .js .rv.in { opacity: 1; transform: none; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    *, *::before, *::after { transition: none !important; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .js .rv { opacity: 1; transform: none; }
+    .bar { transform: none; }
   }
 
   /* ---------- Responsive ---------- */
-  @media (max-width: 1100px) {
+  @media (max-width: 1120px) {
     .menu { gap: 22px; }
-    .head-phone { display: none; }
+    .hero-copy { grid-column: 1 / span 8; }
+    .hero-areas { grid-column: 9 / span 4; }
+    .svc-panel { grid-column: 7 / span 6; }
+    .creds { grid-template-columns: 1fr 1fr; }
+    .posts { grid-template-columns: 1fr 1fr; }
+    .contact-left { grid-column: 1 / -1; margin-bottom: 56px; }
+    .form-wrap { grid-column: 1 / -1; }
   }
   @media (max-width: 900px) {
     :root { --head: 64px; }
-    .brand svg { height: 32px; }
-    .menu-btn { display: block; }
-    .head-tools { display: none; }
+    .brand svg { height: 34px; }
+    .menu-btn { display: inline-flex; }
+    .tools { display: none; }
     .menu {
-      position: fixed; left: 0; right: 0; top: var(--head);
-      flex-direction: column; gap: 0; background: #fff; border-bottom: 1px solid var(--rule);
-      padding: 4px var(--gutter) 20px; display: none;
+      position: fixed; left: 0; right: 0; top: var(--head); bottom: 0;
+      flex-direction: column; gap: 0; background: var(--stone-0); padding: 8px var(--gutter) 32px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .3s, transform .35s var(--ease), visibility 0s .35s;
     }
-    .menu-open .menu { display: flex; }
-    .menu-open .head-tools {
-      display: flex; position: fixed; left: 0; right: 0; top: calc(var(--head) + 5 * 53px + 4px);
-      padding: 0 var(--gutter) 24px; background: #fff; border-bottom: 1px solid var(--rule); justify-content: space-between;
-    }
-    .menu-open .head-tools .head-phone { display: inline; }
+    .menu-open .menu { opacity: 1; visibility: visible; transform: none; transition: opacity .3s, transform .35s var(--ease); }
+    .menu-open .head { background: var(--stone-0); border-bottom-color: var(--rule); }
+    .menu-open .head .brand { opacity: 1; transform: none; pointer-events: auto; }
     .menu li { border-bottom: 1px solid var(--rule); }
-    .menu a { display: block; padding: 14px 0; font-size: 18px; border: 0; }
+    .menu a { display: block; padding: 18px 0; font-family: var(--serif); font-variation-settings: 'SOFT' 50, 'WONK' 0; font-size: 28px; }
+    .menu a::after { display: none; }
+    .menu .m-extra { display: flex; border: 0; padding-top: 24px; justify-content: space-between; align-items: center; }
+    .menu .m-extra a { font-family: var(--sans); font-size: 16px; padding: 0; }
 
-    .hero { grid-template-columns: 1fr; min-height: 0; max-height: none; }
-    .hero-img { order: -1; aspect-ratio: 4 / 3.4; }
-    .hero-img img { object-position: 50% 40%; }
-    .hero-text { padding: 36px var(--gutter) 40px; }
-    .hero h1 { margin-top: 16px; }
-    .hero-contact { flex-direction: column; gap: 14px; margin-top: 36px; }
+    .hero { min-height: 0; display: block; }
+    .hero-layer, .hero-veil { bottom: auto; height: 100vh; }
+    @supports (height: 100svh) { .hero-layer, .hero-veil { height: 100svh; } }
+    .hero-layer img { object-position: 50% 20%; }
+    .hero-in { display: block; padding-top: 42vh; }
+    @supports (height: 100svh) { .hero-in { padding-top: 42svh; } }
+    .hero h1 { font-size: clamp(40px, 11vw, 56px); }
+    .hero-areas { margin-top: 44px; }
 
-    .sec-head, .firm { grid-template-columns: 1fr; }
-    .services { grid-template-columns: 1fr; }
-    .svc, .svc:nth-child(even) { padding: 24px 0; border-left: 0; }
-    .lawyer { grid-template-columns: 1fr; }
-    .lawyer-photo { position: static; max-width: 420px; }
-    .facts, .cv-cols { grid-template-columns: 1fr; }
-    .facts { gap: 0; }
-    .post a { grid-template-columns: 1fr; gap: 4px; }
-    .post p, .post .go { grid-column: 1; grid-row: auto; }
-    .ways { grid-template-columns: 1fr; gap: 28px; margin-top: 40px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+    .sec-head { display: block; }
+    .sec-head > p { margin-top: 18px; }
+    .principles { grid-template-columns: 1fr; row-gap: 36px; }
+    .principle h3 { margin-top: 16px; }
+    .svc-list { grid-column: 1 / -1; }
+    .svc-panel { display: none; }
+    .svc-item.open .svc-detail { display: block; padding: 0 0 28px 64px; }
+    .svc-detail .panel-body h3, .svc-detail .panel-body .n { display: none; }
+    .svc-detail .panel-body > p { margin-top: 0; }
+    .svc-item.open .svc-btn .a { transform: rotate(90deg); color: var(--brass); }
+    .portrait { grid-column: 1 / -1; position: static; max-width: 440px; margin-bottom: 48px; }
+    .lawyer-body { grid-column: 1 / -1; }
+    .creds { grid-template-columns: 1fr; }
+    .tl-axis { display: none; }
+    .tl-row { grid-template-columns: 1fr; row-gap: 8px; }
+    .posts { grid-template-columns: 1fr; }
+    .post a { min-height: 0; }
+    .post h3 { margin-top: 24px; }
+    .fields { grid-template-columns: 1fr; }
   }
   @media (max-width: 520px) {
-    .cv th { width: 96px; }
-    .cv td.r { display: none; }
-    .cv td small { display: block; color: var(--muted); }
+    .svc-btn { grid-template-columns: 36px 1fr 20px; }
+    .svc-item.open .svc-detail { padding-left: 48px; }
+    .lines div { grid-template-columns: 1fr; gap: 2px; }
+    .foot-logo svg { height: 80px; }
+    .frame-in { padding: 24px 20px; }
   }
-  @media (min-width: 521px) { .cv td small { display: none; } }
 </style>
 </head>
 
@@ -286,222 +420,220 @@
 <header class="head" id="head">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Intra Legem"><svg viewBox="-1 -1 152.8 42.0" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" transform="translate(0 0) scale(0.2)" d="M17 17H183V183H17Z M23 23V177H177V23ZM30.5 30.5H169.5V169.5H30.5Z M33.5 33.5V166.5H166.5V33.5ZM52.64 129.9Q52.64 128.92 52.98 128.34Q53.33 127.75 54.4 127.7Q56.79 127.56 59.26 126.87Q61.72 126.19 61.92 124.58L69.73 71.75Q69.78 71.5 69.78 71.01Q69.78 69.26 68.66 68.45Q67.53 67.64 65.95 67.38Q64.36 67.11 62.99 67.01Q61.48 66.86 61.48 65.98Q61.48 65.84 61.53 65.62Q61.58 65.4 61.58 65.2Q61.58 64.67 62.21 63.69Q62.85 62.71 63.68 62.71H88.34Q89.17 62.71 89.41 63.69Q89.65 64.67 89.56 65.2Q89.31 66.86 87.6 67.01Q85.21 67.21 82.72 67.84Q80.23 68.47 79.99 70.13L72.27 122.97Q72.22 123.26 72.22 123.75Q72.22 125.46 73.35 126.24Q74.47 127.02 76.06 127.26Q77.64 127.51 79.01 127.7Q79.84 127.8 80.21 128.02Q80.57 128.24 80.57 128.92Q80.57 129.27 80.52 129.51Q80.43 130.05 79.89 131.02Q79.35 132.0 78.52 132.0H53.86Q53.13 132.0 52.89 131.27Q52.64 130.54 52.64 129.9ZM90.09 129.8Q90.09 128.92 90.46 128.36Q90.83 127.8 91.9 127.7Q94.29 127.46 96.71 126.82Q99.13 126.19 99.37 124.58L107.57 71.75Q107.92 69.65 106.77 68.69Q105.62 67.74 103.89 67.42Q102.15 67.11 100.69 67.01Q99.18 66.86 99.18 65.94Q99.18 64.91 99.74 63.81Q100.3 62.71 101.23 62.71H127.35Q128.18 62.71 128.5 63.13Q128.81 63.54 128.81 64.13Q128.81 65.2 128.25 66.11Q127.69 67.01 126.76 67.01Q124.96 67.01 122.95 67.4Q120.95 67.79 119.46 68.79Q117.97 69.79 117.68 71.6L109.48 124.04Q109.19 125.8 110.43 126.43Q111.68 127.07 113.19 127.07H127.84Q131.21 127.07 133.45 125.51Q135.7 123.94 137.26 121.43Q138.82 118.91 140.04 116.03Q141.27 113.15 142.53 110.52Q142.88 109.64 143.54 109.27Q144.19 108.9 144.98 108.9Q145.9 108.9 146.71 109.32Q147.52 109.73 147.32 110.56L142.39 132.0H91.56Q90.83 132.0 90.46 131.22Q90.09 130.44 90.09 129.8Z"/><path class="brass" fill="#9A7C39" transform="translate(0 0) scale(0.2)" d="M38 38H52L45 52Z M162 38H148L155 52Z M38 162H52L45 148Z M162 162H148L155 148Z"/><path d="M56.58 27.35Q56.58 27.48 56.67 27.55Q56.76 27.61 56.96 27.63L57.98 27.79Q58.09 27.8 58.09 27.85Q58.09 27.89 58.07 27.9Q58.05 27.92 58.01 27.92H52.88Q52.84 27.92 52.81 27.9Q52.79 27.89 52.79 27.85Q52.79 27.8 52.9 27.79L53.92 27.63Q54.12 27.61 54.22 27.55Q54.31 27.48 54.31 27.35V13.09Q54.31 12.96 54.22 12.89Q54.12 12.83 53.92 12.81L52.9 12.65Q52.79 12.64 52.79 12.59Q52.79 12.55 52.81 12.54Q52.84 12.52 52.88 12.52H58.01Q58.05 12.52 58.07 12.54Q58.09 12.55 58.09 12.59Q58.09 12.64 57.98 12.65L56.96 12.81Q56.76 12.83 56.67 12.89Q56.58 12.96 56.58 13.09ZM62.33 18.31V27.36Q62.33 27.49 62.39 27.57Q62.46 27.65 62.59 27.68L63.29 27.78Q63.4 27.79 63.4 27.85Q63.4 27.92 63.31 27.92H59.36Q59.34 27.92 59.31 27.9Q59.29 27.89 59.29 27.85Q59.29 27.84 59.31 27.82Q59.34 27.8 59.38 27.79L60.12 27.68Q60.26 27.65 60.32 27.57Q60.38 27.49 60.38 27.37V19.24Q60.38 19.19 60.35 19.15Q60.33 19.12 60.25 19.12H59.39Q59.36 19.12 59.34 19.1Q59.31 19.08 59.31 19.05Q59.31 19.01 59.34 18.99Q59.36 18.98 59.4 18.97L62.04 18.23Q62.13 18.21 62.16 18.2Q62.2 18.2 62.23 18.2Q62.28 18.2 62.31 18.23Q62.33 18.26 62.33 18.31ZM62.17 20.33 62.09 20.23 62.46 19.89Q63.51 18.94 64.25 18.55Q64.99 18.15 65.68 18.15Q66.7 18.15 67.26 18.82Q67.83 19.48 68.03 20.87L68.88 27.27Q68.91 27.45 68.99 27.56Q69.07 27.68 69.26 27.7L69.84 27.79Q69.9 27.8 69.92 27.82Q69.94 27.83 69.94 27.85Q69.94 27.89 69.92 27.9Q69.9 27.92 69.85 27.92H65.84Q65.74 27.92 65.74 27.85Q65.74 27.81 65.86 27.78L66.57 27.68Q66.77 27.65 66.84 27.53Q66.92 27.41 66.89 27.27L66.1 21.07Q65.95 20.0 65.58 19.51Q65.21 19.01 64.5 19.01Q64.02 19.01 63.56 19.25Q63.09 19.49 62.54 20.0ZM71.14 18.69 70.12 18.52Q70.07 18.49 70.05 18.48Q70.03 18.46 70.03 18.43Q70.03 18.41 70.05 18.39Q70.07 18.37 70.08 18.37H71.1Q71.19 18.37 71.24 18.34Q71.29 18.32 71.33 18.25L72.9 16.25Q72.95 16.21 73 16.18Q73.04 16.15 73.09 16.15Q73.13 16.15 73.16 16.18Q73.19 16.21 73.19 16.27V25.71Q73.19 26.56 73.52 26.97Q73.85 27.38 74.42 27.38Q74.64 27.38 74.84 27.32Q75.03 27.26 75.2 27.13Q75.36 27.01 75.5 26.8Q75.63 26.6 75.72 26.31Q75.74 26.26 75.78 26.27Q75.81 26.28 75.79 26.35Q75.62 26.94 75.33 27.33Q75.05 27.72 74.63 27.91Q74.21 28.1 73.64 28.1Q72.54 28.1 71.92 27.57Q71.3 27.04 71.3 25.94V18.9Q71.3 18.81 71.27 18.76Q71.24 18.7 71.14 18.69ZM72.55 18.56 72.6 18.37H75.72Q75.77 18.37 75.79 18.39Q75.8 18.41 75.8 18.44Q75.8 18.49 75.74 18.53Q75.68 18.56 75.57 18.56ZM79.35 22.65Q79.35 21.17 79.76 20.17Q80.17 19.16 80.81 18.66Q81.46 18.15 82.14 18.15Q82.92 18.15 83.34 18.62Q83.77 19.09 83.77 19.9Q83.77 20.53 83.48 20.85Q83.19 21.17 82.74 21.17Q82.33 21.17 82.11 20.93Q81.9 20.69 81.88 20.21V19.9Q81.86 19.52 81.71 19.33Q81.56 19.14 81.19 19.14Q80.77 19.14 80.37 19.54Q79.97 19.93 79.71 20.73Q79.46 21.52 79.46 22.7ZM79.46 18.36V22.15V27.32Q79.46 27.44 79.53 27.52Q79.6 27.6 79.73 27.63L80.82 27.79Q80.88 27.8 80.9 27.81Q80.92 27.82 80.92 27.85Q80.92 27.89 80.9 27.9Q80.88 27.92 80.82 27.92H76.52Q76.47 27.92 76.45 27.9Q76.42 27.88 76.42 27.85Q76.42 27.82 76.45 27.8Q76.49 27.78 76.55 27.77L77.24 27.68Q77.39 27.65 77.45 27.57Q77.51 27.5 77.51 27.4V19.21Q77.51 19.15 77.48 19.11Q77.45 19.08 77.39 19.08H76.51Q76.47 19.08 76.45 19.05Q76.43 19.03 76.43 19.01Q76.43 18.98 76.45 18.96Q76.47 18.93 76.53 18.92L79.17 18.27Q79.25 18.25 79.29 18.25Q79.32 18.24 79.36 18.24Q79.41 18.24 79.43 18.28Q79.46 18.32 79.46 18.36ZM90.16 26.91V26.83L90.07 26.91V20.29Q90.07 19.31 89.69 18.78Q89.3 18.26 88.53 18.26Q87.67 18.26 87.28 18.67Q86.88 19.08 86.88 19.52V20.28Q86.88 20.73 86.58 21.02Q86.28 21.31 85.82 21.31Q85.48 21.31 85.26 21.08Q85.03 20.86 85.03 20.42Q85.03 19.87 85.46 19.34Q85.88 18.81 86.71 18.47Q87.54 18.13 88.75 18.13Q90.41 18.13 91.22 18.86Q92.03 19.59 92.03 20.89V26.73Q92.03 27.18 92.18 27.38Q92.33 27.57 92.55 27.57Q92.74 27.57 92.9 27.45Q93.06 27.33 93.08 27.08Q93.1 27.04 93.11 27.03Q93.13 27.02 93.14 27.02Q93.17 27.02 93.18 27.03Q93.18 27.04 93.18 27.08Q93.18 27.26 93.03 27.5Q92.88 27.74 92.53 27.93Q92.19 28.11 91.63 28.11Q90.88 28.11 90.52 27.78Q90.16 27.45 90.16 26.91ZM84.5 25.81Q84.5 24.69 85.44 23.97Q86.37 23.26 88.29 23.26Q89.07 23.26 89.58 23.4Q90.08 23.54 90.51 23.75L90.44 23.83Q90.02 23.63 89.55 23.51Q89.08 23.39 88.51 23.39Q87.52 23.39 87 23.96Q86.48 24.53 86.48 25.51Q86.48 26.47 86.97 27.01Q87.46 27.55 88.27 27.55Q88.82 27.55 89.36 27.3Q89.89 27.06 90.26 26.6L90.36 26.67Q89.87 27.37 89.04 27.74Q88.2 28.12 87.23 28.12Q86.01 28.12 85.26 27.47Q84.5 26.83 84.5 25.81ZM103.66 27.92H97.73Q97.36 27.92 97.24 27.77Q97.11 27.61 97.11 27.37Q97.11 27.14 97.26 26.97Q97.42 26.81 97.64 26.73L98.2 26.61Q98.53 26.52 98.73 26.33Q98.93 26.13 99.04 25.7Q99.11 25.37 99.3 24.68Q99.49 23.99 99.74 23.06Q99.99 22.13 100.27 21.09Q100.55 20.06 100.83 19.02Q101.11 17.99 101.36 17.08Q101.6 16.17 101.78 15.52Q101.96 14.87 102.03 14.6Q102.1 14.29 102.02 14.09Q101.94 13.9 101.71 13.82L101.1 13.66Q100.88 13.58 100.78 13.45Q100.69 13.32 100.69 13.13Q100.69 12.85 100.87 12.69Q101.05 12.52 101.37 12.52H105.61Q105.92 12.52 106.05 12.66Q106.17 12.81 106.17 13.04Q106.17 13.28 106.03 13.44Q105.88 13.61 105.67 13.68L104.96 13.83Q104.68 13.9 104.49 14.08Q104.3 14.27 104.19 14.7Q104.1 15.06 103.9 15.77Q103.71 16.47 103.46 17.4Q103.2 18.33 102.92 19.35Q102.64 20.37 102.37 21.39Q102.1 22.4 101.87 23.27Q101.63 24.14 101.47 24.75Q101.31 25.37 101.26 25.6Q101.14 26.23 101.37 26.5Q101.6 26.77 102.19 26.77H103.94Q104.47 26.77 104.91 26.55Q105.35 26.34 105.74 25.8Q106.13 25.26 106.53 24.32Q106.7 23.93 106.88 23.77Q107.07 23.62 107.27 23.62Q107.54 23.62 107.65 23.84Q107.77 24.06 107.74 24.44Q107.59 25.26 107.34 25.95Q107.08 26.63 106.72 27.14Q106.37 27.65 105.97 27.92Q105.56 28.2 105.12 28.2Q104.89 28.2 104.69 28.13Q104.49 28.06 104.26 27.99Q104.02 27.92 103.66 27.92ZM109.58 23.21Q109.58 23.21 109.94 23.09Q110.3 22.96 110.89 22.74Q111.48 22.53 112.18 22.27Q112.88 22 113.58 21.73Q114.27 21.46 114.81 21.24L114.58 21.71Q114.67 21.45 114.7 21.16Q114.73 20.87 114.73 20.5Q114.73 19.91 114.47 19.58Q114.2 19.24 113.68 19.24Q113.18 19.24 112.69 19.59Q112.2 19.93 111.77 20.57Q111.34 21.21 111.05 22.07Q110.76 22.93 110.66 23.94Q110.52 25.32 111.02 26.04Q111.52 26.75 112.49 26.75Q112.93 26.75 113.42 26.57Q113.91 26.38 114.37 25.97Q114.83 25.56 115.18 24.9Q115.41 24.61 115.59 24.5Q115.76 24.39 115.93 24.42Q116.1 24.46 116.17 24.62Q116.24 24.79 116.16 25.06Q116.01 25.8 115.45 26.5Q114.9 27.19 113.98 27.65Q113.06 28.11 111.82 28.11Q110.67 28.11 109.93 27.62Q109.18 27.13 108.85 26.24Q108.52 25.36 108.62 24.15Q108.7 22.88 109.16 21.79Q109.61 20.69 110.33 19.88Q111.05 19.07 111.97 18.6Q112.9 18.14 113.93 18.14Q114.73 18.14 115.26 18.42Q115.78 18.7 116.07 19.19Q116.36 19.68 116.45 20.32Q116.48 20.53 116.54 20.61Q116.59 20.68 116.7 20.7Q116.83 20.72 116.92 20.79Q117.01 20.87 117.04 20.99Q117.08 21.2 116.94 21.36Q116.8 21.52 116.42 21.65Q115.88 21.86 115.17 22.12Q114.46 22.39 113.69 22.66Q112.93 22.93 112.21 23.18Q111.49 23.44 110.9 23.64Q110.32 23.84 109.98 23.96Q109.64 24.08 109.64 24.08ZM124.07 28.22Q123.63 29.89 122.82 31.03Q122 32.17 120.81 32.74Q119.62 33.31 118.05 33.31Q116.89 33.31 116.25 32.93Q115.6 32.55 115.6 31.97Q115.6 31.55 115.88 31.27Q116.15 30.99 116.61 30.99Q116.95 30.99 117.25 31.14Q117.54 31.3 117.81 31.51Q118.09 31.72 118.37 31.87Q118.66 32.02 119 32.02Q119.68 32.02 120.28 31.67Q120.87 31.32 121.33 30.63Q121.79 29.93 122.08 28.91L123.64 23.32L123.92 23.59Q123.17 25.15 122.41 26.14Q121.64 27.14 120.87 27.62Q120.09 28.11 119.3 28.11Q118.58 28.11 118.11 27.73Q117.64 27.36 117.44 26.63Q117.25 25.9 117.39 24.83Q117.52 23.88 117.89 22.93Q118.26 21.98 118.86 21.13Q119.45 20.28 120.26 19.61Q121.07 18.94 122.08 18.56Q123.08 18.19 124.26 18.19Q125.09 18.19 125.64 18.32Q126.18 18.45 126.44 18.7Q126.69 18.96 126.66 19.31Q126.63 19.56 126.52 19.74Q126.41 19.91 126.29 20.1Q126.16 20.29 126.08 20.58ZM119.37 24.65Q119.26 25.28 119.34 25.74Q119.41 26.2 119.62 26.46Q119.84 26.71 120.17 26.71Q120.68 26.71 121.24 26.24Q121.81 25.76 122.34 25.01Q122.87 24.25 123.31 23.35Q123.74 22.45 124.01 21.58Q124.28 20.72 124.31 20.06Q124.32 19.7 124.12 19.53Q123.91 19.35 123.52 19.35Q123.03 19.35 122.5 19.64Q121.97 19.92 121.48 20.43Q120.98 20.94 120.55 21.61Q120.11 22.29 119.81 23.06Q119.51 23.83 119.37 24.65ZM127.83 23.21Q127.83 23.21 128.19 23.09Q128.55 22.96 129.14 22.74Q129.73 22.53 130.43 22.27Q131.13 22 131.83 21.73Q132.52 21.46 133.06 21.24L132.83 21.71Q132.92 21.45 132.95 21.16Q132.98 20.87 132.98 20.5Q132.98 19.91 132.72 19.58Q132.45 19.24 131.93 19.24Q131.43 19.24 130.94 19.59Q130.45 19.93 130.02 20.57Q129.59 21.21 129.3 22.07Q129.01 22.93 128.91 23.94Q128.77 25.32 129.27 26.04Q129.77 26.75 130.74 26.75Q131.18 26.75 131.67 26.57Q132.16 26.38 132.62 25.97Q133.08 25.56 133.43 24.9Q133.66 24.61 133.83 24.5Q134 24.39 134.18 24.42Q134.35 24.46 134.42 24.62Q134.49 24.79 134.41 25.06Q134.26 25.8 133.7 26.5Q133.15 27.19 132.23 27.65Q131.31 28.11 130.07 28.11Q128.92 28.11 128.17 27.62Q127.43 27.13 127.1 26.24Q126.77 25.36 126.87 24.15Q126.95 22.88 127.4 21.79Q127.86 20.69 128.58 19.88Q129.3 19.07 130.22 18.6Q131.14 18.14 132.18 18.14Q132.98 18.14 133.5 18.42Q134.03 18.7 134.32 19.19Q134.61 19.68 134.7 20.32Q134.73 20.53 134.79 20.61Q134.84 20.68 134.95 20.7Q135.08 20.72 135.17 20.79Q135.26 20.87 135.29 20.99Q135.32 21.2 135.19 21.36Q135.05 21.52 134.66 21.65Q134.13 21.86 133.42 22.12Q132.71 22.39 131.94 22.66Q131.18 22.93 130.46 23.18Q129.74 23.44 129.15 23.64Q128.57 23.84 128.23 23.96Q127.89 24.08 127.89 24.08ZM141.15 25.92 142.66 21.58Q142.99 20.65 142.86 20.24Q142.73 19.82 142.25 19.82Q141.7 19.82 141.04 20.34Q140.37 20.85 139.74 21.8Q139.1 22.76 138.65 24.11Q138.45 24.7 138.34 25.05Q138.23 25.4 138.19 25.61Q138.14 25.82 138.14 25.98Q138.14 26.29 138.21 26.54Q138.28 26.79 138.28 27.1Q138.28 27.58 137.89 27.84Q137.49 28.11 136.77 28.11Q135.98 28.11 135.83 27.58Q135.67 27.05 136.11 25.92L137.83 21.24Q138.13 20.46 138.1 20.13Q138.07 19.79 137.74 19.79Q137.51 19.79 137.27 19.94Q137.02 20.09 136.71 20.41Q136.61 20.5 136.51 20.52Q136.41 20.54 136.34 20.52Q136.12 20.5 136.07 20.25Q136.03 20.0 136.22 19.73Q136.66 19.04 137.38 18.61Q138.1 18.19 138.83 18.19Q139.43 18.19 139.74 18.45Q140.04 18.71 140.04 19.23Q140.04 19.52 139.93 19.87Q139.81 20.22 139.6 20.74Q139.38 21.27 139.08 22.05Q138.78 22.83 138.42 23.95L138.06 23.88Q138.84 21.77 139.82 20.52Q140.8 19.27 141.8 18.73Q142.79 18.19 143.63 18.19Q144.3 18.19 144.65 18.5Q144.99 18.82 144.99 19.44Q144.99 19.75 144.88 20.11Q144.77 20.47 144.56 20.98Q144.36 21.5 144.04 22.23Q143.73 22.96 143.32 23.99L143.11 23.88Q143.7 22.3 144.39 21.2Q145.09 20.11 145.84 19.44Q146.59 18.78 147.31 18.48Q148.04 18.19 148.66 18.19Q149.39 18.19 149.72 18.58Q150.04 18.97 150.02 19.67Q150 20.37 149.67 21.32L148.41 25.04Q148.17 25.73 148.19 26.07Q148.21 26.41 148.54 26.41Q148.74 26.41 148.96 26.29Q149.17 26.16 149.49 25.84Q149.6 25.74 149.68 25.71Q149.76 25.69 149.82 25.71Q150 25.73 150.05 25.96Q150.1 26.19 149.91 26.57Q149.5 27.24 148.87 27.67Q148.23 28.11 147.45 28.11Q146.81 28.11 146.5 27.79Q146.18 27.48 146.17 26.92Q146.15 26.37 146.38 25.63L147.7 21.58Q148.01 20.65 147.89 20.24Q147.77 19.82 147.28 19.82Q146.74 19.82 146.08 20.34Q145.41 20.85 144.78 21.8Q144.15 22.76 143.7 24.11Q143.49 24.7 143.38 25.05Q143.27 25.4 143.23 25.61Q143.19 25.82 143.19 25.98Q143.19 26.29 143.26 26.54Q143.33 26.79 143.33 27.1Q143.33 27.58 142.93 27.84Q142.53 28.11 141.8 28.11Q141.29 28.11 141.06 27.88Q140.82 27.66 140.86 27.17Q140.9 26.69 141.15 25.92Z"/></svg></a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" data-i18n="menuBtn">Valmynd</button>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu"><span data-i18n="menuBtn">Valmynd</span><i aria-hidden="true"></i></button>
     <ul class="menu" id="menu">
-      <li><a href="#thjonusta" data-i18n="navServices">Þjónusta</a></li>
+      <li><a href="#svid" data-i18n="navAreas">Starfssvið</a></li>
       <li><a href="#logmadur" data-i18n="navLawyer">Lögmaður</a></li>
+      <li><a href="#ferill" data-i18n="navCareer">Ferill</a></li>
       <li><a href="#skrif" data-i18n="navWriting">Skrif</a></li>
-      <li><a href="#stofan" data-i18n="navFirm">Stofan</a></li>
-      <li><a href="#samband" data-i18n="navContact">Hafa samband</a></li>
+      <li><a href="#samband" data-i18n="navContact2">Hafa samband</a></li>
+      <li class="m-extra"><a class="tnum" href="tel:+3548926064">+354 892 6064</a><div class="lang" role="group" aria-label="Tungumál"><button type="button" data-lang="is" aria-pressed="true">IS</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></li>
     </ul>
-    <div class="head-tools">
-      <a class="head-phone tnum" href="tel:+3548926064">892 6064</a>
+    <div class="tools">
       <div class="lang" role="group" aria-label="Tungumál / Language">
         <button type="button" data-lang="is" aria-pressed="true">IS</button>
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
       </div>
+      <a class="btn" href="#samband" data-i18n="navContact">Bóka samtal</a>
     </div>
   </div>
 </header>
 
 <main id="main">
 
-<!-- Hero -->
-<section class="hero" id="top">
-  <div class="hero-text">
-    <div>
-      <p class="hero-meta" data-i18n="heroMeta">Intra Legem slf. — lögmannsstofa í Grósku, Reykjavík</p>
-      <h1 data-i18n="heroTitle">Lögfræðiráðgjöf fyrir fyrirtæki á sviði samkeppnisréttar, fjarskipta og viðskiptasamninga.</h1>
-      <p class="hero-lede" data-i18n="heroLede">Hallmundur Albertsson lögmaður hefur starfað að lögfræði í yfir 25 ár, meðal annars sem yfirlögfræðingur Símans og eigandi hjá Deloitte Legal. Hann hefur málflutningsréttindi fyrir Landsrétti.</p>
-      <div class="hero-actions">
-        <a class="btn" href="#samband"><span data-i18n="ctaContact">Hafa samband</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></a>
-        <a class="link" href="#thjonusta" data-i18n="ctaServices">Sjá þjónustu</a>
-      </div>
-    </div>
-    <dl class="hero-contact">
-      <div><dt data-i18n="phone">Sími</dt><dd><a class="tnum" href="tel:+3548926064">+354 892 6064</a></dd></div>
-      <div><dt data-i18n="email">Netfang</dt><dd><a href="mailto:hallmundur@intralegem.is">hallmundur@intralegem.is</a></dd></div>
-      <div><dt data-i18n="address">Heimilisfang</dt><dd>Kristínargata 1, 102 Reykjavík</dd></div>
-    </dl>
-  </div>
-  <div class="hero-img">
+<!-- ================= HERO ================= -->
+<section class="hero" id="top" aria-labelledby="h1">
+  <div class="hero-layer" aria-hidden="true">
     <picture>
-      <source srcset="assets/intra-legem-wall-panel.webp" type="image/webp">
-      <img src="assets/intra-legem-wall-panel.jpg" alt="Merki Intra Legem á vegg" width="1600" height="1800" fetchpriority="high" decoding="async">
+      <source media="(max-width: 760px)" srcset="assets/wall-tall-shade.webp">
+      <img src="assets/wall-wide-shade.webp" alt="" width="2400" height="1371">
     </picture>
   </div>
+  <div class="hero-layer hero-sun" id="sun">
+    <picture>
+      <source media="(max-width: 760px)" srcset="assets/wall-tall-sun.webp">
+      <img src="assets/wall-wide-sun.webp" alt="Merki Intra Legem á múrvegg í sólarljósi" width="2400" height="1371">
+    </picture>
+  </div>
+  <div class="hero-veil" aria-hidden="true"></div>
+
+  <div class="hero-in wrap">
+    <div class="hero-copy">
+      <span class="eyebrow" data-i18n="heroEyebrow">Lögmannsstofa · Gróska, Reykjavík</span>
+      <h1 id="h1" data-i18n="heroTitle">Skýr ráðgjöf í flóknu regluverki.</h1>
+      <p class="lede" data-i18n="heroLede">Samkeppnisréttur, fjarskipti og viðskiptasamningar. Hallmundur Albertsson lögmaður var yfirlögfræðingur Símans í rúman áratug og eigandi hjá Deloitte Legal.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#samband"><span data-i18n="ctaBook">Bóka samtal</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        <a class="hero-phone tnum" href="tel:+3548926064"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 1.8 3.4 2.3c-.9.3-1.5 1.2-1.3 2.2.9 4.6 4.5 8.2 9.1 9.1 1 .2 1.9-.4 2.2-1.3l.5-1.8-3-1.6-1.3 1.4C8 9.6 6.4 8 5.7 6.4l1.4-1.3-1.9-3.3Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="ulink">+354 892 6064</span></a>
+      </div>
+    </div>
+    <nav class="hero-areas" aria-label="Helstu svið">
+      <span class="t" data-i18n="heroAreas">Helstu svið</span>
+      <a href="#svid" data-area="0"><span data-i18n="s0t">Samkeppnisréttur</span><span aria-hidden="true">→</span></a>
+      <a href="#svid" data-area="1"><span data-i18n="s1t">Fjarskipti og fjölmiðlar</span><span aria-hidden="true">→</span></a>
+      <a href="#svid" data-area="2"><span data-i18n="s2t">Samningar og félög</span><span aria-hidden="true">→</span></a>
+      <a href="#svid" data-area="4"><span data-i18n="s4t">Málflutningur</span><span aria-hidden="true">→</span></a>
+    </nav>
+  </div>
 </section>
 
-<!-- Services -->
-<section class="sec" id="thjonusta">
+<!-- ================= INTRO ================= -->
+<section class="sec" id="stofan">
+  <div class="wrap">
+    <span class="eyebrow rv" data-i18n="introEyebrow">Stofan</span>
+    <p class="intro-statement serif rv" data-i18n-html="introStatement">Intra Legem er lögmannsstofa þar sem þú talar beint við lögmanninn sem vinnur verkið — með <b>rúmlega aldarfjórðungs reynslu</b> úr lögmennsku, atvinnulífi og stjórnsýslu.</p>
+    <div class="principles">
+      <div class="principle rv"><span class="n">01</span><h3 class="serif" data-i18n="p1t">Svör fljótt</h3><p data-i18n="p1d">Í viðskiptum skiptir tímasetning máli. Við bregðumst hratt við, skilum verkefnum á réttum tíma og höldum ferlinu skýru.</p></div>
+      <div class="principle rv"><span class="n">02</span><h3 class="serif" data-i18n="p2t">Vönduð skjöl</h3><p data-i18n="p2d">Samningar eru verkfæri til að skapa verðmæti og draga úr áhættu. Þeir eiga að vera nákvæmir, skýrir og halda.</p></div>
+      <div class="principle rv"><span class="n">03</span><h3 class="serif" data-i18n="p3t">Sanngjarnt verð</h3><p data-i18n="p3d">Hagkvæm umgjörð gerir okkur kleift að bjóða sérfræðiráðgjöf á samkeppnishæfu verði, án þess að slá af gæðum.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="sec s1" id="svid">
   <div class="wrap">
     <div class="sec-head">
-      <h2 data-i18n="svcTitle">Þjónusta</h2>
-      <p data-i18n="svcIntro">Ráðgjöf og málflutningur fyrir fyrirtæki, fjárfesta og frumkvöðla — frá daglegum samningum til mála fyrir stjórnvöldum og dómstólum.</p>
+      <div><span class="eyebrow rv" data-i18n="svcEyebrow">Starfssvið</span><h2 class="h2 rv" data-i18n="svcTitle">Þar sem reynslan skiptir máli.</h2></div>
+      <p class="lede rv" data-i18n="svcIntro">Ráðgjöf og málflutningur fyrir fyrirtæki, fjárfesta og frumkvöðla — frá daglegum samningum til mála fyrir stjórnvöldum og dómstólum.</p>
     </div>
-    <div class="services">
-      <div class="svc">
-        <h3 data-i18n="a1t">Samkeppnisréttur, ríkisaðstoð og EES-réttur</h3>
-        <p data-i18n="a1d">Samrunatilkynningar og mál fyrir Samkeppniseftirlitinu, samstarf keppinauta, samkeppnisréttaráætlanir og ráðgjöf um ríkisaðstoð og EES-reglur.</p>
-      </div>
-      <div class="svc">
-        <h3 data-i18n="a2t">Fjarskipti, fjölmiðlar og upplýsingatækni</h3>
-        <p data-i18n="a2d">Regluverk fjarskipta- og fjölmiðlamarkaða og mál fyrir Fjarskiptastofu og Fjölmiðlanefnd. Hallmundur var yfirlögfræðingur Símans í rúman áratug.</p>
-      </div>
-      <div class="svc">
-        <h3 data-i18n="a3t">Samninga- og félagaréttur, stjórnarhættir</h3>
-        <p data-i18n="a3d">Gerð og yfirferð viðskiptasamninga, hluthafasamkomulög, skipulag félaga og ráðgjöf til stjórna.</p>
-      </div>
-      <div class="svc">
-        <h3 data-i18n="a4t">Kaup og sala fyrirtækja</h3>
-        <p data-i18n="a4d">Áreiðanleikakannanir, kaupsamningar og samrunaeftirlit, frá viljayfirlýsingu til afhendingar.</p>
-      </div>
-      <div class="svc">
-        <h3 data-i18n="a5t">Málflutningur og úrlausn ágreinings</h3>
-        <p data-i18n="a5d">Rekstur mála fyrir héraðsdómi og Landsrétti, stjórnvöldum og úrskurðarnefndum. Hallmundur er einnig viðurkenndur sáttamaður.</p>
-      </div>
-      <div class="svc">
-        <h3 data-i18n="a6t">Opinber innkaup og verksamningar</h3>
-        <p data-i18n="a6d">Ráðgjöf til kaupenda og bjóðenda í útboðum, kærumál og gerð verksamninga, meðal annars á grundvelli FIDIC.</p>
-      </div>
-      <div class="svc">
-        <h3 data-i18n="a7t">Orkuréttur</h3>
-        <p data-i18n="a7d">Regluverk orkumarkaðar, samningar um kaup og sölu orku og leyfismál.</p>
-      </div>
-      <div class="svc cta">
-        <p data-i18n="svcCta">Er verkefnið ekki á listanum?</p>
-        <a class="link" href="#samband" data-i18n="svcCtaLink">Hafðu samband og við metum hvort við getum aðstoðað.</a>
+    <div class="svc-grid">
+      <ul class="svc-list" role="tablist" aria-orientation="vertical" id="svcList"></ul>
+      <div class="svc-panel">
+        <div class="frame"><div class="frame-in"><div class="panel-body" id="panel" role="tabpanel" aria-live="polite"></div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Lawyer -->
-<section class="sec alt" id="logmadur">
+<!-- ================= LAWYER ================= -->
+<section class="sec dark" id="logmadur">
   <div class="wrap">
     <div class="lawyer">
-      <figure class="lawyer-photo">
-        <img src="assets/hallmundur-albertsson.jpg" alt="Hallmundur Albertsson" width="713" height="475" loading="lazy">
+      <figure class="portrait rv">
+        <div class="frame"><div class="frame-in"><img src="assets/hallmundur-albertsson.jpg" alt="Hallmundur Albertsson" width="713" height="475" loading="lazy"></div></div>
+        <figcaption><span>Hallmundur Albertsson</span><span data-i18n="capRole">Lögmaður</span></figcaption>
       </figure>
-
-      <div>
-        <h2>Hallmundur Albertsson</h2>
-        <p class="role" data-i18n="role">Lögmaður og eigandi Intra Legem</p>
-
-        <div class="bio">
+      <div class="lawyer-body">
+        <span class="eyebrow rv" data-i18n="lawEyebrow">Lögmaður</span>
+        <h2 class="h2 rv">Hallmundur Albertsson</h2>
+        <p class="role rv" data-i18n="role">Lögmaður og eigandi · Málflutningsréttindi fyrir Landsrétti</p>
+        <div class="bio rv">
           <p data-i18n="bio1">Hallmundur sérhæfir sig í samkeppnisrétti, samningagerð og almennri lögfræðiráðgjöf til fyrirtækja, og rekur mál fyrir stjórnvöldum og dómstólum.</p>
           <p data-i18n="bio2">Hann var yfirlögfræðingur Símans á árunum 2003–2014 og hefur síðan starfað sem lögmaður, síðast sem eigandi hjá Deloitte Legal. Hann þekkir því regluverk fjarskipta- og fjölmiðlamarkaða jafnt frá sjónarhóli fyrirtækis og lögmanns.</p>
-          <p data-i18n="bio3">Hallmundur lauk meistaraprófi í samkeppnisrétti Evrópusambandsins frá King’s College London og námi í lögfræðiráðgjöf fyrir tækni- og nýsköpunarfyrirtæki frá University of Cambridge. Hann hefur hlotið viðurkenningu Legal 500 á sviði samkeppnisréttar.</p>
+          <p data-i18n="bio3">Hann lauk meistaraprófi í samkeppnisrétti Evrópusambandsins frá King’s College London og námi í lögfræðiráðgjöf fyrir tækni- og nýsköpunarfyrirtæki frá University of Cambridge. Hann hefur hlotið viðurkenningu Legal 500 á sviði samkeppnisréttar.</p>
         </div>
-
-        <dl class="facts">
-          <div><dt data-i18n="fRights">Réttindi</dt><dd data-i18n="fRightsV">Málflutningsréttindi fyrir Landsrétti</dd></div>
-          <div><dt data-i18n="fLang">Tungumál</dt><dd data-i18n="fLangV">Íslenska, enska</dd></div>
-          <div><dt data-i18n="email">Netfang</dt><dd><a href="mailto:hallmundur@intralegem.is">hallmundur@intralegem.is</a></dd></div>
-          <div><dt data-i18n="phone">Sími</dt><dd><a class="tnum" href="tel:+3548926064">+354 892 6064</a></dd></div>
-        </dl>
-
-        <div class="cv">
-          <h3 data-i18n="careerTitle">Starfsferill</h3>
-          <table>
-            <tbody>
-              <tr><th>2024 –</th><td>Intra Legem<small data-i18n="rOwner2">Eigandi</small></td><td class="r" data-i18n="rOwner">Eigandi</td></tr>
-              <tr><th>2021 – 2024</th><td>Deloitte Legal<small data-i18n="rPartner1s">Eigandi</small></td><td class="r" data-i18n="rPartner1">Eigandi</td></tr>
-              <tr><th>2019 – 2021</th><td data-i18n-html="vik">VÍK lögmannsstofa<small>Eigandi</small></td><td class="r" data-i18n="rPartner2">Eigandi</td></tr>
-              <tr><th>2015 – 2019</th><td data-i18n-html="lmb">LMB Mandat lögmannsstofa<small>Eigandi</small></td><td class="r" data-i18n="rPartner3">Eigandi</td></tr>
-              <tr><th>2014 – 2015</th><td data-i18n-html="cato">CATO lögmannsstofa<small>Eigandi</small></td><td class="r" data-i18n="rPartner4">Eigandi</td></tr>
-              <tr><th>2003 – 2014</th><td data-i18n-html="siminn">Síminn hf.<small>Yfirlögfræðingur</small></td><td class="r" data-i18n="rGC">Yfirlögfræðingur</td></tr>
-              <tr><th>2002 – 2003</th><td data-i18n-html="ministry">Samgönguráðuneytið<small>Sérfræðingur í fjarskiptamálum</small></td><td class="r" data-i18n="rTelecom">Sérfræðingur í fjarskiptamálum</td></tr>
-              <tr><th>2000 – 2002</th><td data-i18n-html="lex">LEX lögmannsstofa<small>Fulltrúi</small></td><td class="r" data-i18n="rAssoc">Fulltrúi</td></tr>
-            </tbody>
-          </table>
+        <div class="creds rv">
+          <div>
+            <h4 data-i18n="cEdu">Menntun</h4>
+            <ul>
+              <li>King’s College London<small data-i18n="cEdu1">MA í samkeppnisrétti ESB, 2012</small></li>
+              <li>University of Cambridge<small data-i18n="cEdu2">Tækni- og nýsköpunarréttur, 2013</small></li>
+              <li data-i18n-html="cEdu3">Háskóli Íslands<small>Cand. jur., 2000</small></li>
+            </ul>
+          </div>
+          <div>
+            <h4 data-i18n="cLic">Réttindi</h4>
+            <ul>
+              <li data-i18n-html="cLic1">Landsréttur<small>Málflutningsréttindi, 2023</small></li>
+              <li data-i18n-html="cLic2">Viðurkenndur sáttamaður<small>Sátt, 2007</small></li>
+              <li data-i18n-html="cLic3">Viðurkenndur stjórnarmaður<small>Háskóli Íslands, 2016</small></li>
+            </ul>
+          </div>
+          <div>
+            <h4 data-i18n="cMore">Annað</h4>
+            <ul>
+              <li data-i18n-html="cMore1">FIDIC<small>Verksamningar, 2017</small></li>
+              <li data-i18n-html="cMore2">Löggiltur fasteignasali<small>2015</small></li>
+              <li data-i18n-html="cMore3">Tungumál<small>Íslenska, enska</small></li>
+            </ul>
+          </div>
         </div>
-
-        <div class="cv-cols">
-          <div class="cv">
-            <h3 data-i18n="eduTitle">Menntun</h3>
-            <table><tbody>
-              <tr><th>2013</th><td data-i18n="e2">University of Cambridge — tækni- og nýsköpunarréttur</td></tr>
-              <tr><th>2012</th><td data-i18n="e3">King’s College London — MA í samkeppnisrétti ESB</td></tr>
-              <tr><th>2000</th><td data-i18n="e5">Háskóli Íslands — cand. jur.</td></tr>
-              <tr><th>2017</th><td data-i18n="e1">FIDIC — námskeið um verksamninga</td></tr>
-              <tr><th>2010</th><td data-i18n="e4">C5 — samkeppnisréttaráætlanir</td></tr>
-            </tbody></table>
-          </div>
-          <div class="cv">
-            <h3 data-i18n="licTitle">Réttindi</h3>
-            <table><tbody>
-              <tr><th>2023</th><td data-i18n="l1">Málflutningsréttindi fyrir Landsrétti</td></tr>
-              <tr><th>2016</th><td data-i18n="l2">Viðurkenndur stjórnarmaður, Háskóli Íslands</td></tr>
-              <tr><th>2015</th><td data-i18n="l3">Löggiltur fasteignasali</td></tr>
-              <tr><th>2007</th><td data-i18n="l4">Viðurkenndur sáttamaður</td></tr>
-              <tr><th>2001</th><td data-i18n="l5">Málflutningsréttindi fyrir héraðsdómi</td></tr>
-            </tbody></table>
-          </div>
+        <div class="direct rv">
+          <a class="ulink" href="mailto:hallmundur@intralegem.is">hallmundur@intralegem.is</a>
+          <a class="ulink tnum" href="tel:+3548926064">+354 892 6064</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Writing -->
-<section class="sec" id="skrif">
+<!-- ================= CAREER ================= -->
+<section class="sec" id="ferill">
   <div class="wrap">
     <div class="sec-head">
-      <h2 data-i18n="wrTitle">Skrif og umfjöllun</h2>
-      <p data-i18n="wrIntro">Greinar Hallmundar og viðtöl við hann í fjölmiðlum.</p>
+      <div><span class="eyebrow rv" data-i18n="tlEyebrow">Ferill</span><h2 class="h2 rv" data-i18n="tlTitle">Aldarfjórðungur á einni línu.</h2></div>
+      <p class="lede rv" data-i18n="tlIntro">Frá LEX og samgönguráðuneytinu, í gegnum ellefu ár sem yfirlögfræðingur Símans, til eigin stofu. Sú blanda gefur skilning á samspili laga, regluverks og atvinnulífs.</p>
+    </div>
+    <div class="tl" id="tl" role="list">
+      <div class="tl-axis" aria-hidden="true"><span></span><div class="ticks tnum"><span style="left:0%">2000</span><span style="left:19.23%">2005</span><span style="left:38.46%">2010</span><span style="left:57.69%">2015</span><span style="left:76.92%">2020</span><span style="left:96.15%">2025</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WRITING ================= -->
+<section class="sec s1" id="skrif">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv" data-i18n="wrEyebrow">Skrif og umfjöllun</span><h2 class="h2 rv" data-i18n="wrTitle">Í umræðunni.</h2></div>
+      <p class="lede rv" data-i18n="wrIntro">Greinar Hallmundar og viðtöl við hann um samkeppnis- og fjarskiptamál.</p>
     </div>
     <ul class="posts">
-      <li class="post"><a href="https://www.visir.is/g/20252804290d/valkvaed-syn" target="_blank" rel="noopener">
-        <span class="when tnum" data-i18n="p1w">17. nóvember 2025 · Vísir</span>
-        <h3>Valkvæð Sýn</h3>
-        <p data-i18n="p1d">Svar við grein Sýnar, „Víð Sýn“, í umræðu um flutningsrétt á sjónvarpsefni.</p>
-        <span class="go" data-i18n="read">Lesa ↗</span>
+      <li class="post rv"><a href="https://www.visir.is/g/20252804290d/valkvaed-syn" target="_blank" rel="noopener">
+        <span class="meta"><b>Vísir</b><span data-i18n="d1">17. nóv. 2025</span></span>
+        <h3 class="serif">Valkvæð Sýn</h3>
+        <p data-i18n="w1">Svar við grein Sýnar, „Víð Sýn“, í umræðu um flutningsrétt á sjónvarpsefni.</p>
+        <span class="go"><span data-i18n="read">Lesa grein</span><span aria-hidden="true">↗</span></span>
       </a></li>
-      <li class="post"><a href="https://www.visir.is/g/20252802834d/throng-syn" target="_blank" rel="noopener">
-        <span class="when tnum" data-i18n="p2w">13. nóvember 2025 · Vísir</span>
-        <h3>Þröng Sýn</h3>
-        <p data-i18n="p2d">Um ákvörðun Fjarskiptastofu nr. 8/2025 um flutningsrétt á línulegum sjónvarpsstöðvum.</p>
-        <span class="go" data-i18n="read2">Lesa ↗</span>
+      <li class="post rv"><a href="https://www.visir.is/g/20252802834d/throng-syn" target="_blank" rel="noopener">
+        <span class="meta"><b>Vísir</b><span data-i18n="d2">13. nóv. 2025</span></span>
+        <h3 class="serif">Þröng Sýn</h3>
+        <p data-i18n="w2">Um ákvörðun Fjarskiptastofu nr. 8/2025 um flutningsrétt á línulegum sjónvarpsstöðvum.</p>
+        <span class="go"><span data-i18n="read2">Lesa grein</span><span aria-hidden="true">↗</span></span>
       </a></li>
-      <li class="post"><a href="https://www.visir.is/g/20222253875d" target="_blank" rel="noopener">
-        <span class="when tnum" data-i18n="p3w">28. apríl 2022 · Innherji</span>
-        <h3 data-i18n="p3t">Brýnt að innleiða skýrar leiðbeiningar fyrir samstarf fyrirtækja</h3>
-        <p data-i18n="p3d">Viðtal um nýjar leiðbeiningar Evrópusambandsins um samstarf keppinauta og hvers vegna Ísland ætti að innleiða þær fljótt.</p>
-        <span class="go" data-i18n="read3">Lesa ↗</span>
+      <li class="post rv"><a href="https://www.visir.is/g/20222253875d" target="_blank" rel="noopener">
+        <span class="meta"><b>Innherji</b><span data-i18n="d3">28. apr. 2022</span></span>
+        <h3 class="serif" data-i18n="w3t">Skýrar leiðbeiningar um samstarf fyrirtækja</h3>
+        <p data-i18n="w3">Viðtal um nýjar leiðbeiningar ESB um samstarf keppinauta og hvers vegna Ísland ætti að innleiða þær fljótt.</p>
+        <span class="go"><span data-i18n="read3">Lesa viðtal</span><span aria-hidden="true">↗</span></span>
       </a></li>
     </ul>
   </div>
 </section>
 
-<!-- Firm -->
-<section class="sec alt" id="stofan">
+<!-- ================= CONTACT ================= -->
+<section class="sec dark" id="samband">
   <div class="wrap">
-    <div class="firm">
-      <h2 class="sec-h" style="font-size: clamp(30px, 3vw, 42px); line-height: 1.1;" data-i18n="firmTitle">Stofan</h2>
-      <div class="firm-body">
-        <p class="lead" data-i18n="firmLead">Intra Legem er lítil lögmannsstofa með stutta boðleið: þú talar beint við lögmanninn sem vinnur verkið.</p>
-        <p data-i18n="firmP">Viðskiptavinir stofunnar eru í ólíkum greinum atvinnulífsins, allt frá tækni- og nýsköpunarfyrirtækjum til rótgróinna félaga og fjármálafyrirtækja. Bakgrunnur úr stjórnsýslu, atvinnulífi og lögmennsku skilar hagnýtri nálgun sem byggir á skýru áhættumati.</p>
-        <div class="ways">
-          <div><h3 data-i18n="w1t">Svör fljótt</h3><p data-i18n="w1d">Í viðskiptum skiptir tímasetning máli. Við bregðumst hratt við og skilum verkefnum á réttum tíma.</p></div>
-          <div><h3 data-i18n="w2t">Vönduð skjöl</h3><p data-i18n="w2d">Samningar eru verkfæri til að skapa verðmæti og draga úr áhættu. Þeir eiga að vera nákvæmir og skýrir.</p></div>
-          <div><h3 data-i18n="w3t">Sanngjarnt verð</h3><p data-i18n="w3d">Hagkvæm umgjörð gerir okkur kleift að bjóða sérfræðiráðgjöf á samkeppnishæfu verði.</p></div>
-        </div>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <span class="eyebrow rv" data-i18n="ctEyebrow">Hafa samband</span>
+        <h2 class="h2 rv" data-i18n="ctTitle">Ræðum málið.</h2>
+        <p class="lede rv" data-i18n="ctLede">Fyrsta samtal er án skuldbindingar. Hringdu beint, sendu tölvupóst eða fylltu út formið.</p>
+        <dl class="lines rv">
+          <div><dt data-i18n="phone">Sími</dt><dd><a class="tnum" href="tel:+3548926064">+354 892 6064</a></dd></div>
+          <div><dt data-i18n="email">Netfang</dt><dd><a href="mailto:hallmundur@intralegem.is">hallmundur@intralegem.is</a></dd></div>
+          <div><dt data-i18n="address">Heimilisfang</dt><dd>Gróska, Kristínargata 1, 102 Reykjavík<small><a class="ulink" href="https://www.google.com/maps/search/?api=1&query=Gr%C3%B3ska%2C%20Kr%C3%ADst%C3%ADnargata%201%2C%20102%20Reykjav%C3%ADk" target="_blank" rel="noopener" data-i18n="map">Opna í korti ↗</a></small></dd></div>
+        </dl>
+      </div>
+      <div class="form-wrap rv">
+        <div class="frame"><div class="frame-in">
+          <form id="form" novalidate>
+            <h3 class="serif" data-i18n="fTitle">Senda fyrirspurn</h3>
+            <p data-i18n="fSub">Lýstu málinu í stuttu máli. Við svörum eins fljótt og auðið er.</p>
+            <div class="fields">
+              <div class="field"><label for="fName" data-i18n="fName">Nafn</label><input id="fName" name="name" autocomplete="name" required></div>
+              <div class="field"><label for="fReach" data-i18n="fReach">Netfang eða sími</label><input id="fReach" name="reach" autocomplete="email" required></div>
+              <div class="field full"><label for="fArea" data-i18n="fArea">Svið</label><select id="fArea" name="area"></select></div>
+              <div class="field full"><label for="fMsg" data-i18n="fMsg">Um hvað snýst málið?</label><textarea id="fMsg" name="msg" rows="4"></textarea></div>
+            </div>
+            <div class="form-foot">
+              <small data-i18n="fNote">Opnar tölvupóstforritið þitt. Allar fyrirspurnir eru trúnaðarmál.</small>
+              <button class="btn" type="submit"><span data-i18n="fSend">Senda</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></button>
+            </div>
+          </form>
+        </div></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- Contact -->
-<section class="sec contact" id="samband">
-  <div class="wrap">
-    <h2 data-i18n="contactTitle">Hafðu samband</h2>
-    <p class="sub" data-i18n="contactSub">Fyrsta samtal er án skuldbindingar. Hringdu eða sendu tölvupóst og lýstu málinu í stuttu máli.</p>
-    <dl class="contact-grid">
-      <div><dt data-i18n="phone">Sími</dt><dd><a class="tnum" href="tel:+3548926064">+354 892 6064</a></dd></div>
-      <div><dt data-i18n="email">Netfang</dt><dd><a href="mailto:hallmundur@intralegem.is">hallmundur@<wbr>intralegem.is</a></dd></div>
-      <div><dt data-i18n="address">Heimilisfang</dt><dd>Gróska<br>Kristínargata 1<br>102 Reykjavík<p class="small"><a class="link" href="https://www.google.com/maps/search/?api=1&query=Gr%C3%B3ska%2C%20Kr%C3%ADst%C3%ADnargata%201%2C%20102%20Reykjav%C3%ADk" target="_blank" rel="noopener" data-i18n="map">Opna í korti</a></p></dd></div>
-    </dl>
   </div>
 </section>
 
@@ -509,19 +641,17 @@
 
 <footer>
   <div class="wrap">
-    <div class="top">
-      <a class="brand" href="#top" aria-label="Intra Legem"><svg viewBox="-1 -1 152.8 42.0" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" transform="translate(0 0) scale(0.2)" d="M17 17H183V183H17Z M23 23V177H177V23ZM30.5 30.5H169.5V169.5H30.5Z M33.5 33.5V166.5H166.5V33.5ZM52.64 129.9Q52.64 128.92 52.98 128.34Q53.33 127.75 54.4 127.7Q56.79 127.56 59.26 126.87Q61.72 126.19 61.92 124.58L69.73 71.75Q69.78 71.5 69.78 71.01Q69.78 69.26 68.66 68.45Q67.53 67.64 65.95 67.38Q64.36 67.11 62.99 67.01Q61.48 66.86 61.48 65.98Q61.48 65.84 61.53 65.62Q61.58 65.4 61.58 65.2Q61.58 64.67 62.21 63.69Q62.85 62.71 63.68 62.71H88.34Q89.17 62.71 89.41 63.69Q89.65 64.67 89.56 65.2Q89.31 66.86 87.6 67.01Q85.21 67.21 82.72 67.84Q80.23 68.47 79.99 70.13L72.27 122.97Q72.22 123.26 72.22 123.75Q72.22 125.46 73.35 126.24Q74.47 127.02 76.06 127.26Q77.64 127.51 79.01 127.7Q79.84 127.8 80.21 128.02Q80.57 128.24 80.57 128.92Q80.57 129.27 80.52 129.51Q80.43 130.05 79.89 131.02Q79.35 132.0 78.52 132.0H53.86Q53.13 132.0 52.89 131.27Q52.64 130.54 52.64 129.9ZM90.09 129.8Q90.09 128.92 90.46 128.36Q90.83 127.8 91.9 127.7Q94.29 127.46 96.71 126.82Q99.13 126.19 99.37 124.58L107.57 71.75Q107.92 69.65 106.77 68.69Q105.62 67.74 103.89 67.42Q102.15 67.11 100.69 67.01Q99.18 66.86 99.18 65.94Q99.18 64.91 99.74 63.81Q100.3 62.71 101.23 62.71H127.35Q128.18 62.71 128.5 63.13Q128.81 63.54 128.81 64.13Q128.81 65.2 128.25 66.11Q127.69 67.01 126.76 67.01Q124.96 67.01 122.95 67.4Q120.95 67.79 119.46 68.79Q117.97 69.79 117.68 71.6L109.48 124.04Q109.19 125.8 110.43 126.43Q111.68 127.07 113.19 127.07H127.84Q131.21 127.07 133.45 125.51Q135.7 123.94 137.26 121.43Q138.82 118.91 140.04 116.03Q141.27 113.15 142.53 110.52Q142.88 109.64 143.54 109.27Q144.19 108.9 144.98 108.9Q145.9 108.9 146.71 109.32Q147.52 109.73 147.32 110.56L142.39 132.0H91.56Q90.83 132.0 90.46 131.22Q90.09 130.44 90.09 129.8Z"/><path class="brass" fill="#9A7C39" transform="translate(0 0) scale(0.2)" d="M38 38H52L45 52Z M162 38H148L155 52Z M38 162H52L45 148Z M162 162H148L155 148Z"/><path d="M56.58 27.35Q56.58 27.48 56.67 27.55Q56.76 27.61 56.96 27.63L57.98 27.79Q58.09 27.8 58.09 27.85Q58.09 27.89 58.07 27.9Q58.05 27.92 58.01 27.92H52.88Q52.84 27.92 52.81 27.9Q52.79 27.89 52.79 27.85Q52.79 27.8 52.9 27.79L53.92 27.63Q54.12 27.61 54.22 27.55Q54.31 27.48 54.31 27.35V13.09Q54.31 12.96 54.22 12.89Q54.12 12.83 53.92 12.81L52.9 12.65Q52.79 12.64 52.79 12.59Q52.79 12.55 52.81 12.54Q52.84 12.52 52.88 12.52H58.01Q58.05 12.52 58.07 12.54Q58.09 12.55 58.09 12.59Q58.09 12.64 57.98 12.65L56.96 12.81Q56.76 12.83 56.67 12.89Q56.58 12.96 56.58 13.09ZM62.33 18.31V27.36Q62.33 27.49 62.39 27.57Q62.46 27.65 62.59 27.68L63.29 27.78Q63.4 27.79 63.4 27.85Q63.4 27.92 63.31 27.92H59.36Q59.34 27.92 59.31 27.9Q59.29 27.89 59.29 27.85Q59.29 27.84 59.31 27.82Q59.34 27.8 59.38 27.79L60.12 27.68Q60.26 27.65 60.32 27.57Q60.38 27.49 60.38 27.37V19.24Q60.38 19.19 60.35 19.15Q60.33 19.12 60.25 19.12H59.39Q59.36 19.12 59.34 19.1Q59.31 19.08 59.31 19.05Q59.31 19.01 59.34 18.99Q59.36 18.98 59.4 18.97L62.04 18.23Q62.13 18.21 62.16 18.2Q62.2 18.2 62.23 18.2Q62.28 18.2 62.31 18.23Q62.33 18.26 62.33 18.31ZM62.17 20.33 62.09 20.23 62.46 19.89Q63.51 18.94 64.25 18.55Q64.99 18.15 65.68 18.15Q66.7 18.15 67.26 18.82Q67.83 19.48 68.03 20.87L68.88 27.27Q68.91 27.45 68.99 27.56Q69.07 27.68 69.26 27.7L69.84 27.79Q69.9 27.8 69.92 27.82Q69.94 27.83 69.94 27.85Q69.94 27.89 69.92 27.9Q69.9 27.92 69.85 27.92H65.84Q65.74 27.92 65.74 27.85Q65.74 27.81 65.86 27.78L66.57 27.68Q66.77 27.65 66.84 27.53Q66.92 27.41 66.89 27.27L66.1 21.07Q65.95 20.0 65.58 19.51Q65.21 19.01 64.5 19.01Q64.02 19.01 63.56 19.25Q63.09 19.49 62.54 20.0ZM71.14 18.69 70.12 18.52Q70.07 18.49 70.05 18.48Q70.03 18.46 70.03 18.43Q70.03 18.41 70.05 18.39Q70.07 18.37 70.08 18.37H71.1Q71.19 18.37 71.24 18.34Q71.29 18.32 71.33 18.25L72.9 16.25Q72.95 16.21 73 16.18Q73.04 16.15 73.09 16.15Q73.13 16.15 73.16 16.18Q73.19 16.21 73.19 16.27V25.71Q73.19 26.56 73.52 26.97Q73.85 27.38 74.42 27.38Q74.64 27.38 74.84 27.32Q75.03 27.26 75.2 27.13Q75.36 27.01 75.5 26.8Q75.63 26.6 75.72 26.31Q75.74 26.26 75.78 26.27Q75.81 26.28 75.79 26.35Q75.62 26.94 75.33 27.33Q75.05 27.72 74.63 27.91Q74.21 28.1 73.64 28.1Q72.54 28.1 71.92 27.57Q71.3 27.04 71.3 25.94V18.9Q71.3 18.81 71.27 18.76Q71.24 18.7 71.14 18.69ZM72.55 18.56 72.6 18.37H75.72Q75.77 18.37 75.79 18.39Q75.8 18.41 75.8 18.44Q75.8 18.49 75.74 18.53Q75.68 18.56 75.57 18.56ZM79.35 22.65Q79.35 21.17 79.76 20.17Q80.17 19.16 80.81 18.66Q81.46 18.15 82.14 18.15Q82.92 18.15 83.34 18.62Q83.77 19.09 83.77 19.9Q83.77 20.53 83.48 20.85Q83.19 21.17 82.74 21.17Q82.33 21.17 82.11 20.93Q81.9 20.69 81.88 20.21V19.9Q81.86 19.52 81.71 19.33Q81.56 19.14 81.19 19.14Q80.77 19.14 80.37 19.54Q79.97 19.93 79.71 20.73Q79.46 21.52 79.46 22.7ZM79.46 18.36V22.15V27.32Q79.46 27.44 79.53 27.52Q79.6 27.6 79.73 27.63L80.82 27.79Q80.88 27.8 80.9 27.81Q80.92 27.82 80.92 27.85Q80.92 27.89 80.9 27.9Q80.88 27.92 80.82 27.92H76.52Q76.47 27.92 76.45 27.9Q76.42 27.88 76.42 27.85Q76.42 27.82 76.45 27.8Q76.49 27.78 76.55 27.77L77.24 27.68Q77.39 27.65 77.45 27.57Q77.51 27.5 77.51 27.4V19.21Q77.51 19.15 77.48 19.11Q77.45 19.08 77.39 19.08H76.51Q76.47 19.08 76.45 19.05Q76.43 19.03 76.43 19.01Q76.43 18.98 76.45 18.96Q76.47 18.93 76.53 18.92L79.17 18.27Q79.25 18.25 79.29 18.25Q79.32 18.24 79.36 18.24Q79.41 18.24 79.43 18.28Q79.46 18.32 79.46 18.36ZM90.16 26.91V26.83L90.07 26.91V20.29Q90.07 19.31 89.69 18.78Q89.3 18.26 88.53 18.26Q87.67 18.26 87.28 18.67Q86.88 19.08 86.88 19.52V20.28Q86.88 20.73 86.58 21.02Q86.28 21.31 85.82 21.31Q85.48 21.31 85.26 21.08Q85.03 20.86 85.03 20.42Q85.03 19.87 85.46 19.34Q85.88 18.81 86.71 18.47Q87.54 18.13 88.75 18.13Q90.41 18.13 91.22 18.86Q92.03 19.59 92.03 20.89V26.73Q92.03 27.18 92.18 27.38Q92.33 27.57 92.55 27.57Q92.74 27.57 92.9 27.45Q93.06 27.33 93.08 27.08Q93.1 27.04 93.11 27.03Q93.13 27.02 93.14 27.02Q93.17 27.02 93.18 27.03Q93.18 27.04 93.18 27.08Q93.18 27.26 93.03 27.5Q92.88 27.74 92.53 27.93Q92.19 28.11 91.63 28.11Q90.88 28.11 90.52 27.78Q90.16 27.45 90.16 26.91ZM84.5 25.81Q84.5 24.69 85.44 23.97Q86.37 23.26 88.29 23.26Q89.07 23.26 89.58 23.4Q90.08 23.54 90.51 23.75L90.44 23.83Q90.02 23.63 89.55 23.51Q89.08 23.39 88.51 23.39Q87.52 23.39 87 23.96Q86.48 24.53 86.48 25.51Q86.48 26.47 86.97 27.01Q87.46 27.55 88.27 27.55Q88.82 27.55 89.36 27.3Q89.89 27.06 90.26 26.6L90.36 26.67Q89.87 27.37 89.04 27.74Q88.2 28.12 87.23 28.12Q86.01 28.12 85.26 27.47Q84.5 26.83 84.5 25.81ZM103.66 27.92H97.73Q97.36 27.92 97.24 27.77Q97.11 27.61 97.11 27.37Q97.11 27.14 97.26 26.97Q97.42 26.81 97.64 26.73L98.2 26.61Q98.53 26.52 98.73 26.33Q98.93 26.13 99.04 25.7Q99.11 25.37 99.3 24.68Q99.49 23.99 99.74 23.06Q99.99 22.13 100.27 21.09Q100.55 20.06 100.83 19.02Q101.11 17.99 101.36 17.08Q101.6 16.17 101.78 15.52Q101.96 14.87 102.03 14.6Q102.1 14.29 102.02 14.09Q101.94 13.9 101.71 13.82L101.1 13.66Q100.88 13.58 100.78 13.45Q100.69 13.32 100.69 13.13Q100.69 12.85 100.87 12.69Q101.05 12.52 101.37 12.52H105.61Q105.92 12.52 106.05 12.66Q106.17 12.81 106.17 13.04Q106.17 13.28 106.03 13.44Q105.88 13.61 105.67 13.68L104.96 13.83Q104.68 13.9 104.49 14.08Q104.3 14.27 104.19 14.7Q104.1 15.06 103.9 15.77Q103.71 16.47 103.46 17.4Q103.2 18.33 102.92 19.35Q102.64 20.37 102.37 21.39Q102.1 22.4 101.87 23.27Q101.63 24.14 101.47 24.75Q101.31 25.37 101.26 25.6Q101.14 26.23 101.37 26.5Q101.6 26.77 102.19 26.77H103.94Q104.47 26.77 104.91 26.55Q105.35 26.34 105.74 25.8Q106.13 25.26 106.53 24.32Q106.7 23.93 106.88 23.77Q107.07 23.62 107.27 23.62Q107.54 23.62 107.65 23.84Q107.77 24.06 107.74 24.44Q107.59 25.26 107.34 25.95Q107.08 26.63 106.72 27.14Q106.37 27.65 105.97 27.92Q105.56 28.2 105.12 28.2Q104.89 28.2 104.69 28.13Q104.49 28.06 104.26 27.99Q104.02 27.92 103.66 27.92ZM109.58 23.21Q109.58 23.21 109.94 23.09Q110.3 22.96 110.89 22.74Q111.48 22.53 112.18 22.27Q112.88 22 113.58 21.73Q114.27 21.46 114.81 21.24L114.58 21.71Q114.67 21.45 114.7 21.16Q114.73 20.87 114.73 20.5Q114.73 19.91 114.47 19.58Q114.2 19.24 113.68 19.24Q113.18 19.24 112.69 19.59Q112.2 19.93 111.77 20.57Q111.34 21.21 111.05 22.07Q110.76 22.93 110.66 23.94Q110.52 25.32 111.02 26.04Q111.52 26.75 112.49 26.75Q112.93 26.75 113.42 26.57Q113.91 26.38 114.37 25.97Q114.83 25.56 115.18 24.9Q115.41 24.61 115.59 24.5Q115.76 24.39 115.93 24.42Q116.1 24.46 116.17 24.62Q116.24 24.79 116.16 25.06Q116.01 25.8 115.45 26.5Q114.9 27.19 113.98 27.65Q113.06 28.11 111.82 28.11Q110.67 28.11 109.93 27.62Q109.18 27.13 108.85 26.24Q108.52 25.36 108.62 24.15Q108.7 22.88 109.16 21.79Q109.61 20.69 110.33 19.88Q111.05 19.07 111.97 18.6Q112.9 18.14 113.93 18.14Q114.73 18.14 115.26 18.42Q115.78 18.7 116.07 19.19Q116.36 19.68 116.45 20.32Q116.48 20.53 116.54 20.61Q116.59 20.68 116.7 20.7Q116.83 20.72 116.92 20.79Q117.01 20.87 117.04 20.99Q117.08 21.2 116.94 21.36Q116.8 21.52 116.42 21.65Q115.88 21.86 115.17 22.12Q114.46 22.39 113.69 22.66Q112.93 22.93 112.21 23.18Q111.49 23.44 110.9 23.64Q110.32 23.84 109.98 23.96Q109.64 24.08 109.64 24.08ZM124.07 28.22Q123.63 29.89 122.82 31.03Q122 32.17 120.81 32.74Q119.62 33.31 118.05 33.31Q116.89 33.31 116.25 32.93Q115.6 32.55 115.6 31.97Q115.6 31.55 115.88 31.27Q116.15 30.99 116.61 30.99Q116.95 30.99 117.25 31.14Q117.54 31.3 117.81 31.51Q118.09 31.72 118.37 31.87Q118.66 32.02 119 32.02Q119.68 32.02 120.28 31.67Q120.87 31.32 121.33 30.63Q121.79 29.93 122.08 28.91L123.64 23.32L123.92 23.59Q123.17 25.15 122.41 26.14Q121.64 27.14 120.87 27.62Q120.09 28.11 119.3 28.11Q118.58 28.11 118.11 27.73Q117.64 27.36 117.44 26.63Q117.25 25.9 117.39 24.83Q117.52 23.88 117.89 22.93Q118.26 21.98 118.86 21.13Q119.45 20.28 120.26 19.61Q121.07 18.94 122.08 18.56Q123.08 18.19 124.26 18.19Q125.09 18.19 125.64 18.32Q126.18 18.45 126.44 18.7Q126.69 18.96 126.66 19.31Q126.63 19.56 126.52 19.74Q126.41 19.91 126.29 20.1Q126.16 20.29 126.08 20.58ZM119.37 24.65Q119.26 25.28 119.34 25.74Q119.41 26.2 119.62 26.46Q119.84 26.71 120.17 26.71Q120.68 26.71 121.24 26.24Q121.81 25.76 122.34 25.01Q122.87 24.25 123.31 23.35Q123.74 22.45 124.01 21.58Q124.28 20.72 124.31 20.06Q124.32 19.7 124.12 19.53Q123.91 19.35 123.52 19.35Q123.03 19.35 122.5 19.64Q121.97 19.92 121.48 20.43Q120.98 20.94 120.55 21.61Q120.11 22.29 119.81 23.06Q119.51 23.83 119.37 24.65ZM127.83 23.21Q127.83 23.21 128.19 23.09Q128.55 22.96 129.14 22.74Q129.73 22.53 130.43 22.27Q131.13 22 131.83 21.73Q132.52 21.46 133.06 21.24L132.83 21.71Q132.92 21.45 132.95 21.16Q132.98 20.87 132.98 20.5Q132.98 19.91 132.72 19.58Q132.45 19.24 131.93 19.24Q131.43 19.24 130.94 19.59Q130.45 19.93 130.02 20.57Q129.59 21.21 129.3 22.07Q129.01 22.93 128.91 23.94Q128.77 25.32 129.27 26.04Q129.77 26.75 130.74 26.75Q131.18 26.75 131.67 26.57Q132.16 26.38 132.62 25.97Q133.08 25.56 133.43 24.9Q133.66 24.61 133.83 24.5Q134 24.39 134.18 24.42Q134.35 24.46 134.42 24.62Q134.49 24.79 134.41 25.06Q134.26 25.8 133.7 26.5Q133.15 27.19 132.23 27.65Q131.31 28.11 130.07 28.11Q128.92 28.11 128.17 27.62Q127.43 27.13 127.1 26.24Q126.77 25.36 126.87 24.15Q126.95 22.88 127.4 21.79Q127.86 20.69 128.58 19.88Q129.3 19.07 130.22 18.6Q131.14 18.14 132.18 18.14Q132.98 18.14 133.5 18.42Q134.03 18.7 134.32 19.19Q134.61 19.68 134.7 20.32Q134.73 20.53 134.79 20.61Q134.84 20.68 134.95 20.7Q135.08 20.72 135.17 20.79Q135.26 20.87 135.29 20.99Q135.32 21.2 135.19 21.36Q135.05 21.52 134.66 21.65Q134.13 21.86 133.42 22.12Q132.71 22.39 131.94 22.66Q131.18 22.93 130.46 23.18Q129.74 23.44 129.15 23.64Q128.57 23.84 128.23 23.96Q127.89 24.08 127.89 24.08ZM141.15 25.92 142.66 21.58Q142.99 20.65 142.86 20.24Q142.73 19.82 142.25 19.82Q141.7 19.82 141.04 20.34Q140.37 20.85 139.74 21.8Q139.1 22.76 138.65 24.11Q138.45 24.7 138.34 25.05Q138.23 25.4 138.19 25.61Q138.14 25.82 138.14 25.98Q138.14 26.29 138.21 26.54Q138.28 26.79 138.28 27.1Q138.28 27.58 137.89 27.84Q137.49 28.11 136.77 28.11Q135.98 28.11 135.83 27.58Q135.67 27.05 136.11 25.92L137.83 21.24Q138.13 20.46 138.1 20.13Q138.07 19.79 137.74 19.79Q137.51 19.79 137.27 19.94Q137.02 20.09 136.71 20.41Q136.61 20.5 136.51 20.52Q136.41 20.54 136.34 20.52Q136.12 20.5 136.07 20.25Q136.03 20.0 136.22 19.73Q136.66 19.04 137.38 18.61Q138.1 18.19 138.83 18.19Q139.43 18.19 139.74 18.45Q140.04 18.71 140.04 19.23Q140.04 19.52 139.93 19.87Q139.81 20.22 139.6 20.74Q139.38 21.27 139.08 22.05Q138.78 22.83 138.42 23.95L138.06 23.88Q138.84 21.77 139.82 20.52Q140.8 19.27 141.8 18.73Q142.79 18.19 143.63 18.19Q144.3 18.19 144.65 18.5Q144.99 18.82 144.99 19.44Q144.99 19.75 144.88 20.11Q144.77 20.47 144.56 20.98Q144.36 21.5 144.04 22.23Q143.73 22.96 143.32 23.99L143.11 23.88Q143.7 22.3 144.39 21.2Q145.09 20.11 145.84 19.44Q146.59 18.78 147.31 18.48Q148.04 18.19 148.66 18.19Q149.39 18.19 149.72 18.58Q150.04 18.97 150.02 19.67Q150 20.37 149.67 21.32L148.41 25.04Q148.17 25.73 148.19 26.07Q148.21 26.41 148.54 26.41Q148.74 26.41 148.96 26.29Q149.17 26.16 149.49 25.84Q149.6 25.74 149.68 25.71Q149.76 25.69 149.82 25.71Q150 25.73 150.05 25.96Q150.1 26.19 149.91 26.57Q149.5 27.24 148.87 27.67Q148.23 28.11 147.45 28.11Q146.81 28.11 146.5 27.79Q146.18 27.48 146.17 26.92Q146.15 26.37 146.38 25.63L147.7 21.58Q148.01 20.65 147.89 20.24Q147.77 19.82 147.28 19.82Q146.74 19.82 146.08 20.34Q145.41 20.85 144.78 21.8Q144.15 22.76 143.7 24.11Q143.49 24.7 143.38 25.05Q143.27 25.4 143.23 25.61Q143.19 25.82 143.19 25.98Q143.19 26.29 143.26 26.54Q143.33 26.79 143.33 27.1Q143.33 27.58 142.93 27.84Q142.53 28.11 141.8 28.11Q141.29 28.11 141.06 27.88Q140.82 27.66 140.86 27.17Q140.9 26.69 141.15 25.92Z"/></svg></a>
-      <nav aria-label="Síðufótur">
-        <ul>
-          <li><a href="#thjonusta" data-i18n="navServices">Þjónusta</a></li>
-          <li><a href="#logmadur" data-i18n="navLawyer">Lögmaður</a></li>
-          <li><a href="#skrif" data-i18n="navWriting">Skrif</a></li>
-          <li><a href="#stofan" data-i18n="navFirm">Stofan</a></li>
-          <li><a href="#samband" data-i18n="navContact">Hafa samband</a></li>
-        </ul>
-      </nav>
+    <div class="foot-top">
+      <a class="foot-logo" href="#top" aria-label="Intra Legem"><svg viewBox="-2 -2 363.1 328.0" aria-hidden="true"><path fill-rule="evenodd" fill="currentColor" transform="translate(64.56 0) scale(1.15)" d="M17 17H183V183H17Z M23 23V177H177V23ZM30.5 30.5H169.5V169.5H30.5Z M33.5 33.5V166.5H166.5V33.5ZM52.64 129.9Q52.64 128.92 52.98 128.34Q53.33 127.75 54.4 127.7Q56.79 127.56 59.26 126.87Q61.72 126.19 61.92 124.58L69.73 71.75Q69.78 71.5 69.78 71.01Q69.78 69.26 68.66 68.45Q67.53 67.64 65.95 67.38Q64.36 67.11 62.99 67.01Q61.48 66.86 61.48 65.98Q61.48 65.84 61.53 65.62Q61.58 65.4 61.58 65.2Q61.58 64.67 62.21 63.69Q62.85 62.71 63.68 62.71H88.34Q89.17 62.71 89.41 63.69Q89.65 64.67 89.56 65.2Q89.31 66.86 87.6 67.01Q85.21 67.21 82.72 67.84Q80.23 68.47 79.99 70.13L72.27 122.97Q72.22 123.26 72.22 123.75Q72.22 125.46 73.35 126.24Q74.47 127.02 76.06 127.26Q77.64 127.51 79.01 127.7Q79.84 127.8 80.21 128.02Q80.57 128.24 80.57 128.92Q80.57 129.27 80.52 129.51Q80.43 130.05 79.89 131.02Q79.35 132.0 78.52 132.0H53.86Q53.13 132.0 52.89 131.27Q52.64 130.54 52.64 129.9ZM90.09 129.8Q90.09 128.92 90.46 128.36Q90.83 127.8 91.9 127.7Q94.29 127.46 96.71 126.82Q99.13 126.19 99.37 124.58L107.57 71.75Q107.92 69.65 106.77 68.69Q105.62 67.74 103.89 67.42Q102.15 67.11 100.69 67.01Q99.18 66.86 99.18 65.94Q99.18 64.91 99.74 63.81Q100.3 62.71 101.23 62.71H127.35Q128.18 62.71 128.5 63.13Q128.81 63.54 128.81 64.13Q128.81 65.2 128.25 66.11Q127.69 67.01 126.76 67.01Q124.96 67.01 122.95 67.4Q120.95 67.79 119.46 68.79Q117.97 69.79 117.68 71.6L109.48 124.04Q109.19 125.8 110.43 126.43Q111.68 127.07 113.19 127.07H127.84Q131.21 127.07 133.45 125.51Q135.7 123.94 137.26 121.43Q138.82 118.91 140.04 116.03Q141.27 113.15 142.53 110.52Q142.88 109.64 143.54 109.27Q144.19 108.9 144.98 108.9Q145.9 108.9 146.71 109.32Q147.52 109.73 147.32 110.56L142.39 132.0H91.56Q90.83 132.0 90.46 131.22Q90.09 130.44 90.09 129.8Z"/><path class="brass" fill="#9A7C39" transform="translate(64.56 0) scale(1.15)" d="M38 38H52L45 52Z M162 38H148L155 52Z M38 162H52L45 148Z M162 162H148L155 148Z"/><path d="M16.64 315.52Q16.64 316.0 16.98 316.24Q17.32 316.48 18.04 316.56L21.76 317.12Q22.16 317.16 22.16 317.36Q22.16 317.48 22.08 317.54Q22.0 317.6 21.84 317.6H3.2Q3.04 317.6 2.96 317.54Q2.88 317.48 2.88 317.36Q2.88 317.16 3.28 317.12L7.0 316.56Q7.72 316.48 8.06 316.24Q8.4 316.0 8.4 315.52V263.68Q8.4 263.2 8.06 262.96Q7.72 262.72 7.0 262.64L3.28 262.08Q2.88 262.04 2.88 261.84Q2.88 261.72 2.96 261.66Q3.04 261.6 3.2 261.6H21.84Q22.0 261.6 22.08 261.66Q22.16 261.72 22.16 261.84Q22.16 262.04 21.76 262.08L18.04 262.64Q17.32 262.72 16.98 262.96Q16.64 263.2 16.64 263.68ZM37.56 282.64V315.56Q37.56 316.04 37.8 316.32Q38.04 316.6 38.52 316.72L41.04 317.08Q41.44 317.12 41.44 317.36Q41.44 317.6 41.12 317.6H26.76Q26.68 317.6 26.6 317.54Q26.52 317.48 26.52 317.36Q26.52 317.32 26.6 317.24Q26.68 317.16 26.84 317.12L29.52 316.72Q30.04 316.6 30.26 316.32Q30.48 316.04 30.48 315.6V286.04Q30.48 285.84 30.38 285.72Q30.28 285.6 30.0 285.6H26.88Q26.76 285.6 26.68 285.52Q26.6 285.44 26.6 285.36Q26.6 285.2 26.68 285.14Q26.76 285.08 26.92 285.04L36.52 282.36Q36.84 282.28 36.96 282.26Q37.08 282.24 37.2 282.24Q37.4 282.24 37.48 282.36Q37.56 282.48 37.56 282.64ZM37.0 290.0 36.68 289.64 38.04 288.4Q41.84 284.96 44.54 283.52Q47.24 282.08 49.76 282.08Q53.44 282.08 55.5 284.5Q57.56 286.92 58.28 291.96L61.4 315.24Q61.48 315.88 61.78 316.3Q62.08 316.72 62.76 316.8L64.88 317.12Q65.08 317.16 65.16 317.22Q65.24 317.28 65.24 317.36Q65.24 317.48 65.16 317.54Q65.08 317.6 64.92 317.6H50.32Q49.96 317.6 49.96 317.36Q49.96 317.2 50.4 317.08L53.0 316.72Q53.72 316.6 53.98 316.18Q54.24 315.76 54.16 315.24L51.28 292.68Q50.72 288.8 49.38 287.0Q48.04 285.2 45.44 285.2Q43.72 285.2 42.02 286.08Q40.32 286.96 38.32 288.8ZM69.6 284.04 65.88 283.4Q65.72 283.32 65.64 283.26Q65.56 283.2 65.56 283.08Q65.56 283.0 65.64 282.94Q65.72 282.88 65.76 282.88H69.44Q69.8 282.88 69.98 282.78Q70.16 282.68 70.28 282.44L76.0 275.16Q76.2 275.0 76.36 274.9Q76.52 274.8 76.68 274.8Q76.84 274.8 76.94 274.9Q77.04 275.0 77.04 275.24V309.56Q77.04 312.64 78.24 314.14Q79.44 315.64 81.52 315.64Q82.32 315.64 83.04 315.42Q83.76 315.2 84.36 314.74Q84.96 314.28 85.44 313.54Q85.92 312.8 86.24 311.76Q86.32 311.56 86.46 311.6Q86.6 311.64 86.52 311.88Q85.88 314.04 84.84 315.46Q83.8 316.88 82.28 317.56Q80.76 318.24 78.68 318.24Q74.68 318.24 72.44 316.32Q70.2 314.4 70.2 310.4V284.8Q70.2 284.48 70.08 284.28Q69.96 284.08 69.6 284.04ZM74.72 283.56 74.92 282.88H86.24Q86.44 282.88 86.5 282.94Q86.56 283.0 86.56 283.12Q86.56 283.32 86.34 283.44Q86.12 283.56 85.72 283.56ZM99.44 298.44Q99.44 293.04 100.94 289.4Q102.44 285.76 104.78 283.92Q107.12 282.08 109.6 282.08Q112.44 282.08 113.98 283.78Q115.52 285.48 115.52 288.44Q115.52 290.72 114.46 291.88Q113.4 293.04 111.8 293.04Q110.28 293.04 109.5 292.18Q108.72 291.32 108.64 289.56V288.44Q108.6 287.04 108.04 286.36Q107.48 285.68 106.16 285.68Q104.6 285.68 103.16 287.12Q101.72 288.56 100.78 291.44Q99.84 294.32 99.84 298.6ZM99.84 282.84V296.6V315.4Q99.84 315.84 100.1 316.14Q100.36 316.44 100.84 316.56L104.8 317.12Q105.0 317.16 105.08 317.2Q105.16 317.24 105.16 317.36Q105.16 317.48 105.08 317.54Q105.0 317.6 104.8 317.6H89.16Q89.0 317.6 88.9 317.52Q88.8 317.44 88.8 317.36Q88.8 317.24 88.92 317.16Q89.04 317.08 89.28 317.04L91.8 316.72Q92.32 316.6 92.54 316.34Q92.76 316.08 92.76 315.72V285.92Q92.76 285.72 92.66 285.58Q92.56 285.44 92.32 285.44H89.12Q89.0 285.44 88.92 285.36Q88.84 285.28 88.84 285.2Q88.84 285.08 88.92 285.0Q89.0 284.92 89.2 284.88L98.8 282.52Q99.08 282.44 99.22 282.42Q99.36 282.4 99.48 282.4Q99.68 282.4 99.76 282.54Q99.84 282.68 99.84 282.84ZM138.76 313.92V313.64L138.44 313.92V289.84Q138.44 286.28 137.04 284.38Q135.64 282.48 132.84 282.48Q129.72 282.48 128.28 283.96Q126.84 285.44 126.84 287.04V289.8Q126.84 291.44 125.74 292.5Q124.64 293.56 123.0 293.56Q121.76 293.56 120.94 292.74Q120.12 291.92 120.12 290.32Q120.12 288.32 121.66 286.4Q123.2 284.48 126.22 283.24Q129.24 282.0 133.64 282.0Q139.68 282.0 142.62 284.66Q145.56 287.32 145.56 292.04V313.28Q145.56 314.92 146.1 315.62Q146.64 316.32 147.44 316.32Q148.16 316.32 148.74 315.88Q149.32 315.44 149.4 314.56Q149.44 314.4 149.5 314.36Q149.56 314.32 149.6 314.32Q149.72 314.32 149.74 314.36Q149.76 314.4 149.76 314.56Q149.76 315.2 149.2 316.08Q148.64 316.96 147.4 317.62Q146.16 318.28 144.12 318.28Q141.4 318.28 140.08 317.08Q138.76 315.88 138.76 313.92ZM118.2 309.92Q118.2 305.84 121.6 303.24Q125.0 300.64 131.96 300.64Q134.8 300.64 136.64 301.16Q138.48 301.68 140.04 302.44L139.8 302.72Q138.24 302.0 136.54 301.56Q134.84 301.12 132.76 301.12Q129.16 301.12 127.28 303.2Q125.4 305.28 125.4 308.84Q125.4 312.32 127.18 314.28Q128.96 316.24 131.88 316.24Q133.88 316.24 135.84 315.36Q137.8 314.48 139.12 312.8L139.48 313.04Q137.72 315.6 134.68 316.96Q131.64 318.32 128.12 318.32Q123.68 318.32 120.94 315.98Q118.2 313.64 118.2 309.92ZM187.84 317.6H166.28Q164.96 317.6 164.5 317.04Q164.04 316.48 164.04 315.6Q164.04 314.76 164.6 314.16Q165.16 313.56 165.96 313.28L168.0 312.84Q169.2 312.52 169.92 311.8Q170.64 311.08 171.04 309.52Q171.32 308.32 172.0 305.82Q172.68 303.32 173.6 299.94Q174.52 296.56 175.54 292.78Q176.56 289.0 177.58 285.24Q178.6 281.48 179.48 278.18Q180.36 274.88 181.02 272.52Q181.68 270.16 181.92 269.16Q182.2 268.04 181.9 267.32Q181.6 266.6 180.76 266.32L178.56 265.76Q177.76 265.44 177.4 264.98Q177.04 264.52 177.04 263.8Q177.04 262.8 177.7 262.2Q178.36 261.6 179.52 261.6H194.96Q196.08 261.6 196.54 262.12Q197.0 262.64 197.0 263.48Q197.0 264.36 196.46 264.96Q195.92 265.56 195.16 265.8L192.6 266.36Q191.56 266.6 190.88 267.28Q190.2 267.96 189.8 269.52Q189.44 270.84 188.74 273.4Q188.04 275.96 187.12 279.34Q186.2 282.72 185.18 286.44Q184.16 290.16 183.18 293.84Q182.2 297.52 181.34 300.68Q180.48 303.84 179.9 306.08Q179.32 308.32 179.12 309.16Q178.68 311.44 179.52 312.42Q180.36 313.4 182.52 313.4H188.88Q190.8 313.4 192.4 312.62Q194.0 311.84 195.42 309.88Q196.84 307.92 198.28 304.52Q198.92 303.08 199.58 302.52Q200.24 301.96 201.0 301.96Q201.96 301.96 202.38 302.76Q202.8 303.56 202.68 304.96Q202.16 307.92 201.22 310.42Q200.28 312.92 199.0 314.76Q197.72 316.6 196.24 317.6Q194.76 318.6 193.16 318.6Q192.32 318.6 191.6 318.36Q190.88 318.12 190.02 317.86Q189.16 317.6 187.84 317.6ZM209.4 300.48Q209.4 300.48 210.7 300.02Q212.0 299.56 214.14 298.78Q216.28 298.0 218.84 297.04Q221.4 296.08 223.92 295.1Q226.44 294.12 228.4 293.32L227.56 295.0Q227.88 294.08 228.0 293.02Q228.12 291.96 228.12 290.6Q228.12 288.48 227.16 287.26Q226.2 286.04 224.28 286.04Q222.48 286.04 220.7 287.3Q218.92 288.56 217.36 290.88Q215.8 293.2 214.74 296.32Q213.68 299.44 213.32 303.12Q212.8 308.16 214.62 310.76Q216.44 313.36 219.96 313.36Q221.56 313.36 223.34 312.68Q225.12 312.0 226.8 310.5Q228.48 309.0 229.76 306.6Q230.6 305.56 231.22 305.16Q231.84 304.76 232.48 304.88Q233.08 305.0 233.34 305.6Q233.6 306.2 233.32 307.2Q232.76 309.88 230.74 312.42Q228.72 314.96 225.38 316.62Q222.04 318.28 217.52 318.28Q213.36 318.28 210.64 316.5Q207.92 314.72 206.72 311.5Q205.52 308.28 205.88 303.88Q206.2 299.28 207.84 295.3Q209.48 291.32 212.1 288.36Q214.72 285.4 218.08 283.72Q221.44 282.04 225.2 282.04Q228.12 282.04 230.02 283.06Q231.92 284.08 232.98 285.86Q234.04 287.64 234.36 289.96Q234.48 290.72 234.68 291.0Q234.88 291.28 235.28 291.36Q235.76 291.4 236.08 291.68Q236.4 291.96 236.52 292.4Q236.64 293.16 236.14 293.74Q235.64 294.32 234.24 294.8Q232.28 295.56 229.7 296.52Q227.12 297.48 224.34 298.46Q221.56 299.44 218.94 300.38Q216.32 301.32 214.2 302.04Q212.08 302.76 210.84 303.2Q209.6 303.64 209.6 303.64ZM262.08 318.68Q260.48 324.76 257.52 328.9Q254.56 333.04 250.22 335.12Q245.88 337.2 240.2 337.2Q235.96 337.2 233.62 335.82Q231.28 334.44 231.28 332.32Q231.28 330.8 232.28 329.78Q233.28 328.76 234.96 328.76Q236.2 328.76 237.26 329.32Q238.32 329.88 239.32 330.64Q240.32 331.4 241.36 331.96Q242.4 332.52 243.64 332.52Q246.12 332.52 248.28 331.24Q250.44 329.96 252.12 327.44Q253.8 324.92 254.84 321.2L260.52 300.88L261.52 301.84Q258.8 307.52 256.02 311.14Q253.24 314.76 250.42 316.52Q247.6 318.28 244.72 318.28Q242.12 318.28 240.4 316.92Q238.68 315.56 237.98 312.9Q237.28 310.24 237.8 306.36Q238.24 302.92 239.6 299.46Q240.96 296.0 243.12 292.9Q245.28 289.8 248.22 287.38Q251.16 284.96 254.82 283.58Q258.48 282.2 262.76 282.2Q265.8 282.2 267.78 282.68Q269.76 283.16 270.68 284.08Q271.6 285.0 271.48 286.28Q271.4 287.2 271.0 287.84Q270.6 288.48 270.14 289.16Q269.68 289.84 269.4 290.92ZM245.0 305.72Q244.6 308.0 244.86 309.68Q245.12 311.36 245.9 312.28Q246.68 313.2 247.88 313.2Q249.76 313.2 251.8 311.48Q253.84 309.76 255.78 307.0Q257.72 304.24 259.3 300.98Q260.88 297.72 261.86 294.56Q262.84 291.4 262.96 289.0Q263.0 287.72 262.24 287.08Q261.48 286.44 260.08 286.44Q258.28 286.44 256.36 287.48Q254.44 288.52 252.64 290.36Q250.84 292.2 249.26 294.66Q247.68 297.12 246.58 299.92Q245.48 302.72 245.0 305.72ZM275.76 300.48Q275.76 300.48 277.06 300.02Q278.36 299.56 280.5 298.78Q282.64 298.0 285.2 297.04Q287.76 296.08 290.28 295.1Q292.8 294.12 294.76 293.32L293.92 295.0Q294.24 294.08 294.36 293.02Q294.48 291.96 294.48 290.6Q294.48 288.48 293.52 287.26Q292.56 286.04 290.64 286.04Q288.84 286.04 287.06 287.3Q285.28 288.56 283.72 290.88Q282.16 293.2 281.1 296.32Q280.04 299.44 279.68 303.12Q279.16 308.16 280.98 310.76Q282.8 313.36 286.32 313.36Q287.92 313.36 289.7 312.68Q291.48 312.0 293.16 310.5Q294.84 309.0 296.12 306.6Q296.96 305.56 297.58 305.16Q298.2 304.76 298.84 304.88Q299.44 305.0 299.7 305.6Q299.96 306.2 299.68 307.2Q299.12 309.88 297.1 312.42Q295.08 314.96 291.74 316.62Q288.4 318.28 283.88 318.28Q279.72 318.28 277.0 316.5Q274.28 314.72 273.08 311.5Q271.88 308.28 272.24 303.88Q272.56 299.28 274.2 295.3Q275.84 291.32 278.46 288.36Q281.08 285.4 284.44 283.72Q287.8 282.04 291.56 282.04Q294.48 282.04 296.38 283.06Q298.28 284.08 299.34 285.86Q300.4 287.64 300.72 289.96Q300.84 290.72 301.04 291.0Q301.24 291.28 301.64 291.36Q302.12 291.4 302.44 291.68Q302.76 291.96 302.88 292.4Q303.0 293.16 302.5 293.74Q302.0 294.32 300.6 294.8Q298.64 295.56 296.06 296.52Q293.48 297.48 290.7 298.46Q287.92 299.44 285.3 300.38Q282.68 301.32 280.56 302.04Q278.44 302.76 277.2 303.2Q275.96 303.64 275.96 303.64ZM324.2 310.32 329.68 294.56Q330.88 291.16 330.4 289.66Q329.92 288.16 328.2 288.16Q326.2 288.16 323.78 290.02Q321.36 291.88 319.04 295.36Q316.72 298.84 315.08 303.76Q314.36 305.88 313.96 307.16Q313.56 308.44 313.4 309.2Q313.24 309.96 313.24 310.56Q313.24 311.68 313.5 312.58Q313.76 313.48 313.76 314.6Q313.76 316.36 312.32 317.32Q310.88 318.28 308.24 318.28Q305.4 318.28 304.82 316.36Q304.24 314.44 305.84 310.32L312.12 293.32Q313.2 290.48 313.1 289.26Q313 288.04 311.8 288.04Q310.96 288.04 310.06 288.58Q309.16 289.12 308.04 290.28Q307.68 290.6 307.32 290.68Q306.96 290.76 306.68 290.68Q305.88 290.6 305.72 289.7Q305.56 288.8 306.24 287.8Q307.84 285.32 310.46 283.76Q313.08 282.2 315.76 282.2Q317.92 282.2 319.04 283.16Q320.16 284.12 320.16 286.0Q320.16 287.04 319.74 288.32Q319.32 289.6 318.54 291.5Q317.76 293.4 316.66 296.24Q315.56 299.08 314.24 303.16L312.96 302.92Q315.8 295.24 319.36 290.7Q322.92 286.16 326.54 284.18Q330.16 282.2 333.2 282.2Q335.64 282.2 336.9 283.36Q338.16 284.52 338.16 286.76Q338.16 287.88 337.76 289.2Q337.36 290.52 336.6 292.38Q335.84 294.24 334.7 296.9Q333.56 299.56 332.08 303.32L331.32 302.92Q333.44 297.16 335.98 293.18Q338.52 289.2 341.24 286.78Q343.96 284.36 346.6 283.28Q349.24 282.2 351.48 282.2Q354.16 282.2 355.34 283.62Q356.52 285.04 356.44 287.6Q356.36 290.16 355.16 293.6L350.6 307.12Q349.72 309.64 349.78 310.88Q349.84 312.12 351.04 312.12Q351.8 312.12 352.58 311.66Q353.36 311.2 354.52 310.04Q354.92 309.68 355.2 309.58Q355.48 309.48 355.72 309.56Q356.36 309.64 356.54 310.48Q356.72 311.32 356.04 312.68Q354.56 315.12 352.24 316.7Q349.92 318.28 347.08 318.28Q344.76 318.28 343.62 317.14Q342.48 316.0 342.42 313.98Q342.36 311.96 343.2 309.28L348 294.56Q349.12 291.16 348.68 289.66Q348.24 288.16 346.48 288.16Q344.52 288.16 342.1 290.02Q339.68 291.88 337.38 295.36Q335.08 298.84 333.44 303.76Q332.68 305.88 332.28 307.16Q331.88 308.44 331.74 309.2Q331.6 309.96 331.6 310.56Q331.6 311.68 331.86 312.58Q332.12 313.48 332.12 314.6Q332.12 316.36 330.66 317.32Q329.2 318.28 326.56 318.28Q324.68 318.28 323.84 317.46Q323 316.64 323.14 314.88Q323.28 313.12 324.2 310.32Z"/></svg></a>
+      <nav aria-label="Síðufótur"><ul>
+        <li><a href="#svid" data-i18n="navAreas">Starfssvið</a></li>
+        <li><a href="#logmadur" data-i18n="navLawyer">Lögmaður</a></li>
+        <li><a href="#ferill" data-i18n="navCareer">Ferill</a></li>
+        <li><a href="#skrif" data-i18n="navWriting">Skrif</a></li>
+        <li><a href="#samband" data-i18n="navContact2">Hafa samband</a></li>
+      </ul></nav>
     </div>
-    <div class="legal">
+    <div class="foot-legal">
       <span>Intra Legem slf. · kt. 660614-2140 · Kristínargata 1, 102 Reykjavík</span>
       <span>© <span id="yr">2026</span></span>
     </div>
@@ -530,97 +660,217 @@
 
 <script>
 (function () {
-  var doc = document.documentElement;
+  var doc = document.documentElement; doc.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lang = 'is';
 
-  var img = document.querySelector('.hero-img img');
-  var ready = function () { img.classList.add('ready'); };
-  if (img.complete && img.naturalWidth) ready(); else img.addEventListener('load', ready);
+  /* ---------- Content ---------- */
+  var AREAS = {
+    is: [
+      { t: 'Samkeppnisréttur, ríkisaðstoð og EES-réttur', d: 'Ráðgjöf um samkeppnisreglur í daglegum rekstri og í málum fyrir Samkeppniseftirlitinu og áfrýjunarnefnd samkeppnismála.', ex: ['Samrunatilkynningar og samrunaeftirlit', 'Samstarf keppinauta og samkeppnisréttaráætlanir', 'Ríkisaðstoð og reglur EES-samningsins'] },
+      { t: 'Fjarskipti, fjölmiðlar og upplýsingatækni', d: 'Regluverk fjarskipta- og fjölmiðlamarkaða frá sjónarhóli bæði fyrirtækis og lögmanns — Hallmundur var yfirlögfræðingur Símans í rúman áratug.', ex: ['Mál fyrir Fjarskiptastofu og Fjölmiðlanefnd', 'Aðgangs- og flutningsréttur', 'Samningar tækni- og nýsköpunarfyrirtækja'] },
+      { t: 'Samninga- og félagaréttur, stjórnarhættir', d: 'Samningar sem skapa verðmæti og draga úr áhættu, og skipulag félaga sem heldur.', ex: ['Gerð og yfirferð viðskiptasamninga', 'Hluthafasamkomulög og skipulag félaga', 'Ráðgjöf til stjórna um stjórnarhætti'] },
+      { t: 'Kaup og sala fyrirtækja', d: 'Aðstoð frá fyrstu viljayfirlýsingu til afhendingar, þar á meðal við samrunaeftirlit.', ex: ['Áreiðanleikakannanir', 'Kaupsamningar og fylgiskjöl', 'Tilkynningar til samkeppnisyfirvalda'] },
+      { t: 'Málflutningur og úrlausn ágreinings', d: 'Rekstur mála fyrir dómstólum, stjórnvöldum og úrskurðarnefndum. Hallmundur er einnig viðurkenndur sáttamaður.', ex: ['Mál fyrir héraðsdómi og Landsrétti', 'Stjórnsýslukærur og úrskurðarnefndir', 'Sáttamiðlun'] },
+      { t: 'Opinber innkaup og verksamningar', d: 'Ráðgjöf til kaupenda og bjóðenda í útboðum og við gerð verksamninga.', ex: ['Útboðsgögn og tilboðsgerð', 'Kærur til kærunefndar útboðsmála', 'Verksamningar, meðal annars FIDIC'] },
+      { t: 'Orkuréttur', d: 'Ráðgjöf um regluverk orkumarkaðar og samninga á sviði orku.', ex: ['Samningar um kaup og sölu orku', 'Leyfismál', 'Regluverk raforkumarkaðar'] }
+    ],
+    en: [
+      { t: 'Competition law, State aid and EEA law', d: 'Advice on competition rules in day-to-day business and in proceedings before the Icelandic Competition Authority and its appeals committee.', ex: ['Merger filings and merger control', 'Cooperation between competitors and compliance programmes', 'State aid and EEA rules'] },
+      { t: 'Telecommunications, media and technology', d: 'Telecoms and media regulation seen from both sides — Hallmundur was General Counsel of Síminn for over a decade.', ex: ['Proceedings before the telecoms and media regulators', 'Access and must-carry rights', 'Contracts for technology and start-up companies'] },
+      { t: 'Contract and company law, governance', d: 'Contracts that create value and reduce risk, and corporate structures that hold.', ex: ['Drafting and reviewing commercial agreements', 'Shareholder agreements and corporate structuring', 'Advice to boards on governance'] },
+      { t: 'Mergers and acquisitions', d: 'From the first letter of intent to completion, including merger control.', ex: ['Due diligence', 'Purchase agreements and ancillary documents', 'Filings with competition authorities'] },
+      { t: 'Litigation and dispute resolution', d: 'Cases before the courts, administrative authorities and appeals boards. Hallmundur is also an accredited mediator.', ex: ['District Courts and the Court of Appeal', 'Administrative appeals and appeals boards', 'Mediation'] },
+      { t: 'Public procurement and construction contracts', d: 'Advice to contracting authorities and bidders, and on construction contracts.', ex: ['Tender documents and bids', 'Procurement complaints', 'Construction contracts, including FIDIC'] },
+      { t: 'Energy law', d: 'Advice on energy market regulation and energy contracts.', ex: ['Power purchase and sale agreements', 'Licensing', 'Electricity market regulation'] }
+    ]
+  };
+  var CAREER = [
+    { o: 'Intra Legem', r: { is: 'Eigandi', en: 'Owner' }, s: 2024, e: 2026.75, cls: 'now', label: { is: '2024 — í dag', en: '2024 — present' } },
+    { o: 'Deloitte Legal', r: { is: 'Eigandi', en: 'Partner' }, s: 2021, e: 2024 },
+    { o: { is: 'VÍK lögmannsstofa', en: 'VÍK Law Firm' }, r: { is: 'Eigandi', en: 'Partner' }, s: 2019, e: 2021 },
+    { o: 'LMB Mandat', r: { is: 'Eigandi', en: 'Partner' }, s: 2015, e: 2019 },
+    { o: { is: 'CATO lögmannsstofa', en: 'CATO Law Firm' }, r: { is: 'Eigandi', en: 'Partner' }, s: 2014, e: 2015, cls: 'short' },
+    { o: 'Síminn hf.', r: { is: 'Yfirlögfræðingur', en: 'General Counsel' }, s: 2003, e: 2014, cls: 'long' },
+    { o: { is: 'Samgönguráðuneytið', en: 'Ministry of Transport and Communications' }, r: { is: 'Sérfræðingur í fjarskiptamálum', en: 'Telecoms specialist' }, s: 2002, e: 2003, cls: 'short' },
+    { o: { is: 'LEX lögmannsstofa', en: 'LEX Law Firm' }, r: { is: 'Fulltrúi', en: 'Associate' }, s: 2000, e: 2002 }
+  ];
+  var tx = function (v) { return typeof v === 'string' ? v : v[lang]; };
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var ARROW = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>';
 
-  var btn = document.getElementById('menuBtn');
-  var setMenu = function (open) { document.body.classList.toggle('menu-open', open); btn.setAttribute('aria-expanded', String(open)); };
-  btn.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
+  /* ---------- Services: tabs (desktop) / accordion (mobile) ---------- */
+  var list = document.getElementById('svcList'), panel = document.getElementById('panel');
+  var sel = document.getElementById('fArea');
+  var current = 0;
+  var mq = window.matchMedia('(max-width: 900px)');
+  function panelHTML(i) {
+    var a = AREAS[lang][i];
+    return '<span class="n tnum">' + pad(i + 1) + ' / 07</span>' +
+      '<h3 class="serif">' + a.t + '</h3><p>' + a.d + '</p>' +
+      '<h4>' + (lang === 'en' ? 'Typical work' : 'Dæmi um verkefni') + '</h4><ul>' + a.ex.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+      '<a class="btn line" href="#samband" data-pick="' + i + '"><span>' + (lang === 'en' ? 'Discuss a matter in this area' : 'Ræða mál á þessu sviði') + '</span>' + ARROW + '</a>';
+  }
+  function buildServices() {
+    list.innerHTML = AREAS[lang].map(function (a, i) {
+      return '<li class="svc-item" role="presentation"><button type="button" class="svc-btn" role="tab" id="tab' + i + '" aria-controls="panel" aria-selected="false" data-i="' + i + '">' +
+        '<span class="n tnum">' + pad(i + 1) + '</span><span class="t">' + a.t + '</span><span class="a" aria-hidden="true">→</span></button>' +
+        '<div class="svc-detail"><div class="panel-body">' + panelHTML(i) + '</div></div></li>';
+    }).join('');
+    var keep = sel.value;
+    sel.innerHTML = AREAS[lang].map(function (a, i) { return '<option value="' + i + '">' + a.t + '</option>'; }).join('') +
+      '<option value="other">' + (lang === 'en' ? 'Other' : 'Annað') + '</option>';
+    if (keep) sel.value = keep;
+    select(current, false);
+  }
+  function select(i, animate) {
+    current = i;
+    list.querySelectorAll('.svc-btn').forEach(function (b, k) {
+      b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1;
+      b.parentNode.classList.toggle('open', k === i);
+    });
+    panel.setAttribute('aria-labelledby', 'tab' + i);
+    if (animate && !reduce && !mq.matches) {
+      panel.classList.add('swap');
+      setTimeout(function () { panel.innerHTML = panelHTML(i); panel.classList.remove('swap'); }, 160);
+    } else panel.innerHTML = panelHTML(i);
+  }
+  list.addEventListener('click', function (e) {
+    var b = e.target.closest('.svc-btn'); if (!b) return;
+    var i = +b.dataset.i;
+    if (mq.matches && i === current && b.parentNode.classList.contains('open')) { b.parentNode.classList.remove('open'); return; }
+    select(i, true);
+  });
+  list.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    e.preventDefault();
+    var n = (current + (e.key === 'ArrowDown' ? 1 : -1) + 7) % 7;
+    select(n, true); document.getElementById('tab' + n).focus();
+  });
+  document.addEventListener('click', function (e) {
+    var p = e.target.closest('[data-pick]'); if (p) sel.value = p.dataset.pick;
+    var h = e.target.closest('[data-area]'); if (h) select(+h.dataset.area, false);
+  });
+
+  /* ---------- Career timeline ---------- */
+  var tl = document.getElementById('tl');
+  var Y0 = 2000, Y1 = 2026;
+  function buildCareer() {
+    tl.querySelectorAll('.tl-row').forEach(function (r) { r.remove(); });
+    CAREER.forEach(function (c) {
+      var s = (c.s - Y0) / (Y1 - Y0) * 100, w = (Math.min(c.e, Y1) - c.s) / (Y1 - Y0) * 100;
+      var years = c.label ? c.label[lang] : c.s + '–' + c.e;
+      var row = document.createElement('div'); row.className = 'tl-row'; row.setAttribute('role', 'listitem');
+      row.innerHTML = '<div class="who"><b>' + tx(c.o) + '</b><span>' + tx(c.r) + ' · <span class="tnum">' + years + '</span></span></div>' +
+        '<div class="track" aria-hidden="true"><span class="bar ' + (c.cls || '') + ' tnum" style="--s:' + s.toFixed(2) + '%;--w:' + w.toFixed(2) + '%">' + (c.cls === 'long' ? (lang === 'en' ? '11 years' : '11 ár') : '') + '</span></div>';
+      tl.appendChild(row);
+    });
+  }
+
+  /* ---------- Header state + moving sunbeam ---------- */
+  var head = document.getElementById('head');
+  var hero = document.getElementById('top');
+  var sun = document.getElementById('sun');
+  function onScroll() { head.classList.toggle('solid', window.scrollY > hero.offsetHeight * 0.6); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  if (!reduce) {
+    var t0 = performance.now();
+    (function tick(now) {
+      var prog = Math.min(1, window.scrollY / Math.max(1, hero.offsetHeight));
+      var drift = Math.sin((now - t0) / 5200) * 2.2;
+      sun.style.setProperty('--p', (44 - prog * 26 + drift).toFixed(2));
+      sun.style.setProperty('--q', (66 - prog * 20 + drift * 0.8).toFixed(2));
+      if (prog < 1) requestAnimationFrame(tick); else setTimeout(function () { requestAnimationFrame(tick); }, 500);
+    })(t0);
+  }
+
+  /* ---------- Reveal + active nav ---------- */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.rv, .tl').forEach(function (el) { io.observe(el); });
+    var links = {}; document.querySelectorAll('.head .menu a[href^="#"]').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    var so = new IntersectionObserver(function (es) { es.forEach(function (en) { var a = links[en.target.id]; if (a) a.classList.toggle('active', en.isIntersecting); }); }, { rootMargin: '-45% 0px -50% 0px' });
+    Object.keys(links).forEach(function (id) { var s = document.getElementById(id); if (s) so.observe(s); });
+  } else {
+    document.querySelectorAll('.rv, .tl').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- Mobile menu ---------- */
+  var mb = document.getElementById('menuBtn');
+  function setMenu(o) { document.body.classList.toggle('menu-open', o); mb.setAttribute('aria-expanded', String(o)); document.body.style.overflow = o ? 'hidden' : ''; }
+  mb.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
   document.querySelectorAll('.menu a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
-  var links = {};
-  document.querySelectorAll('.menu a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { var a = links[en.target.id]; if (a) a.classList.toggle('active', en.isIntersecting); });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-    Object.keys(links).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
-  }
+  /* ---------- Form → email draft ---------- */
+  var form = document.getElementById('form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var bad = null;
+    ['name', 'reach'].forEach(function (n) { var f = form[n]; var ok = f.value.trim().length > 1; f.setAttribute('aria-invalid', String(!ok)); f.style.borderBottomColor = ok ? '' : '#9B2C2C'; if (!ok && !bad) bad = f; });
+    if (bad) { bad.focus(); return; }
+    var area = sel.options[sel.selectedIndex].text;
+    var subj = (lang === 'en' ? 'Enquiry: ' : 'Fyrirspurn: ') + area;
+    var body = form.msg.value + '\n\n— ' + form.name.value + '\n' + form.reach.value;
+    window.location.href = 'mailto:hallmundur@intralegem.is?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+  });
+
   document.getElementById('yr').textContent = new Date().getFullYear();
 
+  /* ---------- IS / EN ---------- */
   var EN = {
     skip: 'Skip to content', menuBtn: 'Menu',
-    navServices: 'Services', navLawyer: 'Lawyer', navWriting: 'Writing', navFirm: 'The firm', navContact: 'Contact',
-    heroMeta: 'Intra Legem slf. — a law firm at Gróska, Reykjavík',
-    heroTitle: 'Legal advice for businesses in competition law, telecommunications and commercial contracts.',
-    heroLede: 'Hallmundur Albertsson has practised law for more than 25 years, including as General Counsel of Síminn and as a partner at Deloitte Legal. He has rights of audience before the Icelandic Court of Appeal.',
-    ctaContact: 'Get in touch', ctaServices: 'See services',
-    phone: 'Phone', email: 'Email', address: 'Address',
-    svcTitle: 'Services',
+    navAreas: 'Practice areas', navLawyer: 'Lawyer', navCareer: 'Career', navWriting: 'Writing', navContact: 'Book a call', navContact2: 'Contact',
+    heroEyebrow: 'Law firm · Gróska, Reykjavík',
+    heroTitle: 'Clear advice in complex regulation.',
+    heroLede: 'Competition law, telecommunications and commercial contracts. Hallmundur Albertsson was General Counsel of Síminn for over a decade and a partner at Deloitte Legal.',
+    ctaBook: 'Book a call', heroAreas: 'Key areas',
+    s0t: 'Competition law', s1t: 'Telecoms and media', s2t: 'Contracts and companies', s4t: 'Litigation',
+    introEyebrow: 'The firm',
+    introStatement: 'Intra Legem is a law firm where you speak directly with the lawyer doing the work — backed by <b>more than twenty-five years</b> in private practice, industry and government.',
+    p1t: 'Fast answers', p1d: 'In business, timing matters. We respond quickly, deliver on time and keep the process clear.',
+    p2t: 'Precise documents', p2d: 'Contracts are tools to create value and reduce risk. They should be precise, clear and hold up.',
+    p3t: 'Fair fees', p3d: 'A lean structure lets us offer specialist advice at competitive rates, without compromising on quality.',
+    svcEyebrow: 'Practice areas', svcTitle: 'Where experience matters.',
     svcIntro: 'Advice and litigation for companies, investors and entrepreneurs — from everyday contracts to proceedings before authorities and the courts.',
-    a1t: 'Competition law, State aid and EEA law',
-    a1d: 'Merger filings and proceedings before the Icelandic Competition Authority, cooperation between competitors, compliance programmes, and advice on State aid and EEA rules.',
-    a2t: 'Telecommunications, media and technology',
-    a2d: 'Regulation of telecoms and media markets and proceedings before the Electronic Communications Office and the Media Commission. Hallmundur was General Counsel of Síminn for over a decade.',
-    a3t: 'Contract and company law, governance',
-    a3d: 'Drafting and review of commercial agreements, shareholder agreements, corporate structuring and advice to boards.',
-    a4t: 'Mergers and acquisitions',
-    a4d: 'Due diligence, purchase agreements and merger control, from letter of intent to completion.',
-    a5t: 'Litigation and dispute resolution',
-    a5d: 'Cases before the District Courts and the Court of Appeal, administrative authorities and appeals boards. Hallmundur is also an accredited mediator.',
-    a6t: 'Public procurement and construction contracts',
-    a6d: 'Advice to contracting authorities and bidders, procurement complaints and construction contracts, including under FIDIC.',
-    a7t: 'Energy law',
-    a7d: 'Energy market regulation, power purchase and sale agreements, and licensing.',
-    svcCta: 'Not on the list?', svcCtaLink: 'Get in touch and we will tell you whether we can help.',
-    role: 'Attorney and owner of Intra Legem',
+    capRole: 'Attorney', lawEyebrow: 'Lawyer',
+    role: 'Attorney and owner · Rights of audience before the Court of Appeal',
     bio1: 'Hallmundur specialises in competition law, commercial contracts and general legal advice to businesses, and represents clients before administrative authorities and the courts.',
-    bio2: 'He was General Counsel of Síminn from 2003 to 2014 and has since worked in private practice, most recently as a partner at Deloitte Legal. He knows telecoms and media regulation from both sides — as in-house counsel and as outside counsel.',
+    bio2: 'He was General Counsel of Síminn from 2003 to 2014 and has since worked in private practice, most recently as a partner at Deloitte Legal. He knows telecoms and media regulation from both sides — as in-house and as outside counsel.',
     bio3: 'He holds an MA in EU Competition Law from King’s College London and completed studies in legal advice for technology and innovation businesses at the University of Cambridge. He has been recognised by The Legal 500 for competition law.',
-    fRights: 'Rights of audience', fRightsV: 'Court of Appeal (Landsréttur)', fLang: 'Languages', fLangV: 'Icelandic, English',
-    careerTitle: 'Career',
-    rOwner: 'Owner', rOwner2: 'Owner', rPartner1: 'Partner', rPartner1s: 'Partner', rPartner2: 'Partner', rPartner3: 'Partner', rPartner4: 'Partner',
-    vik: 'VÍK Law Firm<small>Partner</small>', lmb: 'LMB Mandat Law Firm<small>Partner</small>', cato: 'CATO Law Firm<small>Partner</small>',
-    siminn: 'Síminn hf.<small>General Counsel</small>', ministry: 'Ministry of Transport and Communications<small>Telecommunications specialist</small>', lex: 'LEX Law Firm<small>Associate</small>',
-    rGC: 'General Counsel', rTelecom: 'Telecommunications specialist', rAssoc: 'Associate',
-    eduTitle: 'Education', licTitle: 'Qualifications',
-    e1: 'FIDIC — construction contracts course', e2: 'University of Cambridge — technology and innovation law',
-    e3: 'King’s College London — MA in EU Competition Law', e4: 'C5 — competition compliance programmes', e5: 'University of Iceland — cand. jur.',
-    l1: 'Rights of audience, Court of Appeal', l2: 'Certified board member, University of Iceland', l3: 'Licensed real estate agent', l4: 'Accredited mediator', l5: 'Rights of audience, District Courts',
-    wrTitle: 'Writing and media', wrIntro: 'Articles by Hallmundur and interviews with him (in Icelandic).',
-    p1w: '17 November 2025 · Vísir', p1d: 'A reply to Sýn’s article “Víð Sýn” in the debate on carriage rights for TV channels.',
-    p2w: '13 November 2025 · Vísir', p2d: 'On the Electronic Communications Office’s Decision No. 8/2025 on must-carry rights for linear TV channels.',
-    p3w: '28 April 2022 · Innherji', p3t: 'Brýnt að innleiða skýrar leiðbeiningar fyrir samstarf fyrirtækja',
-    p3d: 'Interview on the EU’s new guidelines on horizontal cooperation and why Iceland should adopt them quickly.',
-    read: 'Read ↗', read2: 'Read ↗', read3: 'Read ↗',
-    firmTitle: 'The firm',
-    firmLead: 'Intra Legem is a small firm with a short line: you speak directly with the lawyer doing the work.',
-    firmP: 'Clients come from across the economy — from technology and start-up companies to established corporates and financial institutions. A background in government, industry and private practice makes for a practical approach built on clear risk assessment.',
-    w1t: 'Fast answers', w1d: 'In business, timing matters. We respond quickly and deliver on time.',
-    w2t: 'Precise documents', w2d: 'Contracts are tools to create value and reduce risk. They should be precise and clear.',
-    w3t: 'Fair fees', w3d: 'A lean structure lets us offer specialist advice at competitive rates.',
-    contactTitle: 'Get in touch', contactSub: 'The first conversation is without obligation. Call or email with a short description of the matter.',
-    map: 'Open in maps'
+    cEdu: 'Education', cEdu1: 'MA in EU Competition Law, 2012', cEdu2: 'Technology and innovation law, 2013', cEdu3: 'University of Iceland<small>Cand. jur., 2000</small>',
+    cLic: 'Qualifications', cLic1: 'Court of Appeal<small>Rights of audience, 2023</small>', cLic2: 'Accredited mediator<small>Sátt, 2007</small>', cLic3: 'Certified board member<small>University of Iceland, 2016</small>',
+    cMore: 'Other', cMore1: 'FIDIC<small>Construction contracts, 2017</small>', cMore2: 'Licensed real estate agent<small>2015</small>', cMore3: 'Languages<small>Icelandic, English</small>',
+    tlEyebrow: 'Career', tlTitle: 'Twenty-five years on one line.',
+    tlIntro: 'From LEX and the Ministry of Transport, through eleven years as General Counsel of Síminn, to his own firm. That mix brings an understanding of how law, regulation and business interact.',
+    wrEyebrow: 'Writing and media', wrTitle: 'In the debate.', wrIntro: 'Articles by Hallmundur and interviews with him on competition and telecoms (in Icelandic).',
+    d1: '17 Nov 2025', d2: '13 Nov 2025', d3: '28 Apr 2022',
+    w1: 'A reply to Sýn’s article “Víð Sýn” in the debate on carriage rights for TV content.',
+    w2: 'On the Electronic Communications Office’s Decision No. 8/2025 on must-carry rights for linear TV channels.',
+    w3t: 'Clear guidelines for cooperation between companies', w3: 'Interview on the EU’s new horizontal cooperation guidelines and why Iceland should adopt them quickly.',
+    read: 'Read article', read2: 'Read article', read3: 'Read interview',
+    ctEyebrow: 'Contact', ctTitle: 'Let’s talk.', ctLede: 'The first conversation is without obligation. Call, email or use the form.',
+    phone: 'Phone', email: 'Email', address: 'Address', map: 'Open in maps ↗',
+    fTitle: 'Send an enquiry', fSub: 'Describe the matter briefly. We will reply as soon as possible.',
+    fName: 'Name', fReach: 'Email or phone', fArea: 'Area', fMsg: 'What is the matter about?',
+    fNote: 'Opens your email app. All enquiries are confidential.', fSend: 'Send'
   };
   var IS = {};
   document.querySelectorAll('[data-i18n]').forEach(function (el) { IS[el.dataset.i18n] = el.textContent; });
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) { IS[el.dataset.i18nHtml] = el.innerHTML; });
   var titles = { is: document.title, en: 'Intra Legem — Law firm, Reykjavík' };
-  function setLang(lang) {
-    var d = lang === 'en' ? EN : IS;
+  function setLang(l) {
+    lang = l; var d = l === 'en' ? EN : IS;
     document.querySelectorAll('[data-i18n]').forEach(function (el) { var v = d[el.dataset.i18n]; if (v != null) el.textContent = v; });
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) { var v = d[el.dataset.i18nHtml]; if (v != null) el.innerHTML = v; });
-    doc.lang = lang; document.title = titles[lang];
-    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
-    try { localStorage.setItem('il-lang', lang); } catch (e) {}
+    doc.lang = l; document.title = titles[l];
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
+    buildServices(); buildCareer();
+    try { localStorage.setItem('il-lang', l); } catch (e) {}
   }
   document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
   var saved = null; try { saved = localStorage.getItem('il-lang'); } catch (e) {}
-  if (saved === 'en') setLang('en');
+  setLang(saved === 'en' ? 'en' : 'is');
 })();
 </script>
 </body>
