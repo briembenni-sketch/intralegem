@@ -82,6 +82,9 @@ sun *= 1 - 0.9/(1+np.exp(-(edge2 - 520)/60))
 mull = np.abs((xx*0.88 - yy*0.47) - 0.60*W) + wob*0.5   # thin mullion bar crossing lit area
 sun *= 1 - 0.85*np.exp(-(np.clip(mull-26, 0, None)/16)**2) * (mull < 200)
 sun = nd.gaussian_filter(sun, 2)
+SUN_MODE = os.environ.get('SUN_MODE')   # 'full' = sunlit everywhere, 'none' = shade only (for compositing a moving beam)
+if SUN_MODE == 'full': sun = np.ones_like(sun)
+elif SUN_MODE == 'none': sun = np.zeros_like(sun)
 
 # cast shadow of standoff letters (depth ~ 22 px)
 DEPTH = 34.0
@@ -111,7 +114,7 @@ letter = alb_let * (SKY*1.1 + SUN*(ndl_l*sun)[..., None]) + (spec*sun)[..., None
 img = wall*(1 - M[..., None]) + letter*M[..., None]
 
 # bounce light from the lit area into the shadow wedge (warm fill)
-bounce = nd.gaussian_filter(sun, 180)[..., None] * np.array([1.0, 0.86, 0.7]) * 0.1
+bounce = (np.full_like(sun, 0.5) if SUN_MODE else nd.gaussian_filter(sun, 180))[..., None] * np.array([1.0, 0.86, 0.7]) * 0.1
 img = img + alb*bounce*(1-M[..., None])
 
 # ---------------- Camera ----------------

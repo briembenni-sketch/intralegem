@@ -10,8 +10,8 @@ Opnaðu `index.html` í vafra til að skoða.
 ## Merki og veggmynd
 
 - `assets/brand/` — merki Intra Legem (IL-skjöldur + orðmerki) í SVG: `logo-stacked.svg`, `logo-horizontal.svg`, `mark.svg`.
-- `assets/intra-legem-wall-panel.{webp,jpg}` — merkið á múrvegg (forsíða).
-- `assets/fonts/` — Schibsted Grotesk, hýst á síðunni sjálfri (engar beiðnir til Google).
+- `assets/wall-{wide,tall}-{sun,shade}.webp` — merkið á múrvegg, í sól og skugga. Síðan blandar lögunum saman með CSS-grímu svo sólargeislinn færist yfir vegginn.
+- `assets/fonts/` — Fraunces (fyrirsagnir, sama letur og í merkinu) og Schibsted Grotesk (meginmál), hýst á síðunni sjálfri.
 - `tools/brand/` — skriftur sem búa til merkið og veggmyndina
-  (`logo.py` → SVG, `rastermask.js` → maski, `render.py` → mynd; 6. viðfang = messingmaski).
+  (`logo.py` → SVG, `rastermask.js` → maski, `render.py` → mynd; 6. viðfang = messingmaski, `SUN_MODE=full|none` fyrir sól/skugga-lög).
   Letur: Fraunces (SOFT) og Gelasio Italic frá Google Fonts.
