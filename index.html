@@ -134,24 +134,25 @@
   .menu-open .menu-btn i::after { transform: translateY(-3.25px) rotate(-45deg); }
 
   /* ---------- Hero (full-screen photo) ---------- */
-  .hero { position: relative; min-height: max(100vh, 720px); display: flex; align-items: flex-end; overflow: hidden; background: #2A231C; color: var(--on-dark); isolation: isolate; }
-  @supports (height: 100svh) { .hero { min-height: max(100svh, 720px); } }
+  .hero { position: relative; min-height: max(100vh, 560px); display: flex; align-items: flex-end; overflow: hidden; background: #2A231C; color: var(--on-dark); isolation: isolate; }
+  @supports (height: 100svh) { .hero { min-height: max(100svh, 560px); } }
   .hero-bg { position: absolute; inset: 0; z-index: -2; }
   .hero-bg img { position: absolute; inset: -3% 0 0; width: 100%; height: 106%; object-fit: cover; object-position: 50% 30%; transform: scale(1.04); opacity: 0; transition: opacity 1.2s ease, transform 2s var(--ease); }
   .hero-bg img.ready { opacity: 1; transform: scale(1) translateY(var(--py, 0px)); }
   .hero-shade { position: absolute; inset: 0; z-index: -1; pointer-events: none;
     background:
-      linear-gradient(to top, rgba(17, 13, 9, 0.86) 0%, rgba(17, 13, 9, 0.55) 30%, rgba(17, 13, 9, 0) 58%),
-      linear-gradient(90deg, rgba(17, 13, 9, 0.5) 0%, rgba(17, 13, 9, 0) 55%),
+      linear-gradient(to top, rgba(17, 13, 9, 0.9) 0%, rgba(17, 13, 9, 0.62) 24%, rgba(17, 13, 9, 0) 44%),
       linear-gradient(to bottom, rgba(17, 13, 9, 0.45) 0%, rgba(17, 13, 9, 0) 16%); }
-  .hero-in { width: 100%; padding-top: 160px; padding-bottom: clamp(32px, 4.5vw, 60px); display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: end; }
+  .hero-in { width: 100%; padding-top: 160px; padding-bottom: clamp(28px, 5vh, 56px); display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: end; }
   .hero-copy { grid-column: 1 / span 7; }
+  .hero-aside { grid-column: 8 / span 5; padding-bottom: 6px; }
+  .hero-aside .lede { margin-top: 0; font-size: clamp(15.5px, 1.15vw, 17.5px); }
   .hero .eyebrow { color: rgba(239, 232, 220, 0.78); }
   .hero .eyebrow::before { background: var(--brass-lt); }
-  .hero h1 { margin-top: 18px; font-size: clamp(46px, 6vw, 96px); line-height: 0.95; letter-spacing: -0.038em; font-weight: 320; color: #F6F1E8; text-wrap: balance; }
+  .hero h1 { margin-top: 14px; font-size: clamp(38px, min(5vw, 9vh), 88px); line-height: 0.96; letter-spacing: -0.038em; font-weight: 320; color: #F6F1E8; text-wrap: balance; }
   .hero h1 em { font-style: normal; color: var(--brass-lt); }
   .hero .lede { margin-top: 22px; max-width: 32em; color: rgba(239, 232, 220, 0.82); }
-  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; margin-top: 30px; }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; margin-top: 22px; }
   .hero .btn { background: #F6F1E8; color: var(--ink); border-color: #F6F1E8; }
   .hero .btn:hover { background: var(--brass-lt); border-color: var(--brass-lt); color: var(--ink); }
   .hero-phone { font-size: 16px; font-weight: 500; display: inline-flex; gap: 10px; align-items: center; color: #F6F1E8; }
@@ -364,7 +365,7 @@
   @media (max-width: 1120px) {
     .menu { gap: 22px; }
     .hero-copy { grid-column: 1 / span 12; }
-    .hero-cards { grid-column: 1 / span 12; grid-template-columns: 1fr 1fr; margin-top: 32px; }
+    .hero-aside { grid-column: 1 / span 9; margin-top: 20px; }
     .stats { grid-template-columns: 1fr 1fr; row-gap: 32px; }
     .svc-panel { grid-column: 7 / span 6; }
     .creds { grid-template-columns: 1fr 1fr; }
@@ -397,7 +398,6 @@
     .hero-shade { background: linear-gradient(to top, #1C1814 0%, rgba(28, 24, 20, 0.7) 22%, rgba(28, 24, 20, 0) 50%), linear-gradient(to bottom, rgba(17, 13, 9, 0.5) 0%, rgba(17, 13, 9, 0) 16%); }
     .hero-in { display: block; padding-top: 56vh; padding-bottom: 72px; }
     .scroll-cue { display: none; }
-    .hero-cards { display: none; }
     .cta-card { display: none; }
     .hero h1 { font-size: clamp(40px, 11vw, 60px); }
     .menu-open .head { color: var(--ink); }
@@ -475,21 +475,13 @@
   <div class="hero-in wrap">
     <div class="hero-copy">
       <span class="eyebrow" data-i18n="heroEyebrow">Lögmannsstofa · Gróska, Reykjavík</span>
-      <h1 id="h1" data-i18n-html="heroTitle">Skýr ráðgjöf í <em>flóknu</em> regluverki.</h1>
-      <p class="lede" data-i18n="heroLede">Samkeppnisréttur, fjarskipti og viðskiptasamningar. Hallmundur Albertsson lögmaður var yfirlögfræðingur Símans í rúman áratug og eigandi hjá Deloitte Legal.</p>
+      <h1 id="h1" data-i18n-html="heroTitle">Þekkir regluverkið <em>innan frá.</em></h1>
+    </div>
+    <div class="hero-aside">
+      <p class="lede" data-i18n="heroLede">Hallmundur Albertsson var yfirlögfræðingur Símans í 11 ár. Nú ver hann hagsmuni fyrirtækja í samkeppnis-, fjarskipta- og samningamálum.</p>
       <div class="hero-actions">
         <a class="btn" href="#samband"><span data-i18n="ctaBook">Bóka samtal</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></a>
-        <a class="hero-phone tnum" href="tel:+3548926064"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 1.8 3.4 2.3c-.9.3-1.5 1.2-1.3 2.2.9 4.6 4.5 8.2 9.1 9.1 1 .2 1.9-.4 2.2-1.3l.5-1.8-3-1.6-1.3 1.4C8 9.6 6.4 8 5.7 6.4l1.4-1.3-1.9-3.3Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="ulink">+354 892 6064</span></a>
-      </div>
-    </div>
-    <div class="hero-cards">
-      <a class="who-card glass" href="#logmadur">
-        <img src="assets/hallmundur-albertsson.jpg" alt="" width="713" height="475">
-        <span><b>Hallmundur Albertsson</b><span data-i18n="whoRole">Lögmaður · Málflutningsréttindi fyrir Landsrétti</span></span>
-      </a>
-      <div class="cta-card">
-        <p data-i18n="ctaCard">Fyrsta samtal er án skuldbindingar.</p>
-        <a href="#samband"><span data-i18n="ctaCardLink">Bóka samtal</span><span aria-hidden="true">→</span></a>
+        <a class="hero-phone tnum" href="tel:+3548926064"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 1.8 3.4 2.3c-.9.3-1.5 1.2-1.3 2.2.9 4.6 4.5 8.2 9.1 9.1 1 .2 1.9-.4 2.2-1.3l.5-1.8-3-1.6-1.3 1.4C8 9.6 6.4 8 5.7 6.4l1.4-1.3-1.9-3.3Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="ulink">892 6064</span></a>
       </div>
     </div>
   </div>
@@ -859,8 +851,8 @@
     skip: 'Skip to content', menuBtn: 'Menu',
     navAreas: 'Practice areas', navLawyer: 'Lawyer', navCareer: 'Career', navWriting: 'Writing', navContact: 'Book a call', navContact2: 'Contact',
     heroEyebrow: 'Law firm · Gróska, Reykjavík',
-    heroTitle: 'Clear advice in <em>complex</em> regulation.',
-    heroLede: 'Competition law, telecommunications and commercial contracts. Hallmundur Albertsson was General Counsel of Síminn for over a decade and a partner at Deloitte Legal.',
+    heroTitle: 'Knows the regulation <em>from the inside.</em>',
+    heroLede: 'Hallmundur Albertsson was General Counsel of Síminn for 11 years. Today he acts for companies in competition, telecoms and contract matters.',
     ctaBook: 'Book a call', chip: 'Gróska, Kristínargata 1', whoRole: 'Attorney · Rights of audience, Court of Appeal',
     ctaCard: 'The first conversation is without obligation.', ctaCardLink: 'Book a call',
     st1: 'years in law, private practice and government', st2: 'years as General Counsel of Síminn', st3: 'rights of audience before the Court of Appeal', st4: 'universities: Iceland, King’s College London and Cambridge',
