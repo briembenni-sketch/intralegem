@@ -8,7 +8,11 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else '.'
 F_R, F_I, F_IL = 'fr-r-s30.ttf', 'fr-i-w0.ttf', 'gelasio-i.ttf'
 _fonts = {}
 def font(f):
-    if f not in _fonts: _fonts[f] = TTFont(f)
+    if f not in _fonts:
+        ft = TTFont(f)
+        from fontTools.ttLib.removeOverlaps import removeOverlaps
+        removeOverlaps(ft)          # merge overlapping contours so even-odd fills (SVG, Blender) stay solid
+        _fonts[f] = ft
     return _fonts[f]
 
 def text_path(f, text, size, x, y, tracking=0):
