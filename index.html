@@ -319,7 +319,7 @@
   .portrait { grid-column: 1 / span 5; position: sticky; top: calc(var(--head) + 32px); }
   .portrait .ph { border-radius: var(--radius); overflow: hidden; }
   .portrait .ph picture { display: block; }
-  .portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 54% 22%; filter: saturate(0.9) contrast(1.02); }
+  .portrait img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 54% 22%; filter: saturate(0.9) contrast(1.02); }
   .portrait figcaption { display: flex; justify-content: space-between; margin-top: 16px; font-size: 14px; color: var(--on-dark-2); }
   .lawyer-body { grid-column: 7 / span 6; }
   .lawyer-body .h2 { margin-top: 18px; font-size: clamp(44px, 5vw, 76px); line-height: 0.98; }
@@ -362,6 +362,7 @@
   .bar.now { background: linear-gradient(90deg, var(--brass), var(--brass-lt)); color: #fff; }
   .bar.long { background: var(--ink); color: var(--stone-0); }
   .bar.now { color: transparent; }
+  .tl-row .dur { display: none; }
   .tl-note { margin-top: 20px; font-size: 14px; color: var(--muted); }
 
   /* Writing */
@@ -536,7 +537,19 @@
     .lawyer-body { grid-column: 1 / -1; }
     .creds { grid-template-columns: 1fr; }
     .tl-axis { display: none; }
-    .tl-row { grid-template-columns: 1fr; row-gap: 8px; }
+    .tl { border-top: 0; position: relative; padding-left: 26px; }
+    .tl::before { content: ''; position: absolute; left: 5px; top: 10px; bottom: 10px; width: 1px; background: var(--rule-2); }
+    .tl-row { display: block; position: relative; padding: 16px 0 18px; border-bottom: 1px solid var(--rule); }
+    .tl-row:last-child { border-bottom: 0; }
+    .tl-row::before { content: ''; position: absolute; left: -25px; top: 24px; width: 9px; height: 9px; border-radius: 50%; background: var(--stone-0); border: 1.5px solid var(--stone-3); }
+    .tl-row:nth-child(2)::before { background: var(--brass); border-color: var(--brass); box-shadow: 0 0 0 4px rgba(154, 124, 57, 0.18); }
+    .tl-row .track { display: none; }
+    .tl-row .who b { font-size: 20px; }
+    .tl-row .who > span { display: block; margin-top: 4px; }
+    .tl-row .dur { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--stone-2); color: var(--ink-2); font-size: 12px; font-weight: 500; }
+    .portrait { max-width: none; }
+    .portrait img { aspect-ratio: 1 / 1; object-position: 54% 18%; }
+    .field select { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
     .posts { grid-template-columns: 1fr; }
     .post a { min-height: 0; }
     .post h3 { margin-top: 24px; }
@@ -910,7 +923,8 @@
       var s = (c.s - Y0) / (Y1 - Y0) * 100, w = (Math.min(c.e, Y1) - c.s) / (Y1 - Y0) * 100;
       var years = c.label ? c.label[lang] : c.s + '–' + c.e;
       var row = document.createElement('div'); row.className = 'tl-row'; row.setAttribute('role', 'listitem');
-      row.innerHTML = '<div class="who"><b>' + tx(c.o) + '</b><span>' + tx(c.r) + ' · <span class="tnum">' + years + '</span></span></div>' +
+      var yrs = Math.round(Math.min(c.e, 2026) - c.s); var dur = yrs >= 2 ? '<span class="dur tnum">' + yrs + (lang === 'en' ? ' yrs' : ' ár') + '</span>' : '';
+      row.innerHTML = '<div class="who"><b>' + tx(c.o) + '</b><span>' + tx(c.r) + ' · <span class="tnum">' + years + '</span>' + dur + '</span></div>' +
         '<div class="track" aria-hidden="true"><span class="bar ' + (c.cls || '') + ' tnum" style="--s:' + s.toFixed(2) + '%;--w:' + w.toFixed(2) + '%">' + (c.cls === 'long' ? (lang === 'en' ? '11 years' : '11 ár') : '') + '</span></div>';
       tl.appendChild(row);
     });
