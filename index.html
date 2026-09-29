@@ -167,10 +167,15 @@
       linear-gradient(to top, rgba(14, 11, 8, 0.94) 0%, rgba(14, 11, 8, 0.74) 26%, rgba(14, 11, 8, 0) 50%),
       linear-gradient(to bottom, rgba(17, 13, 9, 0.45) 0%, rgba(17, 13, 9, 0) 16%); }
   .hero-in { width: 100%; padding-top: 160px; padding-bottom: clamp(28px, 5vh, 56px); display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: end; }
-  .hero-copy { grid-column: 1 / span 7; }
-  .hero-aside { grid-column: 8 / span 5; padding-bottom: 6px; }
+  .hero-copy { grid-column: 1 / span 6; }
+  .hero-aside { grid-column: 7 / span 6; padding-bottom: 6px; padding-left: clamp(0px, 3vw, 48px); }
   .hero-aside .lede { margin-top: 0; font-size: clamp(17px, 1.4vw, 21px); line-height: 1.5; color: rgba(246, 241, 232, 0.94); }
   .hero-aside .lede b { font-weight: 500; color: #fff; }
+  @media (min-width: 901px) and (max-height: 820px) {
+    .hero-aside .lede { font-size: 16px; line-height: 1.48; }
+    .hero-in { padding-bottom: 28px; }
+    .hero-actions { margin-top: 18px; }
+  }
   .hero .eyebrow { color: rgba(239, 232, 220, 0.78); }
   .hero .eyebrow::before { background: var(--brass-lt); }
   .hero h1 { margin-top: 0; font-size: clamp(42px, min(5.6vw, 10.5vh), 100px); line-height: 0.95; font-weight: 340; letter-spacing: -0.038em; font-weight: 320; color: #F6F1E8; text-wrap: balance; }
@@ -331,7 +336,7 @@
   .bio { margin-top: 40px; }
   .bio p { color: var(--on-dark-2); }
   .bio p + p { margin-top: 1em; }
-  .bio p:first-child { font-family: var(--serif); font-variation-settings: 'SOFT' 50, 'WONK' 0; font-weight: 330; font-size: clamp(22px, 1.9vw, 27px); line-height: 1.4; color: var(--on-dark); letter-spacing: -0.012em; }
+  .bio p:first-child { font-family: var(--serif); font-variation-settings: 'SOFT' 50, 'WONK' 0; font-weight: 330; font-size: clamp(19px, 1.5vw, 22px); line-height: 1.45; color: var(--on-dark); letter-spacing: -0.012em; }
   .creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule-dark); }
   .creds h4 { font-size: 13px; font-weight: 500; color: var(--brass-lt); }
   .creds ul { list-style: none; margin-top: 10px; }
@@ -616,7 +621,7 @@
       <h1 id="h1" data-i18n-html="heroTitle">Lögmannsstofa fyrir <em>atvinnulífið.</em></h1>
     </div>
     <div class="hero-aside">
-      <p class="lede" data-i18n-html="heroLede"><b>Intra Legem</b> er lögmannsstofa Hallmundar Albertssonar, fyrrverandi yfirlögfræðings Símans. Hann ráðleggur fyrirtækjum og rekur mál þeirra fyrir samkeppnisyfirvöldum, eftirlitsstofnunum og dómstólum.</p>
+      <p class="lede" data-i18n-html="heroLede"><b>Intra Legem</b> er lögmannsstofa Hallmundar Albertssonar. Yfir 25 ára reynsla úr stjórnsýslu, atvinnulífi og lögmannsstörfum gerir honum kleift að fylgja fyrirtækjum alla leið — frá daglegri lögfræðiráðgjöf til málarekstrar fyrir stjórnvöldum og dómstólum.</p>
       <div class="hero-actions">
         <a class="btn" href="#samband"><span data-i18n="ctaBook">Bóka samtal</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></a>
         <a class="hero-phone tnum" href="tel:+3548926064"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 1.8 3.4 2.3c-.9.3-1.5 1.2-1.3 2.2.9 4.6 4.5 8.2 9.1 9.1 1 .2 1.9-.4 2.2-1.3l.5-1.8-3-1.6-1.3 1.4C8 9.6 6.4 8 5.7 6.4l1.4-1.3-1.9-3.3Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="ulink">892 6064</span></a>
@@ -629,7 +634,7 @@
   <div class="wrap">
     <div class="stats">
       <div class="stat rv"><b><i class="count" data-to="25">25</i><sup>+</sup></b><span data-i18n="st1">ár í lögfræði, lögmennsku og stjórnsýslu</span></div>
-      <div class="stat rv"><b><i class="count" data-to="11">11</i></b><span data-i18n="st2">ár sem yfirlögfræðingur Símans</span></div>
+      <div class="stat rv"><b><i class="count" data-to="11">11</i></b><span data-i18n="st2">ár hjá Símanum, þar af 4 sem yfirlögfræðingur</span></div>
       <div class="stat rv"><b><i class="count" data-from="2000" data-to="2023">2023</i></b><span data-i18n="st3">málflutningsréttindi fyrir Landsrétti</span></div>
       <div class="stat rv"><b><i class="count" data-to="3">3</i></b><span data-i18n="st4">háskólar: HÍ, King’s College London og Cambridge</span></div>
     </div>
@@ -645,11 +650,11 @@
         <span class="intro-mark rv" aria-hidden="true"><svg viewBox="37 19 186 146" fill="currentColor" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M38.4 20.4H221.6V163.6H38.4ZM41.6 23.6V160.4H218.4V23.6Z M47.1 29.1H212.9V154.9H47.1ZM48.9 30.9V153.1H211.1V30.9Z M100.79 106.7Q100.79 106.09 101 105.73Q101.21 105.37 101.88 105.34Q103.36 105.25 104.89 104.82Q106.42 104.4 106.54 103.4L111.38 70.64Q111.41 70.49 111.41 70.19Q111.41 69.1 110.72 68.6Q110.02 68.1 109.04 67.93Q108.05 67.77 107.2 67.71Q106.27 67.62 106.27 67.07Q106.27 66.98 106.3 66.84Q106.33 66.71 106.33 66.59Q106.33 66.25 106.72 65.65Q107.11 65.04 107.63 65.04H122.92Q123.43 65.04 123.58 65.65Q123.73 66.25 123.67 66.59Q123.52 67.62 122.46 67.71Q120.98 67.83 119.43 68.22Q117.89 68.61 117.74 69.64L112.96 102.4Q112.93 102.58 112.93 102.88Q112.93 103.94 113.62 104.43Q114.32 104.91 115.3 105.06Q116.29 105.21 117.13 105.34Q117.65 105.4 117.88 105.53Q118.1 105.67 118.1 106.09Q118.1 106.3 118.07 106.46Q118.01 106.79 117.68 107.39Q117.35 108.0 116.83 108.0H101.54Q101.09 108.0 100.94 107.55Q100.79 107.09 100.79 106.7ZM124.01 106.64Q124.01 106.09 124.23 105.74Q124.46 105.4 125.13 105.34Q126.61 105.18 128.11 104.79Q129.61 104.4 129.76 103.4L134.84 70.64Q135.06 69.34 134.34 68.75Q133.63 68.16 132.56 67.96Q131.48 67.77 130.58 67.71Q129.64 67.62 129.64 67.04Q129.64 66.4 129.98 65.72Q130.33 65.04 130.91 65.04H147.1Q147.62 65.04 147.82 65.3Q148.01 65.56 148.01 65.92Q148.01 66.59 147.66 67.15Q147.32 67.71 146.74 67.71Q145.62 67.71 144.38 67.95Q143.14 68.19 142.22 68.81Q141.29 69.43 141.11 70.55L136.02 103.07Q135.84 104.16 136.61 104.55Q137.39 104.94 138.33 104.94H147.41Q149.5 104.94 150.89 103.97Q152.28 103 153.25 101.45Q154.22 99.89 154.98 98.1Q155.73 96.31 156.52 94.68Q156.73 94.13 157.14 93.91Q157.55 93.68 158.03 93.68Q158.61 93.68 159.11 93.94Q159.61 94.2 159.49 94.71L156.43 108.0H124.91Q124.46 108.0 124.23 107.52Q124.01 107.03 124.01 106.64Z"/><path class="brass" fill="#9A7C39" d="M54 36H62L58 44Z M206 36H198L202 44Z M54 148H62L58 140Z M206 148H198L202 140Z"/></svg></span>
       </div>
       <div class="intro-main">
-        <p class="intro-statement serif scrub" data-i18n-html="introStatement">Intra Legem er lögmannsstofa þar sem þú talar beint við lögmanninn sem vinnur verkið — með <b>rúmlega aldarfjórðungs reynslu</b> úr lögmennsku, atvinnulífi og stjórnsýslu.</p>
+        <p class="intro-statement serif scrub" data-i18n-html="introStatement"><b>Traust samband.</b> Intra Legem er lögmannsstofa þar sem þú ert í beinu sambandi við lögmanninn sem vinnur verkið.</p>
     <div class="principles">
-      <div class="principle rv"><span class="n">01</span><h3 class="serif" data-i18n="p1t">Svör fljótt</h3><p data-i18n="p1d">Í viðskiptum skiptir tímasetning máli. Við bregðumst hratt við, skilum verkefnum á réttum tíma og höldum ferlinu skýru.</p></div>
-      <div class="principle rv"><span class="n">02</span><h3 class="serif" data-i18n="p2t">Vönduð skjöl</h3><p data-i18n="p2d">Samningar eru verkfæri til að skapa verðmæti og draga úr áhættu. Þeir eiga að vera nákvæmir, skýrir og halda.</p></div>
-      <div class="principle rv"><span class="n">03</span><h3 class="serif" data-i18n="p3t">Sanngjarnt verð</h3><p data-i18n="p3d">Hagkvæm umgjörð gerir okkur kleift að bjóða sérfræðiráðgjöf á samkeppnishæfu verði, án þess að slá af gæðum.</p></div>
+      <div class="principle rv"><span class="n">01</span><h3 class="serif" data-i18n="p1t">Skilvirkni</h3><p data-i18n="p1d">Í viðskiptum skiptir tímasetning máli. Við bregðumst hratt við, skilum verkefnum á réttum tíma og höldum ferlinu skýru.</p></div>
+      <div class="principle rv"><span class="n">02</span><h3 class="serif" data-i18n="p2t">Vönduð skjalagerð</h3><p data-i18n="p2d">Samningar eru verkfæri til að skapa verðmæti og draga úr áhættu. Þeir eiga að vera nákvæmir, skýrir og halda.</p></div>
+      <div class="principle rv"><span class="n">03</span><h3 class="serif" data-i18n="p3t">Virði fyrir viðskiptavini</h3><p data-i18n="p3d">Hagkvæm umgjörð gerir okkur kleift að bjóða sérfræðiráðgjöf á samkeppnishæfu verði, án þess að slá af gæðum.</p></div>
     </div>
       </div>
     </div>
@@ -685,9 +690,10 @@
         <h2 class="h2 split">Hallmundur Albertsson</h2>
         <p class="role rv" data-i18n="role">Lögmaður og eigandi · Málflutningsréttindi fyrir Landsrétti</p>
         <div class="bio rv">
-          <p data-i18n="bio1">Hallmundur sérhæfir sig í samkeppnisrétti, samningagerð og almennri lögfræðiráðgjöf til fyrirtækja, og rekur mál fyrir stjórnvöldum og dómstólum.</p>
-          <p data-i18n="bio2">Hann var yfirlögfræðingur Símans á árunum 2003–2014 og hefur síðan starfað sem lögmaður, síðast sem eigandi hjá Deloitte Legal. Hann þekkir því regluverk fjarskipta- og fjölmiðlamarkaða jafnt frá sjónarhóli fyrirtækis og lögmanns.</p>
-          <p data-i18n="bio3">Hann lauk meistaraprófi í samkeppnisrétti Evrópusambandsins frá King’s College London og námi í lögfræðiráðgjöf fyrir tækni- og nýsköpunarfyrirtæki frá University of Cambridge. Hann hefur hlotið viðurkenningu Legal 500 á sviði samkeppnisréttar.</p>
+          <p data-i18n="bio1">Hallmundur hefur sérþekkingu á samkeppnisrétti, samningagerð og almennri lögfræðiráðgjöf, sem og rekstri ágreiningsmála fyrir stjórnvöldum og dómstólum. Hann sinnir jafnframt ráðgjöf við tækni- og nýsköpunargeirann. Hann hefur m.a. hlotið viðurkenningu frá Legal 500 sem framúrskarandi lögmaður á sviði samkeppnisréttar.</p>
+          <p data-i18n="bio2">Hann var yfirlögfræðingur Símans um árabil og hefur starfað sem sjálfstætt starfandi lögmaður síðan, síðast sem meðeigandi hjá Deloitte Legal.</p>
+          <p data-i18n="bio3">Hallmundur er með meistarapróf frá King’s College London og hefur lokið sérhæfðu námi í lögfræðiráðgjöf fyrir tækni- og nýsköpunarumhverfi frá University of Cambridge.</p>
+          <p data-i18n="bio4">Fjölbreyttur bakgrunnur úr stjórnsýslu, atvinnulífi og lögmennsku tryggir hagnýta nálgun sem byggir á skýru áhættumati og skilvirkri framkvæmd.</p>
         </div>
         <div class="creds rv">
           <div>
@@ -729,7 +735,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><span class="eyebrow rv" data-i18n="tlEyebrow">Ferill</span><h2 class="h2 split" data-i18n="tlTitle">Aldarfjórðungur á einni línu.</h2></div>
-      <p class="lede rv" data-i18n="tlIntro">Frá LEX og samgönguráðuneytinu, í gegnum ellefu ár sem yfirlögfræðingur Símans, til eigin stofu. Sú blanda gefur skilning á samspili laga, regluverks og atvinnulífs.</p>
+      <p class="lede rv" data-i18n="tlIntro">Hjá LEX lögmannsstofu, í samgönguráðuneytinu, sem yfirlögfræðingur Símans um árabil og í eigin rekstri sem sjálfstætt starfandi lögmaður síðan. Með árunum hefur byggst upp þekking og reynsla á samspili laga, regluverks og atvinnulífs.</p>
     </div>
     <div class="tl" id="tl" role="list">
       <div class="tl-axis" aria-hidden="true"><span></span><div class="ticks tnum"><span style="left:0%">2000</span><span style="left:19.23%">2005</span><span style="left:38.46%">2010</span><span style="left:57.69%">2015</span><span style="left:76.92%">2020</span><span style="left:96.15%">2025</span></div></div>
@@ -741,8 +747,7 @@
 <section class="sec s1" id="skrif">
   <div class="wrap">
     <div class="sec-head">
-      <div><span class="eyebrow rv" data-i18n="wrEyebrow">Skrif og umfjöllun</span><h2 class="h2 split" data-i18n="wrTitle">Í umræðunni.</h2></div>
-      <p class="lede rv" data-i18n="wrIntro">Greinar Hallmundar og viðtöl við hann um samkeppnis- og fjarskiptamál.</p>
+      <div><span class="eyebrow rv" data-i18n="wrEyebrow">Greinaskrif</span><h2 class="h2 split" data-i18n="wrTitle">Í umræðunni.</h2></div>
     </div>
     <ul class="posts">
       <li class="post rv"><a href="https://www.visir.is/g/20252804290d/valkvaed-syn" target="_blank" rel="noopener">
@@ -833,18 +838,18 @@
   /* ---------- Content ---------- */
   var AREAS = {
     is: [
-      { t: 'Samkeppnisréttur, ríkisaðstoð og EES-réttur', d: 'Ráðgjöf um samkeppnisreglur í daglegum rekstri og í málum fyrir Samkeppniseftirlitinu og áfrýjunarnefnd samkeppnismála.', ex: ['Samrunatilkynningar og samrunaeftirlit', 'Samstarf keppinauta og samkeppnisréttaráætlanir', 'Ríkisaðstoð og reglur EES-samningsins'] },
-      { t: 'Fjarskipti, fjölmiðlar og upplýsingatækni', d: 'Regluverk fjarskipta- og fjölmiðlamarkaða frá sjónarhóli bæði fyrirtækis og lögmanns — Hallmundur var yfirlögfræðingur Símans í rúman áratug.', ex: ['Mál fyrir Fjarskiptastofu og Fjölmiðlanefnd', 'Aðgangs- og flutningsréttur', 'Samningar tækni- og nýsköpunarfyrirtækja'] },
-      { t: 'Samninga- og félagaréttur, stjórnarhættir', d: 'Samningar sem skapa verðmæti og draga úr áhættu, og skipulag félaga sem heldur.', ex: ['Gerð og yfirferð viðskiptasamninga', 'Hluthafasamkomulög og skipulag félaga', 'Ráðgjöf til stjórna um stjórnarhætti'] },
+      { t: 'Samkeppnisréttur, ríkisaðstoð og EES-réttur', d: 'Hallmundur er með framhaldsmenntun í samkeppnisrétti frá King’s College London.', ex: ['Markaðsráðandi staða fyrirtækja', 'Samrunatilkynningar og samrunaeftirlit', 'Samstarf keppinauta og samkeppnisréttaráætlanir', 'Ríkisaðstoð og reglur EES-samningsins'] },
+      { t: 'Fjarskipti, fjölmiðlar og upplýsingatækni', d: 'Hallmundur var yfirlögfræðingur Símans um árabil.', ex: ['Mál fyrir Fjarskiptastofu og Fjölmiðlanefnd', 'Aðgangs- og flutningsréttur', 'Samningar tækni- og nýsköpunarfyrirtækja'] },
+      { t: 'Samninga- og félagaréttur, stjórnarhættir', d: 'Víðtæk reynsla af samningagerð, félagarétti og stjórnarháttum fyrirtækja.', ex: ['Gerð og yfirferð viðskiptasamninga', 'Hluthafasamkomulög og skipulag félaga', 'Ráðgjöf til stjórna um stjórnarhætti'] },
       { t: 'Kaup og sala fyrirtækja', d: 'Aðstoð frá fyrstu viljayfirlýsingu til afhendingar, þar á meðal við samrunaeftirlit.', ex: ['Áreiðanleikakannanir', 'Kaupsamningar og fylgiskjöl', 'Tilkynningar til samkeppnisyfirvalda'] },
       { t: 'Málflutningur og úrlausn ágreinings', d: 'Rekstur mála fyrir dómstólum, stjórnvöldum og úrskurðarnefndum. Hallmundur er einnig viðurkenndur sáttamaður.', ex: ['Mál fyrir héraðsdómi og Landsrétti', 'Stjórnsýslukærur og úrskurðarnefndir', 'Sáttamiðlun'] },
       { t: 'Opinber innkaup og verksamningar', d: 'Ráðgjöf til kaupenda og bjóðenda í útboðum og við gerð verksamninga.', ex: ['Útboðsgögn og tilboðsgerð', 'Kærur til kærunefndar útboðsmála', 'Verksamningar, meðal annars FIDIC'] },
       { t: 'Orkuréttur', d: 'Ráðgjöf um regluverk orkumarkaðar og samninga á sviði orku.', ex: ['Samningar um kaup og sölu orku', 'Leyfismál', 'Regluverk raforkumarkaðar'] }
     ],
     en: [
-      { t: 'Competition law, State aid and EEA law', d: 'Advice on competition rules in day-to-day business and in proceedings before the Icelandic Competition Authority and its appeals committee.', ex: ['Merger filings and merger control', 'Cooperation between competitors and compliance programmes', 'State aid and EEA rules'] },
-      { t: 'Telecommunications, media and technology', d: 'Telecoms and media regulation seen from both sides — Hallmundur was General Counsel of Síminn for over a decade.', ex: ['Proceedings before the telecoms and media regulators', 'Access and must-carry rights', 'Contracts for technology and start-up companies'] },
-      { t: 'Contract and company law, governance', d: 'Contracts that create value and reduce risk, and corporate structures that hold.', ex: ['Drafting and reviewing commercial agreements', 'Shareholder agreements and corporate structuring', 'Advice to boards on governance'] },
+      { t: 'Competition law, State aid and EEA law', d: 'Hallmundur holds a postgraduate degree in competition law from King’s College London.', ex: ['Dominant position', 'Merger filings and merger control', 'Cooperation between competitors and compliance programmes', 'State aid and EEA rules'] },
+      { t: 'Telecommunications, media and technology', d: 'Hallmundur served as General Counsel of Síminn for several years.', ex: ['Proceedings before the telecoms and media regulators', 'Access and must-carry rights', 'Contracts for technology and start-up companies'] },
+      { t: 'Contract and company law, governance', d: 'Extensive experience in contract drafting, company law and corporate governance.', ex: ['Drafting and reviewing commercial agreements', 'Shareholder agreements and corporate structuring', 'Advice to boards on governance'] },
       { t: 'Mergers and acquisitions', d: 'From the first letter of intent to completion, including merger control.', ex: ['Due diligence', 'Purchase agreements and ancillary documents', 'Filings with competition authorities'] },
       { t: 'Litigation and dispute resolution', d: 'Cases before the courts, administrative authorities and appeals boards. Hallmundur is also an accredited mediator.', ex: ['District Courts and the Court of Appeal', 'Administrative appeals and appeals boards', 'Mediation'] },
       { t: 'Public procurement and construction contracts', d: 'Advice to contracting authorities and bidders, and on construction contracts.', ex: ['Tender documents and bids', 'Procurement complaints', 'Construction contracts, including FIDIC'] },
@@ -857,7 +862,7 @@
     { o: { is: 'VÍK lögmannsstofa', en: 'VÍK Law Firm' }, r: { is: 'Eigandi', en: 'Partner' }, s: 2019, e: 2021 },
     { o: 'LMB Mandat', r: { is: 'Eigandi', en: 'Partner' }, s: 2015, e: 2019 },
     { o: { is: 'CATO lögmannsstofa', en: 'CATO Law Firm' }, r: { is: 'Eigandi', en: 'Partner' }, s: 2014, e: 2015, cls: 'short' },
-    { o: 'Síminn hf.', r: { is: 'Yfirlögfræðingur', en: 'General Counsel' }, s: 2003, e: 2014, cls: 'long' },
+    { o: 'Síminn hf.', r: { is: 'Lögfræðingur, yfirlögfræðingur síðustu 4 árin', en: 'Counsel, General Counsel for the last 4 years' }, s: 2003, e: 2014, cls: 'long' },
     { o: { is: 'Samgönguráðuneytið', en: 'Ministry of Transport and Communications' }, r: { is: 'Sérfræðingur í fjarskiptamálum', en: 'Telecoms specialist' }, s: 2002, e: 2003, cls: 'short' },
     { o: { is: 'LEX lögmannsstofa', en: 'LEX Law Firm' }, r: { is: 'Fulltrúi', en: 'Associate' }, s: 2000, e: 2002 }
   ];
@@ -956,7 +961,7 @@
 
   /* ---------- Hero life: word reveal, rotating word, dust in the sunbeam, pointer parallax ---------- */
   var heroH1 = document.getElementById('h1');
-  var ROT = { is: ['atvinnulífið.', 'fyrirtæki.', 'fjárfesta.', 'frumkvöðla.'], en: ['business.', 'companies.', 'investors.', 'founders.'] };
+  var ROT = { is: ['atvinnulífið.', 'fyrirtæki.', 'fjárfesta.', 'frumkvöðla.'], en: ['business.', 'investors.', 'startups.'] };
   var rotTimer = null;
   function dressTitle() {
     var em = heroH1.querySelector('em');
@@ -1117,28 +1122,29 @@
     heroEyebrow: 'Law firm · Gróska, Reykjavík',
     heroTitle: 'A law firm for <em>business.</em>',
     s0t: 'Competition law', s1t: 'Telecoms and media', s2t: 'Contracts and companies', s4t: 'Litigation',
-    heroLede: '<b>Intra Legem</b> is the law firm of Hallmundur Albertsson, former General Counsel of Síminn. He advises companies and represents them before competition authorities, regulators and the courts.',
+    heroLede: '<b>Intra Legem</b> is the law firm of Hallmundur Albertsson, former General Counsel of Síminn, Iceland’s leading telecommunications company. With more than 25 years in government, business and private practice, he supports companies every step of the way — from day-to-day legal advice to proceedings before regulators and the courts.',
     ctaBook: 'Book a call', chip: 'Gróska, Kristínargata 1', whoRole: 'Attorney · Rights of audience, Court of Appeal',
     ctaCard: 'The first conversation is without obligation.', ctaCardLink: 'Book a call',
-    st1: 'years in law, private practice and government', st2: 'years as General Counsel of Síminn', st3: 'rights of audience before the Court of Appeal', st4: 'universities: Iceland, King’s College London and Cambridge',
+    st1: 'years in law, private practice and government', st2: 'years at Síminn, including 4 as General Counsel', st3: 'rights of audience before the Court of Appeal', st4: 'universities: Iceland, King’s College London and Cambridge',
     introEyebrow: 'The firm',
     introStatement: 'Intra Legem is a law firm where you speak directly with the lawyer doing the work — backed by <b>more than twenty-five years</b> in private practice, industry and government.',
-    p1t: 'Fast answers', p1d: 'In business, timing matters. We respond quickly, deliver on time and keep the process clear.',
-    p2t: 'Precise documents', p2d: 'Contracts are tools to create value and reduce risk. They should be precise, clear and hold up.',
-    p3t: 'Fair fees', p3d: 'A lean structure lets us offer specialist advice at competitive rates, without compromising on quality.',
+    p1t: 'Efficiency', p1d: 'In business, timing matters. We respond quickly, deliver on time and keep the process clear.',
+    p2t: 'Precision', p2d: 'Contracts are tools to create value and reduce risk. They should be precise, clear and hold up.',
+    p3t: 'Value', p3d: 'A lean structure lets us offer specialist advice at competitive rates, without compromising on quality.',
     svcEyebrow: 'Practice areas', svcTitle: 'Where experience matters.',
     svcIntro: 'Advice and litigation for companies, investors and entrepreneurs — from everyday contracts to proceedings before authorities and the courts.',
     capRole: 'Attorney', lawEyebrow: 'Lawyer',
-    role: 'Attorney and owner · Rights of audience before the Court of Appeal',
+    role: 'Attorney at Law and owner · Admitted to the Court of Appeal',
     bio1: 'Hallmundur specialises in competition law, commercial contracts and general legal advice to businesses, and represents clients before administrative authorities and the courts.',
-    bio2: 'He was General Counsel of Síminn from 2003 to 2014 and has since worked in private practice, most recently as a partner at Deloitte Legal. He knows telecoms and media regulation from both sides — as in-house and as outside counsel.',
+    bio2: 'Since leaving his role as General Counsel of Síminn in 2014, Hallmundur has worked in private practice, most recently as a partner at Deloitte Legal. He knows telecoms and media regulation from both sides — as in-house and as outside counsel.',
+    bio4: 'A background spanning government, business and private practice makes for a practical approach built on clear risk assessment and efficient execution.',
     bio3: 'He holds an MA in EU Competition Law from King’s College London and completed studies in legal advice for technology and innovation businesses at the University of Cambridge. He has been recognised by The Legal 500 for competition law.',
     cEdu: 'Education', cEdu1: 'MA in EU Competition Law, 2012', cEdu2: 'Technology and innovation law, 2013', cEdu3: 'University of Iceland<small>Cand. jur., 2000</small>',
     cLic: 'Qualifications', cLic1: 'Court of Appeal<small>Rights of audience, 2023</small>', cLic2: 'Accredited mediator<small>Sátt, 2007</small>', cLic3: 'Certified board member<small>University of Iceland, 2016</small>',
     cMore: 'Other', cMore1: 'FIDIC<small>Construction contracts, 2017</small>', cMore2: 'Licensed real estate agent<small>2015</small>', cMore3: 'Languages<small>Icelandic, English</small>',
     tlEyebrow: 'Career', tlTitle: 'Twenty-five years on one line.',
-    tlIntro: 'From LEX and the Ministry of Transport, through eleven years as General Counsel of Síminn, to his own firm. That mix brings an understanding of how law, regulation and business interact.',
-    wrEyebrow: 'Writing and media', wrTitle: 'In the debate.', wrIntro: 'Articles by Hallmundur and interviews with him on competition and telecoms (in Icelandic).',
+    tlIntro: 'At LEX law firm, at the Ministry of Transport and Communications, as General Counsel of Síminn — and in independent practice ever since. Over the years, this has built a depth of knowledge and experience in the interplay of law, regulation and business.',
+    wrEyebrow: 'Articles', wrTitle: 'In the debate.', wrIntro: 'Articles by Hallmundur and interviews with him on competition and telecoms (in Icelandic).',
     d1: '17 Nov 2025', d2: '13 Nov 2025', d3: '28 Apr 2022',
     w1: 'A reply to Sýn’s article “Víð Sýn” in the debate on carriage rights for TV content.',
     w2: 'On the Electronic Communications Office’s Decision No. 8/2025 on must-carry rights for linear TV channels.',
