@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "intralegem.vercel.app" }],
+      "destination": "https://www.intralegem.is/$1",
+      "permanent": true
+    }
+  ]
+}
