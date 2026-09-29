@@ -14,7 +14,8 @@ OUT = sys.argv[1]
 W, H = int(sys.argv[2]), int(sys.argv[3])
 SHOT = sys.argv[4] if len(sys.argv) > 4 else 'wide'
 SAMPLES = int(sys.argv[5]) if len(sys.argv) > 5 else 128
-LOGO_SVG = sys.argv[6] if len(sys.argv) > 6 else '/home/user/intralegem/assets/brand/logo-stacked.svg'
+BRAND = '/home/user/intralegem/assets/brand/source/'
+LOGO_PARTS = [(BRAND + 'wall-green.svg', 'green'), (BRAND + 'wall-brass.svg', 'brass')]
 random.seed(4)
 
 addon_utils.enable('io_curve_svg', default_set=True)
@@ -111,6 +112,7 @@ M_WALNUT = wood('Walnut', (0.10, 0.05, 0.028), (0.21, 0.11, 0.06), scale=(0.9, 2
 M_SHELF = wood('ShelfWalnut', (0.09, 0.045, 0.025), (0.18, 0.095, 0.05), scale=(28, 28, 0.9))
 M_FLOOR = floor_mat()
 M_RUG = rug_mat()
+M_GREEN = mat('LogoGreen', (0.014, 0.036, 0.024), 0.5, coat=0.1)[0]
 M_BLACK, nt, b = mat('LogoBlack', (0.01, 0.0095, 0.009), 0.68)
 bn = nt.nodes.new('ShaderNodeTexNoise'); bn.inputs['Scale'].default_value = 900
 bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.12
@@ -175,29 +177,30 @@ box('Transom', LX0 + 0.08, LX1 - 0.08, -4.5, -0.35, 2.38, 2.44, M_SHELF)
 box('Rug', -1.7, 1.7, -3.2, -0.25, 0.0, 0.012, M_RUG, bevel=0.004)
 
 # ---------------------------------------------------------------- the sign
-before = set(bpy.data.objects)
-bpy.ops.import_curve.svg(filepath=LOGO_SVG)
-curves = [o for o in bpy.data.objects if o not in before]
-SIGN_W = 1.3
-xs = [o.dimensions.x for o in curves]
-raw_w = max(xs)
+curves, kinds = [], {}
+for path, kind in LOGO_PARTS:
+    before = set(bpy.data.objects)
+    bpy.ops.import_curve.svg(filepath=path)
+    for o in bpy.data.objects:
+        if o not in before and o.type == 'CURVE': curves.append(o); kinds[o.name] = kind
+SIGN_W = 1.22                      # the supplied lockup is taller than it is wide
+raw_w = max(o.dimensions.x for o in curves)
 s = SIGN_W / raw_w
 for o in curves:
     cu = o.data
     cu.dimensions = '2D'; cu.fill_mode = 'BOTH'
-    cu.extrude = 0.0075 / s; cu.bevel_depth = 0.0009 / s; cu.bevel_resolution = 2
+    cu.extrude = 0.0028 / s; cu.bevel_depth = 0.0005 / s; cu.bevel_resolution = 2
     o.scale = (s, s, s)
     o.rotation_euler = (math.radians(90), 0, 0)
-    is_brass = any(mm and 'SVGMat' in mm.name for mm in cu.materials)
-    cu.materials.clear(); cu.materials.append(M_BRASS if is_brass else M_BLACK)
+    cu.materials.clear(); cu.materials.append(M_BRASS if kinds[o.name] == 'brass' else M_GREEN)
 bpy.context.view_layer.update()
 mins = Vector((1e9, 1e9, 1e9)); maxs = Vector((-1e9, -1e9, -1e9))
 for o in curves:
     for c in o.bound_box:
         w = o.matrix_world @ Vector(c)
         mins = Vector(map(min, mins, w)); maxs = Vector(map(max, maxs, w))
-SIGN_Z = 1.78
-off = Vector((-(mins.x + maxs.x) / 2, (WALL_Y - 0.009) - maxs.y, SIGN_Z - mins.z))
+SIGN_Z = 1.56
+off = Vector((-(mins.x + maxs.x) / 2, (WALL_Y - 0.0015) - maxs.y, SIGN_Z - mins.z))
 for o in curves: o.location += off
 
 # ---------------------------------------------------------------- desk
