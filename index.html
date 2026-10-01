@@ -400,7 +400,7 @@
   .post a:hover::after { opacity: 1; }
 
   /* Contact (dark) */
-  .contact-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: start; }
+  .contact-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: end; }
   .contact-left { grid-column: 1 / span 5; }
   .contact-left .h2 { margin-top: 18px; font-size: clamp(48px, 6vw, 96px); line-height: 0.96; }
   .contact-left .lede { margin-top: 24px; max-width: 26em; }
@@ -410,25 +410,8 @@
   .lines dd { font-size: 18px; }
   .lines a:hover { color: var(--brass-lt); }
   .lines small { display: block; margin-top: 4px; font-size: 14px; }
-  .form-wrap { grid-column: 7 / span 6; }
-  .form-wrap .card { color: var(--ink); border: 0; }
-  form h3 { font-size: 30px; letter-spacing: -0.02em; line-height: 1.1; }
-  form > p { margin-top: 8px; font-size: 15px; color: var(--ink-2); }
-  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-top: 28px; }
-  .field { display: flex; flex-direction: column; gap: 4px; }
-  .field.full { grid-column: 1 / -1; }
-  .field label { font-size: 13px; font-weight: 500; color: var(--ink-2); }
-  .field input, .field select, .field textarea {
-    width: 100%; border: 0; border-bottom: 1px solid var(--rule-2); background: transparent;
-    padding: 10px 0; font-size: 16px; border-radius: 0; transition: border-color .2s;
-    -webkit-appearance: none; appearance: none;
-  }
-  .field select { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%237B7268' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right 2px center; padding-right: 22px; cursor: pointer; }
-  .field textarea { resize: vertical; min-height: 100px; }
-  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: var(--ink); }
-  .field .err { font-size: 12.5px; color: #9B2C2C; min-height: 0; }
-  .form-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-top: 28px; }
-  .form-foot small { font-size: 13px; color: var(--muted); max-width: 22em; }
+  .contact-right { grid-column: 7 / span 6; }
+  .contact-right .lines { margin-top: 0; }
 
   /* Footer */
   footer { background: var(--umber); color: var(--on-dark-2); border-top: 1px solid var(--rule-dark); padding: 64px 0 36px; font-size: 14px; }
@@ -489,7 +472,7 @@
     .creds { grid-template-columns: 1fr 1fr; }
     .posts { grid-template-columns: 1fr 1fr; }
     .contact-left { grid-column: 1 / -1; margin-bottom: 56px; }
-    .form-wrap { grid-column: 1 / -1; }
+    .contact-right { grid-column: 1 / -1; }
   }
   @media (max-width: 900px) {
     :root { --head: 64px; }
@@ -564,10 +547,8 @@
     .tl-row .dur { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--stone-2); color: var(--ink-2); font-size: 12px; font-weight: 500; }
     .portrait { max-width: none; }
     .portrait img { aspect-ratio: 1 / 1; object-position: 54% 18%; }
-    .field select { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
     .posts { grid-template-columns: 1fr; }
     .post-img { aspect-ratio: 16 / 9; }
-    .fields { grid-template-columns: 1fr; }
   }
   @media (max-width: 520px) {
     .svc-btn { grid-template-columns: 36px 1fr 20px; }
@@ -787,30 +768,14 @@
       <div class="contact-left">
         <span class="eyebrow rv" data-i18n="ctEyebrow">Hafa samband</span>
         <h2 class="h2 split" data-i18n="ctTitle">Ræðum málið.</h2>
-        <p class="lede rv" data-i18n="ctLede">Fyrsta samtal er án skuldbindingar. Hringdu beint, sendu tölvupóst eða fylltu út formið.</p>
+        <p class="lede rv" data-i18n="ctLede">Fyrsta samtal er án skuldbindingar. Hringdu beint eða sendu tölvupóst.</p>
+      </div>
+      <div class="contact-right">
         <dl class="lines rv">
           <div><dt data-i18n="phone">Sími</dt><dd><a class="tnum" href="tel:+3548926064">+354 892 6064</a></dd></div>
           <div><dt data-i18n="email">Netfang</dt><dd><a href="mailto:hallmundur@intralegem.is">hallmundur@intralegem.is</a></dd></div>
           <div><dt data-i18n="address">Heimilisfang</dt><dd>Gróska, Kristínargata 1, 102 Reykjavík<small><a class="ulink" href="https://www.google.com/maps/search/?api=1&query=Gr%C3%B3ska%2C%20Kr%C3%ADst%C3%ADnargata%201%2C%20102%20Reykjav%C3%ADk" target="_blank" rel="noopener" data-i18n="map">Opna í korti ↗</a></small></dd></div>
         </dl>
-      </div>
-      <div class="form-wrap rv">
-        <div class="card">
-          <form id="form" novalidate>
-            <h3 class="serif" data-i18n="fTitle">Senda fyrirspurn</h3>
-            <p data-i18n="fSub">Lýstu málinu í stuttu máli. Við svörum eins fljótt og auðið er.</p>
-            <div class="fields">
-              <div class="field"><label for="fName" data-i18n="fName">Nafn</label><input id="fName" name="name" autocomplete="name" required></div>
-              <div class="field"><label for="fReach" data-i18n="fReach">Netfang eða sími</label><input id="fReach" name="reach" autocomplete="email" required></div>
-              <div class="field full"><label for="fArea" data-i18n="fArea">Svið</label><select id="fArea" name="area"></select></div>
-              <div class="field full"><label for="fMsg" data-i18n="fMsg">Um hvað snýst málið?</label><textarea id="fMsg" name="msg" rows="4"></textarea></div>
-            </div>
-            <div class="form-foot">
-              <small data-i18n="fNote">Opnar tölvupóstforritið þitt. Allar fyrirspurnir eru trúnaðarmál.</small>
-              <button class="btn" type="submit"><span data-i18n="fSend">Senda</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></button>
-            </div>
-          </form>
-        </div>
       </div>
     </div>
   </div>
@@ -880,7 +845,6 @@
 
   /* ---------- Services: tabs (desktop) / accordion (mobile) ---------- */
   var list = document.getElementById('svcList'), panel = document.getElementById('panel');
-  var sel = document.getElementById('fArea');
   var current = 0;
   var mq = window.matchMedia('(max-width: 900px)');
   function panelHTML(i) {
@@ -888,7 +852,7 @@
     return '<span class="n tnum">' + pad(i + 1) + ' / 07</span>' +
       '<h3 class="serif">' + a.t + '</h3><p>' + a.d + '</p>' +
       '<h4>' + (lang === 'en' ? 'Typical work' : 'Dæmi um verkefni') + '</h4><ul>' + a.ex.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
-      '<a class="btn line" href="#samband" data-pick="' + i + '"><span>' + (lang === 'en' ? 'Discuss a matter in this area' : 'Ræða mál á þessu sviði') + '</span>' + ARROW + '</a>';
+      '<a class="btn line" href="#samband"><span>' + (lang === 'en' ? 'Discuss a matter in this area' : 'Ræða mál á þessu sviði') + '</span>' + ARROW + '</a>';
   }
   function buildServices() {
     list.innerHTML = AREAS[lang].map(function (a, i) {
@@ -896,10 +860,6 @@
         '<span class="n tnum">' + pad(i + 1) + '</span><span class="t">' + a.t + '</span><span class="a" aria-hidden="true">→</span></button>' +
         '<div class="svc-detail"><div class="panel-body">' + panelHTML(i) + '</div></div></li>';
     }).join('');
-    var keep = sel.value;
-    sel.innerHTML = AREAS[lang].map(function (a, i) { return '<option value="' + i + '">' + a.t + '</option>'; }).join('') +
-      '<option value="other">' + (lang === 'en' ? 'Other' : 'Annað') + '</option>';
-    if (keep) sel.value = keep;
     select(current, false);
   }
   function select(i, animate) {
@@ -927,7 +887,6 @@
     select(n, true); document.getElementById('tab' + n).focus();
   });
   document.addEventListener('click', function (e) {
-    var p = e.target.closest('[data-pick]'); if (p) sel.value = p.dataset.pick;
     var h = e.target.closest('[data-area]'); if (h) select(+h.dataset.area, false);
   });
 
@@ -1108,19 +1067,6 @@
   window.__restInd = restInd;
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
-  /* ---------- Form → email draft ---------- */
-  var form = document.getElementById('form');
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var bad = null;
-    ['name', 'reach'].forEach(function (n) { var f = form[n]; var ok = f.value.trim().length > 1; f.setAttribute('aria-invalid', String(!ok)); f.style.borderBottomColor = ok ? '' : '#9B2C2C'; if (!ok && !bad) bad = f; });
-    if (bad) { bad.focus(); return; }
-    var area = sel.options[sel.selectedIndex].text;
-    var subj = (lang === 'en' ? 'Enquiry: ' : 'Fyrirspurn: ') + area;
-    var body = form.msg.value + '\n\n— ' + form.name.value + '\n' + form.reach.value;
-    window.location.href = 'mailto:hallmundur@intralegem.is?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
-  });
-
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   /* ---------- IS / EN ---------- */
@@ -1158,11 +1104,8 @@
     w2: 'On the Electronic Communications Office’s Decision No. 8/2025 on must-carry rights for linear TV channels.',
     w3t: 'Clear guidelines for cooperation between companies', w3: 'Interview on the EU’s new horizontal cooperation guidelines and why Iceland should adopt them quickly.',
     read: 'Read article', read2: 'Read article', read3: 'Read interview',
-    ctEyebrow: 'Contact', ctTitle: 'Let’s talk.', ctLede: 'The first conversation is without obligation. Call, email or use the form.',
-    phone: 'Phone', email: 'Email', address: 'Address', map: 'Open in maps ↗',
-    fTitle: 'Send an enquiry', fSub: 'Describe the matter briefly. We will reply as soon as possible.',
-    fName: 'Name', fReach: 'Email or phone', fArea: 'Area', fMsg: 'What is the matter about?',
-    fNote: 'Opens your email app. All enquiries are confidential.', fSend: 'Send'
+    ctEyebrow: 'Contact', ctTitle: 'Let’s talk.', ctLede: 'The first conversation is without obligation. Call or send an email.',
+    phone: 'Phone', email: 'Email', address: 'Address', map: 'Open in maps ↗'
   };
   var IS = {};
   document.querySelectorAll('[data-i18n]').forEach(function (el) { IS[el.dataset.i18n] = el.textContent; });
