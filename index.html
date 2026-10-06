@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Intra Legem — Lögmannsstofa</title>
+<title>Hallmundur Albertsson lögmaður | Intra Legem lögmannsstofa</title>
 <meta name="description" content="Intra Legem er lögmannsstofa Hallmundar Albertssonar lögmanns í Grósku, Reykjavík. Samkeppnisréttur, fjarskipti og fjölmiðlar, samninga- og félagaréttur og málflutningur.">
 <meta name="theme-color" content="#FBF8F3">
 <link rel="canonical" href="https://www.intralegem.is/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.intralegem.is/">
-<meta property="og:title" content="Intra Legem — Lögmannsstofa">
+<meta property="og:title" content="Hallmundur Albertsson lögmaður | Intra Legem">
 <meta property="og:description" content="Skýr ráðgjöf í flóknu regluverki. Samkeppnisréttur, fjarskipti og viðskiptasamningar.">
 <meta property="og:image" content="https://www.intralegem.is/assets/og-image.jpg">
 <meta property="og:locale" content="is_IS">
@@ -32,7 +32,22 @@
   "email": "hallmundur@intralegem.is",
   "telephone": "+354 892 6064",
   "address": { "@type": "PostalAddress", "streetAddress": "Kristínargata 1 (Gróska)", "postalCode": "102", "addressLocality": "Reykjavík", "addressCountry": "IS" },
-  "employee": { "@type": "Person", "name": "Hallmundur Albertsson", "jobTitle": "Lögmaður", "alumniOf": ["King's College London", "University of Cambridge", "Háskóli Íslands"] }
+  "@id": "https://www.intralegem.is/#stofa",
+  "founder": { "@id": "https://www.intralegem.is/#hallmundur" },
+  "employee": {
+    "@type": "Person",
+    "@id": "https://www.intralegem.is/#hallmundur",
+    "name": "Hallmundur Albertsson",
+    "jobTitle": "Lögmaður",
+    "url": "https://www.intralegem.is/#logmadur",
+    "image": "https://www.intralegem.is/assets/hallmundur-albertsson.jpg",
+    "email": "hallmundur@intralegem.is",
+    "telephone": "+354 892 6064",
+    "worksFor": { "@id": "https://www.intralegem.is/#stofa" },
+    "alumniOf": ["King's College London", "University of Cambridge", "Háskóli Íslands"],
+    "knowsAbout": ["Samkeppnisréttur", "Fjarskiptaréttur", "Fjölmiðlaréttur", "Samningaréttur", "Félagaréttur", "Málflutningur"],
+    "sameAs": ["https://lmfi.is/logmannalisti/600/hallmundur-albertsson"]
+  }
 }
 </script>
 
@@ -1116,7 +1131,7 @@
   var IS = {};
   document.querySelectorAll('[data-i18n]').forEach(function (el) { IS[el.dataset.i18n] = el.textContent; });
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) { IS[el.dataset.i18nHtml] = el.innerHTML; });
-  var titles = { is: document.title, en: 'Intra Legem — Law firm, Reykjavík' };
+  var titles = { is: document.title, en: 'Hallmundur Albertsson, attorney | Intra Legem law firm, Reykjavík' };
   function setLang(l) {
     lang = l; var d = l === 'en' ? EN : IS;
     document.querySelectorAll('[data-i18n]').forEach(function (el) { var v = d[el.dataset.i18n]; if (v != null) el.textContent = v; });
