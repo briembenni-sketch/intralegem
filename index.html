@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hallmundur Albertsson lögmaður | Intra Legem lögmannsstofa</title>
+<title>Intra Legem | Lögmannsstofa</title>
 <meta name="description" content="Intra Legem er lögmannsstofa Hallmundar Albertssonar lögmanns í Grósku, Reykjavík. Samkeppnisréttur, fjarskipti og fjölmiðlar, samninga- og félagaréttur og málflutningur.">
 <meta name="theme-color" content="#FBF8F3">
 <link rel="canonical" href="https://www.intralegem.is/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.intralegem.is/">
-<meta property="og:title" content="Hallmundur Albertsson lögmaður | Intra Legem">
+<meta property="og:title" content="Intra Legem | Lögmannsstofa">
 <meta property="og:description" content="Skýr ráðgjöf í flóknu regluverki. Samkeppnisréttur, fjarskipti og viðskiptasamningar.">
 <meta property="og:image" content="https://www.intralegem.is/assets/og-image.jpg">
 <meta property="og:locale" content="is_IS">
@@ -32,22 +32,7 @@
   "email": "hallmundur@intralegem.is",
   "telephone": "+354 892 6064",
   "address": { "@type": "PostalAddress", "streetAddress": "Kristínargata 1 (Gróska)", "postalCode": "102", "addressLocality": "Reykjavík", "addressCountry": "IS" },
-  "@id": "https://www.intralegem.is/#stofa",
-  "founder": { "@id": "https://www.intralegem.is/#hallmundur" },
-  "employee": {
-    "@type": "Person",
-    "@id": "https://www.intralegem.is/#hallmundur",
-    "name": "Hallmundur Albertsson",
-    "jobTitle": "Lögmaður",
-    "url": "https://www.intralegem.is/#logmadur",
-    "image": "https://www.intralegem.is/assets/hallmundur-albertsson.jpg",
-    "email": "hallmundur@intralegem.is",
-    "telephone": "+354 892 6064",
-    "worksFor": { "@id": "https://www.intralegem.is/#stofa" },
-    "alumniOf": ["King's College London", "University of Cambridge", "Háskóli Íslands"],
-    "knowsAbout": ["Samkeppnisréttur", "Fjarskiptaréttur", "Fjölmiðlaréttur", "Samningaréttur", "Félagaréttur", "Málflutningur"],
-    "sameAs": ["https://lmfi.is/logmannalisti/600/hallmundur-albertsson"]
-  }
+  "employee": { "@type": "Person", "name": "Hallmundur Albertsson", "jobTitle": "Lögmaður", "alumniOf": ["King's College London", "University of Cambridge", "Háskóli Íslands"] }
 }
 </script>
 
@@ -166,11 +151,10 @@
   .hero h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.12em; margin-bottom: -0.12em; }
   .hero h1 .w > span { display: inline-block; transform: translateY(105%); transition: transform 1.1s cubic-bezier(0.2, 0.75, 0.1, 1); }
   .hero.go h1 .w > span { transform: none; }
-  /* All rotating words share one grid cell, so the box is always as wide as the longest word and the heading never reflows */
-  .hero h1 .rot { display: inline-grid; position: relative; }
-  .hero h1 .rot span { grid-area: 1 / 1; justify-self: start; white-space: nowrap; opacity: 0; transform: translateY(60%); transition: transform .7s cubic-bezier(0.6, 0, 0.2, 1), opacity .5s ease; }
-  .hero h1 .rot span.on { opacity: 1; transform: none; }
-  .hero h1 .rot span.out { opacity: 0; transform: translateY(-60%); }
+  .hero h1 .rot { display: inline-block; position: relative; }
+  .hero h1 .rot span { display: inline-block; transition: transform .7s cubic-bezier(0.6, 0, 0.2, 1), opacity .5s ease; }
+  .hero h1 .rot span.out { transform: translateY(-60%); opacity: 0; }
+  .hero h1 .rot span.pre { transform: translateY(60%); opacity: 0; transition: none; }
   .hero-aside > * { opacity: 0; transform: translateY(16px); transition: opacity 1s ease, transform 1.1s var(--ease); }
   .hero.go .hero-aside > * { opacity: 1; transform: none; }
   .hero.go .hero-aside > :nth-child(1) { transition-delay: .55s; }
@@ -309,7 +293,7 @@
   .principle h3 { margin-top: 36px; font-size: 26px; line-height: 1.15; }
   .principle p { margin-top: 12px; font-size: 16px; color: var(--ink-2); }
 
-  /* Services — two-pane */
+  /* Services: two-pane */
   .svc-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: start; }
   .svc-list { grid-column: 1 / span 6; list-style: none; border-top: 1px solid var(--ink); }
   .svc-item { border-bottom: 1px solid var(--rule-2); }
@@ -391,7 +375,7 @@
   .tl-note { margin-top: 20px; font-size: 14px; color: var(--muted); }
 
   /* Writing */
-  .posts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; list-style: none; }
+  .posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; list-style: none; }
   .posts { align-items: stretch; }
   .post a {
     display: flex; flex-direction: column; height: 100%; position: relative; overflow: hidden;
@@ -416,7 +400,7 @@
   .post a:hover::after { opacity: 1; }
 
   /* Contact (dark) */
-  .contact-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: end; }
+  .contact-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: start; }
   .contact-left { grid-column: 1 / span 5; }
   .contact-left .h2 { margin-top: 18px; font-size: clamp(48px, 6vw, 96px); line-height: 0.96; }
   .contact-left .lede { margin-top: 24px; max-width: 26em; }
@@ -426,8 +410,25 @@
   .lines dd { font-size: 18px; }
   .lines a:hover { color: var(--brass-lt); }
   .lines small { display: block; margin-top: 4px; font-size: 14px; }
-  .contact-right { grid-column: 7 / span 6; }
-  .contact-right .lines { margin-top: 0; }
+  .form-wrap { grid-column: 7 / span 6; }
+  .form-wrap .card { color: var(--ink); border: 0; }
+  form h3 { font-size: 30px; letter-spacing: -0.02em; line-height: 1.1; }
+  form > p { margin-top: 8px; font-size: 15px; color: var(--ink-2); }
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-top: 28px; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+  .field input, .field select, .field textarea {
+    width: 100%; border: 0; border-bottom: 1px solid var(--rule-2); background: transparent;
+    padding: 10px 0; font-size: 16px; border-radius: 0; transition: border-color .2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .field select { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%237B7268' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right 2px center; padding-right: 22px; cursor: pointer; }
+  .field textarea { resize: vertical; min-height: 100px; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: var(--ink); }
+  .field .err { font-size: 12.5px; color: #9B2C2C; min-height: 0; }
+  .form-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-top: 28px; }
+  .form-foot small { font-size: 13px; color: var(--muted); max-width: 22em; }
 
   /* Footer */
   footer { background: var(--umber); color: var(--on-dark-2); border-top: 1px solid var(--rule-dark); padding: 64px 0 36px; font-size: 14px; }
@@ -488,7 +489,7 @@
     .creds { grid-template-columns: 1fr 1fr; }
     .posts { grid-template-columns: 1fr 1fr; }
     .contact-left { grid-column: 1 / -1; margin-bottom: 56px; }
-    .contact-right { grid-column: 1 / -1; }
+    .form-wrap { grid-column: 1 / -1; }
   }
   @media (max-width: 900px) {
     :root { --head: 64px; }
@@ -563,8 +564,10 @@
     .tl-row .dur { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--stone-2); color: var(--ink-2); font-size: 12px; font-weight: 500; }
     .portrait { max-width: none; }
     .portrait img { aspect-ratio: 1 / 1; object-position: 54% 18%; }
+    .field select { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
     .posts { grid-template-columns: 1fr; }
     .post-img { aspect-ratio: 16 / 9; }
+    .fields { grid-template-columns: 1fr; }
   }
   @media (max-width: 520px) {
     .svc-btn { grid-template-columns: 36px 1fr 20px; }
@@ -623,7 +626,7 @@
       <h1 id="h1" data-i18n-html="heroTitle">Lögmannsstofa fyrir <em>atvinnulífið.</em></h1>
     </div>
     <div class="hero-aside">
-      <p class="lede" data-i18n-html="heroLede"><b>Intra Legem</b> er lögmannsstofa Hallmundar Albertssonar. Yfir 25 ára reynsla úr stjórnsýslu, atvinnulífi og lögmannsstörfum gerir honum kleift að fylgja fyrirtækjum alla leið — frá daglegri lögfræðiráðgjöf til málarekstrar fyrir stjórnvöldum og dómstólum.</p>
+      <p class="lede" data-i18n-html="heroLede"><b>Intra Legem</b> er lögmannsstofa Hallmundar Albertssonar. Yfir 25 ára reynsla úr stjórnsýslu, atvinnulífi og lögmannsstörfum gerir honum kleift að fylgja fyrirtækjum alla leið, frá daglegri lögfræðiráðgjöf til málarekstrar fyrir stjórnvöldum og dómstólum.</p>
       <div class="hero-actions">
         <a class="btn" href="#samband"><span data-i18n="ctaBook">Bóka samtal</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></a>
         <a class="hero-phone tnum" href="tel:+3548926064"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 1.8 3.4 2.3c-.9.3-1.5 1.2-1.3 2.2.9 4.6 4.5 8.2 9.1 9.1 1 .2 1.9-.4 2.2-1.3l.5-1.8-3-1.6-1.3 1.4C8 9.6 6.4 8 5.7 6.4l1.4-1.3-1.9-3.3Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="ulink">892 6064</span></a>
@@ -668,7 +671,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><span class="eyebrow rv" data-i18n="svcEyebrow">Starfssvið</span><h2 class="h2 split" data-i18n="svcTitle">Þar sem reynslan skiptir máli.</h2></div>
-      <p class="lede rv" data-i18n="svcIntro">Ráðgjöf og málflutningur fyrir fyrirtæki, fjárfesta og frumkvöðla — frá daglegum samningum til mála fyrir stjórnvöldum og dómstólum.</p>
+      <p class="lede rv" data-i18n="svcIntro">Ráðgjöf og málflutningur fyrir fyrirtæki, fjárfesta og frumkvöðla, frá daglegum samningum til mála fyrir stjórnvöldum og dómstólum.</p>
     </div>
     <div class="svc-grid">
       <ul class="svc-list" role="tablist" aria-orientation="vertical" id="svcList"></ul>
@@ -752,13 +755,6 @@
       <div><span class="eyebrow rv" data-i18n="wrEyebrow">Greinaskrif</span><h2 class="h2 split" data-i18n="wrTitle">Í umræðunni.</h2></div>
     </div>
     <ul class="posts">
-      <li class="post rv"><a href="https://www.visir.is/g/20262944921d/til-varnar-tjaningarfrelsi" target="_blank" rel="noopener">
-        <figure class="post-img"><img src="assets/news/til-varnar-tjaningarfrelsi.webp" alt="Hallmundur Albertsson" width="1200" height="675" loading="lazy"><span class="pub">Vísir</span></figure>
-        <div class="post-body"><span class="meta"><span data-i18n="d0">7. okt. 2026</span></span>
-        <h3 class="serif">Til varnar tjáningarfrelsi</h3>
-        <p data-i18n="w0">Um kröfu Fjölmiðlanefndar um að hlaðvörp skrái sig sem fjölmiðla og hvers vegna Alþingi þurfi að taka af öll tvímæli.</p>
-        <span class="go"><span data-i18n="read0">Lesa grein</span><span aria-hidden="true">↗</span></span></div>
-      </a></li>
       <li class="post rv"><a href="https://www.visir.is/g/20252804290d/valkvaed-syn" target="_blank" rel="noopener">
         <figure class="post-img"><img src="assets/news/valkvaed-syn.webp" alt="" width="1200" height="675" loading="lazy"><span class="pub">Vísir</span></figure>
         <div class="post-body"><span class="meta"><span data-i18n="d1">17. nóv. 2025</span></span>
@@ -791,14 +787,30 @@
       <div class="contact-left">
         <span class="eyebrow rv" data-i18n="ctEyebrow">Hafa samband</span>
         <h2 class="h2 split" data-i18n="ctTitle">Ræðum málið.</h2>
-        <p class="lede rv" data-i18n="ctLede">Fyrsta samtal er án skuldbindingar. Hringdu beint eða sendu tölvupóst.</p>
-      </div>
-      <div class="contact-right">
+        <p class="lede rv" data-i18n="ctLede">Fyrsta samtal er án skuldbindingar. Hringdu beint, sendu tölvupóst eða fylltu út formið.</p>
         <dl class="lines rv">
           <div><dt data-i18n="phone">Sími</dt><dd><a class="tnum" href="tel:+3548926064">+354 892 6064</a></dd></div>
           <div><dt data-i18n="email">Netfang</dt><dd><a href="mailto:hallmundur@intralegem.is">hallmundur@intralegem.is</a></dd></div>
           <div><dt data-i18n="address">Heimilisfang</dt><dd>Gróska, Kristínargata 1, 102 Reykjavík<small><a class="ulink" href="https://www.google.com/maps/search/?api=1&query=Gr%C3%B3ska%2C%20Kr%C3%ADst%C3%ADnargata%201%2C%20102%20Reykjav%C3%ADk" target="_blank" rel="noopener" data-i18n="map">Opna í korti ↗</a></small></dd></div>
         </dl>
+      </div>
+      <div class="form-wrap rv">
+        <div class="card">
+          <form id="form" novalidate>
+            <h3 class="serif" data-i18n="fTitle">Senda fyrirspurn</h3>
+            <p data-i18n="fSub">Lýstu málinu í stuttu máli. Við svörum eins fljótt og auðið er.</p>
+            <div class="fields">
+              <div class="field"><label for="fName" data-i18n="fName">Nafn</label><input id="fName" name="name" autocomplete="name" required></div>
+              <div class="field"><label for="fReach" data-i18n="fReach">Netfang eða sími</label><input id="fReach" name="reach" autocomplete="email" required></div>
+              <div class="field full"><label for="fArea" data-i18n="fArea">Svið</label><select id="fArea" name="area"></select></div>
+              <div class="field full"><label for="fMsg" data-i18n="fMsg">Um hvað snýst málið?</label><textarea id="fMsg" name="msg" rows="4"></textarea></div>
+            </div>
+            <div class="form-foot">
+              <small data-i18n="fNote">Opnar tölvupóstforritið þitt. Allar fyrirspurnir eru trúnaðarmál.</small>
+              <button class="btn" type="submit"><span data-i18n="fSend">Senda</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -853,7 +865,7 @@
     ]
   };
   var CAREER = [
-    { o: 'Intra Legem', r: { is: 'Eigandi', en: 'Owner' }, s: 2024, e: 2026.75, cls: 'now', label: { is: '2024 — í dag', en: '2024 — present' } },
+    { o: 'Intra Legem', r: { is: 'Eigandi', en: 'Owner' }, s: 2024, e: 2026.75, cls: 'now', label: { is: '2024 – í dag', en: '2024 – present' } },
     { o: 'Deloitte Legal', r: { is: 'Eigandi', en: 'Partner' }, s: 2021, e: 2024 },
     { o: { is: 'VÍK lögmannsstofa', en: 'VÍK Law Firm' }, r: { is: 'Eigandi', en: 'Partner' }, s: 2019, e: 2021 },
     { o: 'LMB Mandat', r: { is: 'Eigandi', en: 'Partner' }, s: 2015, e: 2019 },
@@ -868,6 +880,7 @@
 
   /* ---------- Services: tabs (desktop) / accordion (mobile) ---------- */
   var list = document.getElementById('svcList'), panel = document.getElementById('panel');
+  var sel = document.getElementById('fArea');
   var current = 0;
   var mq = window.matchMedia('(max-width: 900px)');
   function panelHTML(i) {
@@ -875,7 +888,7 @@
     return '<span class="n tnum">' + pad(i + 1) + ' / 07</span>' +
       '<h3 class="serif">' + a.t + '</h3><p>' + a.d + '</p>' +
       '<h4>' + (lang === 'en' ? 'Typical work' : 'Dæmi um verkefni') + '</h4><ul>' + a.ex.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
-      '<a class="btn line" href="#samband"><span>' + (lang === 'en' ? 'Discuss a matter in this area' : 'Ræða mál á þessu sviði') + '</span>' + ARROW + '</a>';
+      '<a class="btn line" href="#samband" data-pick="' + i + '"><span>' + (lang === 'en' ? 'Discuss a matter in this area' : 'Ræða mál á þessu sviði') + '</span>' + ARROW + '</a>';
   }
   function buildServices() {
     list.innerHTML = AREAS[lang].map(function (a, i) {
@@ -883,6 +896,10 @@
         '<span class="n tnum">' + pad(i + 1) + '</span><span class="t">' + a.t + '</span><span class="a" aria-hidden="true">→</span></button>' +
         '<div class="svc-detail"><div class="panel-body">' + panelHTML(i) + '</div></div></li>';
     }).join('');
+    var keep = sel.value;
+    sel.innerHTML = AREAS[lang].map(function (a, i) { return '<option value="' + i + '">' + a.t + '</option>'; }).join('') +
+      '<option value="other">' + (lang === 'en' ? 'Other' : 'Annað') + '</option>';
+    if (keep) sel.value = keep;
     select(current, false);
   }
   function select(i, animate) {
@@ -910,6 +927,7 @@
     select(n, true); document.getElementById('tab' + n).focus();
   });
   document.addEventListener('click', function (e) {
+    var p = e.target.closest('[data-pick]'); if (p) sel.value = p.dataset.pick;
     var h = e.target.closest('[data-area]'); if (h) select(+h.dataset.area, false);
   });
 
@@ -957,24 +975,19 @@
     var em = heroH1.querySelector('em');
     var words = [];
     heroH1.childNodes.forEach(function (n) { if (n.nodeType === 3) n.textContent.split(/\s+/).filter(Boolean).forEach(function (w) { words.push(w); }); });
-    var first = em ? em.textContent : ROT[lang][0];
-    var list = reduce ? [first] : ROT[lang];
-    var k = Math.max(0, list.indexOf(first));
     heroH1.innerHTML = words.map(function (w) { return '<span class="w"><span>' + w + '</span></span>'; }).join(' ') +
-      ' <span class="w"><span><em class="rot" aria-live="off">' +
-      list.map(function (w, i) { return '<span' + (i === k ? ' class="on"' : ' aria-hidden="true"') + '>' + w + '</span>'; }).join('') +
-      '</em></span></span>';
+      ' <span class="w"><span><em class="rot" aria-live="off"><span>' + (em ? em.textContent : '') + '</span></em></span></span>';
     heroH1.setAttribute('aria-label', words.join(' ') + ' ' + ROT[lang].join(' / ').replace(/\./g, ''));
     heroH1.querySelectorAll('.w > span').forEach(function (sp, i) { sp.style.transitionDelay = (0.12 + i * 0.09) + 's'; });
     clearInterval(rotTimer);
     if (reduce) return;
-    var spans = heroH1.querySelectorAll('.rot span');
+    var k = 0, rot = heroH1.querySelector('.rot');
     rotTimer = setInterval(function () {
-      var cur = spans[k]; k = (k + 1) % spans.length; var next = spans[k];
-      cur.classList.remove('on'); cur.classList.add('out');
+      var cur = rot.querySelector('span'); k = (k + 1) % ROT[lang].length;
+      cur.classList.add('out');
       setTimeout(function () {
-        next.classList.remove('out'); next.classList.add('on');
-        setTimeout(function () { cur.classList.remove('out'); }, 700);
+        cur.textContent = ROT[lang][k]; cur.classList.remove('out'); cur.classList.add('pre');
+        cur.offsetWidth; cur.classList.remove('pre');
       }, 520);
     }, 3200);
   }
@@ -1095,6 +1108,19 @@
   window.__restInd = restInd;
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
+  /* ---------- Form → email draft ---------- */
+  var form = document.getElementById('form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var bad = null;
+    ['name', 'reach'].forEach(function (n) { var f = form[n]; var ok = f.value.trim().length > 1; f.setAttribute('aria-invalid', String(!ok)); f.style.borderBottomColor = ok ? '' : '#9B2C2C'; if (!ok && !bad) bad = f; });
+    if (bad) { bad.focus(); return; }
+    var area = sel.options[sel.selectedIndex].text;
+    var subj = (lang === 'en' ? 'Enquiry: ' : 'Fyrirspurn: ') + area;
+    var body = form.msg.value + '\n\n' + form.name.value + '\n' + form.reach.value;
+    window.location.href = 'mailto:hallmundur@intralegem.is?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+  });
+
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   /* ---------- IS / EN ---------- */
@@ -1104,42 +1130,44 @@
     heroEyebrow: 'Law firm · Gróska, Reykjavík',
     heroTitle: 'A law firm for <em>business.</em>',
     s0t: 'Competition law', s1t: 'Telecoms and media', s2t: 'Contracts and companies', s4t: 'Litigation',
-    heroLede: '<b>Intra Legem</b> is the law firm of Hallmundur Albertsson, former General Counsel of Síminn, Iceland’s leading telecommunications company. With more than 25 years in government, business and private practice, he supports companies every step of the way — from day-to-day legal advice to proceedings before regulators and the courts.',
+    heroLede: '<b>Intra Legem</b> is the law firm of Hallmundur Albertsson, former General Counsel of Síminn, Iceland’s leading telecommunications company. With more than 25 years in government, business and private practice, he supports companies every step of the way, from day-to-day legal advice to proceedings before regulators and the courts.',
     ctaBook: 'Book a call', chip: 'Gróska, Kristínargata 1', whoRole: 'Attorney · Rights of audience, Court of Appeal',
     ctaCard: 'The first conversation is without obligation.', ctaCardLink: 'Book a call',
     st1: 'years in law, private practice and government', st2: 'years at Síminn, including 4 as General Counsel', st3: 'rights of audience before the Court of Appeal', st4: 'universities: Iceland, King’s College London and Cambridge',
     introEyebrow: 'The firm',
-    introStatement: 'Intra Legem is a law firm where you speak directly with the lawyer doing the work — backed by <b>more than twenty-five years</b> in private practice, industry and government.',
+    introStatement: 'Intra Legem is a law firm where you speak directly with the lawyer doing the work, backed by <b>more than twenty-five years</b> in private practice, industry and government.',
     p1t: 'Efficiency', p1d: 'In business, timing matters. We respond quickly, deliver on time and keep the process clear.',
     p2t: 'Precision', p2d: 'Contracts are tools to create value and reduce risk. They should be precise, clear and hold up.',
     p3t: 'Value', p3d: 'A lean structure lets us offer specialist advice at competitive rates, without compromising on quality.',
     svcEyebrow: 'Practice areas', svcTitle: 'Where experience matters.',
-    svcIntro: 'Advice and litigation for companies, investors and entrepreneurs — from everyday contracts to proceedings before authorities and the courts.',
+    svcIntro: 'Advice and litigation for companies, investors and entrepreneurs, from everyday contracts to proceedings before authorities and the courts.',
     capRole: 'Attorney', lawEyebrow: 'Lawyer',
     role: 'Attorney at Law and owner · Admitted to the Court of Appeal',
     bio1: 'Hallmundur specialises in competition law, commercial contracts and general legal advice to businesses, and represents clients before administrative authorities and the courts.',
-    bio2: 'Since leaving his role as General Counsel of Síminn in 2014, Hallmundur has worked in private practice, most recently as a partner at Deloitte Legal. He knows telecoms and media regulation from both sides — as in-house and as outside counsel.',
+    bio2: 'Since leaving his role as General Counsel of Síminn in 2014, Hallmundur has worked in private practice, most recently as a partner at Deloitte Legal. He knows telecoms and media regulation from both sides, as in-house and as outside counsel.',
     bio4: 'A background spanning government, business and private practice makes for a practical approach built on clear risk assessment and efficient execution.',
     bio3: 'He holds an MA in EU Competition Law from King’s College London and completed studies in legal advice for technology and innovation businesses at the University of Cambridge. He has been recognised by The Legal 500 for competition law.',
     cEdu: 'Education', cEdu1: 'MA in EU Competition Law, 2012', cEdu2: 'Technology and innovation law, 2013', cEdu3: 'University of Iceland<small>Cand. jur., 2000</small>',
     cLic: 'Qualifications', cLic1: 'Court of Appeal<small>Rights of audience, 2023</small>', cLic2: 'Accredited mediator<small>Sátt, 2007</small>', cLic3: 'Certified board member<small>University of Iceland, 2016</small>',
     cMore: 'Other', cMore1: 'FIDIC<small>Construction contracts, 2017</small>', cMore2: 'Licensed real estate agent<small>2015</small>', cMore3: 'Languages<small>Icelandic, English</small>',
     tlEyebrow: 'Career', tlTitle: 'Twenty-five years on one line.',
-    tlIntro: 'At LEX law firm, at the Ministry of Transport and Communications, as General Counsel of Síminn — and in independent practice ever since. Over the years, this has built a depth of knowledge and experience in the interplay of law, regulation and business.',
+    tlIntro: 'At LEX law firm, at the Ministry of Transport and Communications, as General Counsel of Síminn, and in independent practice ever since. Over the years, this has built a depth of knowledge and experience in the interplay of law, regulation and business.',
     wrEyebrow: 'Articles', wrTitle: 'In the debate.', wrIntro: 'Articles by Hallmundur and interviews with him on competition and telecoms (in Icelandic).',
-    d0: '7 Oct 2026', d1: '17 Nov 2025', d2: '13 Nov 2025', d3: '28 Apr 2022',
-    w0: 'On the Media Commission’s demand that podcasts register as media outlets, and why Parliament must settle the matter.',
+    d1: '17 Nov 2025', d2: '13 Nov 2025', d3: '28 Apr 2022',
     w1: 'A reply to Sýn’s article “Víð Sýn” in the debate on carriage rights for TV content.',
     w2: 'On the Electronic Communications Office’s Decision No. 8/2025 on must-carry rights for linear TV channels.',
     w3t: 'Clear guidelines for cooperation between companies', w3: 'Interview on the EU’s new horizontal cooperation guidelines and why Iceland should adopt them quickly.',
-    read0: 'Read article', read: 'Read article', read2: 'Read article', read3: 'Read interview',
-    ctEyebrow: 'Contact', ctTitle: 'Let’s talk.', ctLede: 'The first conversation is without obligation. Call or send an email.',
-    phone: 'Phone', email: 'Email', address: 'Address', map: 'Open in maps ↗'
+    read: 'Read article', read2: 'Read article', read3: 'Read interview',
+    ctEyebrow: 'Contact', ctTitle: 'Let’s talk.', ctLede: 'The first conversation is without obligation. Call, email or use the form.',
+    phone: 'Phone', email: 'Email', address: 'Address', map: 'Open in maps ↗',
+    fTitle: 'Send an enquiry', fSub: 'Describe the matter briefly. We will reply as soon as possible.',
+    fName: 'Name', fReach: 'Email or phone', fArea: 'Area', fMsg: 'What is the matter about?',
+    fNote: 'Opens your email app. All enquiries are confidential.', fSend: 'Send'
   };
   var IS = {};
   document.querySelectorAll('[data-i18n]').forEach(function (el) { IS[el.dataset.i18n] = el.textContent; });
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) { IS[el.dataset.i18nHtml] = el.innerHTML; });
-  var titles = { is: document.title, en: 'Hallmundur Albertsson, attorney | Intra Legem law firm, Reykjavík' };
+  var titles = { is: document.title, en: 'Intra Legem | Law firm, Reykjavík' };
   function setLang(l) {
     lang = l; var d = l === 'en' ? EN : IS;
     document.querySelectorAll('[data-i18n]').forEach(function (el) { var v = d[el.dataset.i18n]; if (v != null) el.textContent = v; });
